@@ -1,0 +1,179 @@
+/* ==========================================================================
+   SHOWCASE SITE SPECIFIC STYLING (DOCUMENTATION STYLES)
+   ========================================================================== */
+
+/* Styling for documentation sections */
+.doc-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.doc-section-title {
+    margin-top: 0;
+    color: var(--gold);
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doc-subsection-title {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-top: 25px;
+    margin-bottom: 12px;
+}
+
+/* Color swatches display */
+.swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.swatch-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.swatch-color {
+    height: 60px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.swatch-info {
+    font-size: 0.75rem;
+}
+
+.swatch-name {
+    font-weight: bold;
+    color: var(--text);
+}
+
+.swatch-var {
+    font-family: monospace;
+    color: var(--muted-text);
+}
+
+/* Component preview layout */
+.component-demo {
+    border: 1px dashed var(--border-light);
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--bg);
+    margin-bottom: 15px;
+}
+
+.code-container {
+    position: relative;
+    margin-top: 15px;
+}
+
+pre {
+    background: #090d16;
+    color: #a9b1d6;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    margin: 0;
+    border: 1px solid var(--border);
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #a9b1d6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Typography showcase */
+.font-display {
+    padding: 15px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.font-size-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-light);
+    padding: 10px 0;
+}
+.font-size-row:last-child {
+    border-bottom: none;
+}
+.font-size-label {
+    width: 80px;
+    font-size: 0.75rem;
+    color: var(--muted-text);
+    font-family: monospace;
+}
+.font-size-preview {
+    flex-grow: 1;
+    color: var(--text);
+}
+
+/* Spacing tokens */
+.spacing-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.spacing-label {
+    width: 60px;
+    font-size: 0.75rem;
+    color: var(--muted-text);
+}
+.spacing-bar {
+    height: 10px;
+    background: var(--accent);
+    border-radius: 3px;
+}
+
+/* Page transitions */
+.doc-section {
+    display: none;
+}
+.doc-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

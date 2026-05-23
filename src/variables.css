@@ -1,0 +1,117 @@
+/* ==========================================================================
+   DESIGN TOKENS & THEMES (VARIABLES)
+   ========================================================================== */
+
+/* 
+   By default, the :root element uses the MAGPIE theme.
+   You can override themes by setting data-theme="magpie|dark|light|hc|terminal" on the <html> or <body> element.
+*/
+:root, [data-theme="magpie"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --input-bg: #1e293b;
+    --text: #f8fafc;
+    --muted-text: #94a3b8;
+    --border: #334155;
+    --border-light: #475569;
+    --accent: #3b82f6;
+    --secondary: #2dd4bf;
+    --danger: #f43f5e;
+    --gold: #ffd700;
+    
+    --hover-bg: rgba(45, 212, 191, 0.1);
+    --table-hover: rgba(45, 212, 191, 0.05);
+    --table-header-bg: #0f172a;
+    --gradient-start: rgba(255, 215, 0, 0.08);
+    --gradient-end: rgba(15, 23, 42, 1);
+    --search-icon-color: %2394a3b8;
+    
+    /* Animation Speeds */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-theme="dark"] {
+    --bg: #1a1a1a;
+    --card: #2d2d2d;
+    --input-bg: #111;
+    --text: #e0e0e0;
+    --muted-text: #888;
+    --border: #444;
+    --border-light: #333;
+    --accent: #4a9eff;
+    --secondary: #666;
+    --danger: #ff4d4d;
+    --gold: #ffd700;
+    
+    --hover-bg: #2a2a2a;
+    --table-hover: #252525;
+    --table-header-bg: #1a1a1a;
+    --gradient-start: rgba(255, 215, 0, 0.08);
+    --gradient-end: rgba(26, 26, 26, 1);
+    --search-icon-color: %23888;
+}
+
+[data-theme="light"] {
+    --bg: #f4f4f5;
+    --card: #ffffff;
+    --input-bg: #ffffff;
+    --text: #111827;
+    --muted-text: #6b7280;
+    --border: #d1d5db;
+    --border-light: #e5e7eb;
+    --accent: #0056b3;
+    --secondary: #4b5563;
+    --danger: #dc2626;
+    --gold: #b48600;
+    
+    --hover-bg: #f3f4f6;
+    --table-hover: #f9fafb;
+    --table-header-bg: #f3f4f6;
+    --gradient-start: rgba(180, 134, 0, 0.08);
+    --gradient-end: rgba(255, 255, 255, 1);
+    --search-icon-color: %236b7280;
+}
+
+[data-theme="hc"] {
+    --bg: #000000;
+    --card: #000000;
+    --input-bg: #000000;
+    --text: #ffffff;
+    --muted-text: #cccccc;
+    --border: #ffffff;
+    --border-light: #ffffff;
+    --accent: #00ffff;
+    --secondary: #ffffff;
+    --danger: #ff0000;
+    --gold: #ffff00;
+    
+    --hover-bg: #333333;
+    --table-hover: #111111;
+    --table-header-bg: #000000;
+    --gradient-start: rgba(0, 0, 0, 0);
+    --gradient-end: rgba(0, 0, 0, 1);
+    --search-icon-color: %23ffffff;
+}
+
+[data-theme="terminal"] {
+    --bg: #000000;
+    --card: #050505;
+    --input-bg: #000000;
+    --text: #33ff00;
+    --muted-text: #00cc00;
+    --border: #33ff00;
+    --border-light: #004400;
+    --accent: #33ff00; 
+    --secondary: #00aa00;
+    --danger: #ff3333;
+    --gold: #ffcc00;
+    
+    --hover-bg: #002200;
+    --table-hover: #001a00;
+    --table-header-bg: #000000;
+    --gradient-start: rgba(51, 255, 0, 0.15);
+    --gradient-end: rgba(0, 0, 0, 1);
+    --search-icon-color: %2333ff00;
+}

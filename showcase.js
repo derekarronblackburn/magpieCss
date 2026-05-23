@@ -1,0 +1,228 @@
+// Showcase Site Controller
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Navigation routing
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+    const sections = document.querySelectorAll('.doc-section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Set active link
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Show corresponding section
+            const targetId = link.getAttribute('href').substring(1);
+            sections.forEach(sec => {
+                if (sec.id === targetId) {
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu on click
+            const mainNavMenu = document.getElementById('mainNavMenu');
+            if (mainNavMenu) mainNavMenu.classList.remove('show');
+            
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // 2. Code Copy Functionality
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.closest('.code-container');
+            const codeEl = container.querySelector('code');
+            
+            // Get unescaped HTML content or clean text
+            const codeText = codeEl.innerText;
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                btn.innerText = 'Copied!';
+                if (window.MagpieCSS) {
+                    MagpieCSS.toast.show("Code snippet copied to clipboard!", "success", 2000);
+                }
+                setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy code: ", err);
+                if (window.MagpieCSS) {
+                    MagpieCSS.toast.show("Copy failed. Please manually select and copy.", "error", 3000);
+                }
+            });
+        });
+    });
+
+    // 3. Setup dynamic demo listeners
+    setupDemoListeners();
+});
+
+// Setup interactive features on the showcase page
+function setupDemoListeners() {
+    // Tab controls
+    if (window.MagpieCSS) {
+        MagpieCSS.ui.initTabs('.admin-tabs');
+    }
+
+    // Toggle Mobile menu
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    if (mobileToggle) {
+        mobileToggle.onclick = () => {
+            const nav = document.getElementById('mainNavMenu');
+            if (nav) nav.classList.toggle('show');
+        };
+    }
+
+    // 3.1 Theme toggler in showcase header
+    window.setAppTheme = function(themeName) {
+        if (window.MagpieCSS) {
+            MagpieCSS.theme.set(themeName);
+            
+            // Sync theme modal/dropdown items
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById('btn-theme-' + themeName);
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            // Update color swatch values based on active theme variables
+            updateColorSwatchValues();
+        }
+    };
+
+    // Update showcase swatches with real calculated CSS variable colors
+    function updateColorSwatchValues() {
+        const swatches = document.querySelectorAll('.swatch-card');
+        swatches.forEach(swatch => {
+            const varName = swatch.querySelector('.swatch-var').innerText.trim();
+            const colorBlock = swatch.querySelector('.swatch-color');
+            const labelValue = swatch.querySelector('.swatch-hex');
+            
+            // Read computed variable style value
+            const computedColor = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+            colorBlock.style.backgroundColor = `var(${varName})`;
+            if (labelValue) labelValue.innerText = computedColor || 'N/A';
+        });
+    }
+    
+    // Initial swatch calculation
+    setTimeout(updateColorSwatchValues, 200);
+    window.addEventListener('magpie-theme-change', updateColorSwatchValues);
+
+    // 3.2 Dynamic Toast triggers
+    window.triggerToast = function(type) {
+        if (!window.MagpieCSS) return;
+        
+        if (type === 'success') {
+            MagpieCSS.toast.show("Vault item 'Vintage Camera' saved successfully!", "success");
+        } else if (type === 'error') {
+            MagpieCSS.toast.show("Failed to update warehouse bin. Database error occurred.", "error");
+        } else if (type === 'warning') {
+            MagpieCSS.toast.show("Warning: Storage space is reaching 95% capacity.", "warning");
+        }
+    };
+
+    window.triggerClippy = function() {
+        if (!window.MagpieCSS) return;
+        
+        MagpieCSS.toast.showClippy(
+            "Version 1.5.0 has landed!", 
+            "We have added spatial mapping support for multiple floor levels and receipts upload features. Click to check the full notes.",
+            8000,
+            () => {
+                MagpieCSS.dialog.alert("Here are the Release Notes for version 1.5.0:\n- Added multi-layered spatial mapping editor.\n- Integrated secure document vaults.\n- Enhanced mobile responsive layouts.", "MagpieStash Updates");
+            }
+        );
+    };
+
+    // 3.3 Dynamic Dialogs triggers
+    window.triggerAlert = function() {
+        if (!window.MagpieCSS) return;
+        MagpieCSS.dialog.alert("Your file 'warranty_info.pdf' has been successfully uploaded and encrypted in the vault.", "File Upload Completed");
+    };
+
+    window.triggerConfirm = function() {
+        if (!window.MagpieCSS) return;
+        MagpieCSS.dialog.confirm("Are you sure you want to permanently delete the location 'Garage Shelf B'? This will de-stash 14 items.", "Delete Location").then(confirmed => {
+            if (confirmed) {
+                MagpieCSS.toast.show("Location deleted. Items moved to Unsorted Vault.", "success");
+            } else {
+                MagpieCSS.toast.show("Delete operation cancelled.", "warning");
+            }
+        });
+    };
+
+    // 3.4 Spatial mapping interactive controls
+    window.toggleCanvasPalette = function() {
+        const pal = document.getElementById('demoPalette');
+        if (pal) pal.classList.toggle('expanded');
+    };
+
+    window.selectCanvasTool = function(btn, toolName) {
+        const btns = btn.parentNode.querySelectorAll('.tool-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Show status toast
+        if (window.MagpieCSS) {
+            MagpieCSS.toast.show(`Tool switched to: ${toolName}`, 'success', 1500);
+        }
+    };
+
+    window.toggleCanvasFullscreen = function() {
+        const container = document.getElementById('demoMapContainer');
+        if (container) {
+            container.classList.toggle('fullscreen');
+            
+            // Esc key exits fullscreen
+            const escHandler = (e) => {
+                if (e.key === 'Escape' && container.classList.contains('fullscreen')) {
+                    container.classList.remove('fullscreen');
+                    document.removeEventListener('keydown', escHandler);
+                }
+            };
+            
+            if (container.classList.contains('fullscreen')) {
+                document.addEventListener('keydown', escHandler);
+                if (window.MagpieCSS) MagpieCSS.toast.show("Press ESC to exit fullscreen mode.", "success", 2000);
+            }
+        }
+    };
+
+    // 3.5 Hierarchical tree expand/collapse demo
+    window.toggleTreeDetails = function(summaryEl) {
+        // Toggle the icon dynamically
+        const details = summaryEl.parentNode;
+        const icon = summaryEl.querySelector('.node-toggle-icon');
+        
+        // Wait a tiny bit for the 'open' attribute state to toggle
+        setTimeout(() => {
+            if (details.hasAttribute('open')) {
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            } else {
+                if (icon) icon.style.transform = 'rotate(-90deg)';
+            }
+        }, 50);
+    };
+    
+    // Setup detail summaries for icons
+    document.querySelectorAll('details.tree-node > summary').forEach(sum => {
+        sum.addEventListener('click', () => {
+            window.toggleTreeDetails(sum);
+        });
+    });
+
+    // 3.6 Location item Details toggle button
+    window.toggleAdvancedDrawer = function() {
+        const toggleBtn = document.getElementById('drawerToggleBtn');
+        const drawer = document.getElementById('advancedDrawer');
+        if (toggleBtn && drawer) {
+            toggleBtn.classList.toggle('active');
+            drawer.classList.toggle('show');
+        }
+    };
+}

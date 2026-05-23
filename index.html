@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="magpie">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagpieCSS | Beautiful, Themeable Design System</title>
+    
+    <!-- Link to the compiled bundle stylesheet -->
+    <link rel="stylesheet" href="dist/magpie.css">
+    <!-- Link to showcase-specific style documentation -->
+    <link rel="stylesheet" href="showcase.css">
+    
+    <!-- Google Fonts Outfit and Inter for premium aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Apply premium fonts for the showcase site */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        h1, h2, h3, h4, .logo-text, .summary-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container app-layout">
+    
+    <!-- 1. APP LOGO AREA -->
+    <div class="app-logo">
+        <a href="#overview" class="nav-link" style="color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; border: none; background: transparent; padding: 0;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="16" y1="8" x2="2" y2="22" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 1 l1 2.5 l2.5 1 l-2.5 1 l-1 2.5 l-1 -2.5 l-2.5 -1 l2.5 -1 z" fill="var(--gold)"/>
+                <path d="M9 2 l0.5 1.5 l1.5 0.5 l-1.5 0.5 l-0.5 1.5 l-0.5 -1.5 l-1.5 -0.5 l1.5 -0.5 z" fill="var(--gold)"/>
+            </svg>
+            <span class="logo-text" style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;">MagpieCSS</span>
+        </a>
+    </div>
+
+    <!-- 2. SEARCH / SYSTEM COMPONENT FILTER -->
+    <div class="app-search">
+        <button class="mobile-menu-toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span style="margin-left: 8px; font-weight: bold; font-size: 0.9rem;">Nav Menu</span>
+        </button>
+        <input type="text" class="nav-search-input" placeholder="Search Components..." style="margin-left: 10px;">
+    </div>
+
+    <!-- 3. TOP ACTION BAR (THEME DROPDOWN SWITCHER) -->
+    <div class="app-actions">
+        <div class="dropdown">
+            <button class="hamburger-btn" onclick="MagpieCSS.ui.toggleDropdown('showcaseThemeDropdown')" style="border: 1px solid var(--border); padding: 8px 16px; background: var(--card); border-radius: 20px; display: flex; align-items: center; gap: 8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                <span style="font-size: 0.85rem; font-weight: bold; color: var(--text);">Change Theme</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            
+            <div id="showcaseThemeDropdown" class="dropdown-content" style="right: 0; min-width: 200px;">
+                <div style="padding: 10px 16px; font-size: 0.7rem; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.05rem; border-bottom: 1px solid var(--border-light);">Choose Visual Theme</div>
+                <button id="btn-theme-magpie" class="dropdown-item" onclick="setAppTheme('magpie')">Magpie Slate (Default)</button>
+                <button id="btn-theme-dark" class="dropdown-item" onclick="setAppTheme('dark')">Dark Mode</button>
+                <button id="btn-theme-light" class="dropdown-item" onclick="setAppTheme('light')">Light Mode</button>
+                <button id="btn-theme-hc" class="dropdown-item" onclick="setAppTheme('hc')">High Contrast Stark</button>
+                <button id="btn-theme-terminal" class="dropdown-item" onclick="setAppTheme('terminal')">Monospace Terminal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. SIDEBAR NAVIGATION -->
+    <div class="app-nav">
+        <div class="nav-wrapper">
+            <nav class="nav-menu" id="mainNavMenu">
+                <div style="padding: 0 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Tokens & Reset</div>
+                <a href="#overview" class="nav-link active">Overview & Tokens</a>
+                
+                <div style="padding: 15px 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Layouts & Grids</div>
+                <a href="#grids" class="nav-link">Responsive Grids</a>
+                
+                <div style="padding: 15px 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">UI Components</div>
+                <a href="#forms" class="nav-link">Form Controls & Buttons</a>
+                <a href="#trees" class="nav-link">Trees & Accordions</a>
+                <a href="#dialogs" class="nav-link">Dialogs & Toasts</a>
+                <a href="#spatial" class="nav-link">Spatial Canvas Designer</a>
+                <a href="#print" class="nav-link">Report & Print Styles</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 5. MAIN CONTENT FRAME -->
+    <div class="app-content">
+
+        <!-- ==================== SECTION 1: OVERVIEW & TOKENS ==================== -->
+        <section id="overview" class="doc-section active">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                Overview & Design Tokens
+            </div>
+            
+            <p>Welcome to <strong>MagpieCSS</strong>, a themeable, responsive design system extracted from the MagpieStash asset manager. It is written in pure vanilla CSS and relies on modern CSS Custom Properties for theme switching.</p>
+            <p>To use this design system, link the distribution stylesheet and target themes using the <code>data-theme</code> attribute on the root html node.</p>
+
+            <div class="doc-subsection-title">Active Theme Color Tokens</div>
+            <p>Below are the current values of the design variables. Try changing the theme in the top-right header switcher to see variables adapt dynamically.</p>
+            
+            <div class="swatches-grid">
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--bg);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Background</div>
+                        <div class="swatch-var">--bg</div>
+                        <div class="swatch-hex">#0f172a</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--card);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Card/Panel</div>
+                        <div class="swatch-var">--card</div>
+                        <div class="swatch-hex">#1e293b</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--text);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Text</div>
+                        <div class="swatch-var">--text</div>
+                        <div class="swatch-hex">#f8fafc</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--accent);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Accent</div>
+                        <div class="swatch-var">--accent</div>
+                        <div class="swatch-hex">#3b82f6</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--secondary);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Secondary</div>
+                        <div class="swatch-var">--secondary</div>
+                        <div class="swatch-hex">#2dd4bf</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--gold);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Gold</div>
+                        <div class="swatch-var">--gold</div>
+                        <div class="swatch-hex">#ffd700</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--border);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Border</div>
+                        <div class="swatch-var">--border</div>
+                        <div class="swatch-hex">#334155</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background-color: var(--danger);"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Danger</div>
+                        <div class="swatch-var">--danger</div>
+                        <div class="swatch-hex">#f43f5e</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Custom Monospace overrides (Terminal Theme)</div>
+            <p>When using <code>data-theme="terminal"</code>, the font stack changes to a strict typewriter monospace style, and border-radius indicators flatline to <code>0px</code>, giving a blocky retro vibe automatically.</p>
+            
+            <div class="doc-subsection-title">Typography Scale Preview</div>
+            <div class="component-demo">
+                <div class="font-display">
+                    <div class="font-size-row">
+                        <span class="font-size-label">1.8rem (h2)</span>
+                        <span class="font-size-preview" style="font-size: 1.8rem; font-weight: bold;">Beautiful Vault Manager</span>
+                    </div>
+                    <div class="font-size-row">
+                        <span class="font-size-label">1.25rem (h3)</span>
+                        <span class="font-size-preview" style="font-size: 1.25rem; font-weight: 600;">Secure Spatial Database</span>
+                    </div>
+                    <div class="font-size-row">
+                        <span class="font-size-label">1.0rem</span>
+                        <span class="font-size-preview" style="font-size: 1rem;">Primary body text block size.</span>
+                    </div>
+                    <div class="font-size-row">
+                        <span class="font-size-label">0.85rem</span>
+                        <span class="font-size-preview" style="font-size: 0.85rem; color: var(--muted-text);">Muted small descriptions and labels.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Integration Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Link stylesheet in header --&gt;
+&lt;link rel="stylesheet" href="magpie.css"&gt;
+
+&lt;!-- Apply specific theme: magpie (default), dark, light, hc, terminal --&gt;
+&lt;html data-theme="magpie"&gt;
+  &lt;body&gt;
+    &lt;!-- Your app content here --&gt;
+    &lt;script src="magpie.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: GRID LAYOUTS ==================== -->
+        <section id="grids" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                Responsive Grids & Airtable Transforms
+            </div>
+
+            <p>MagpieCSS includes layout utilities for side-navigation dashboards and the highly optimized dense <strong>"Airtable" grid</strong>. This table automatically flattens into scrollable micro-cards on mobile devices.</p>
+            
+            <div class="doc-subsection-title">The Airtable Dense Grid</div>
+            <p>Hover on rows to see highlighting. Shrink your browser window below 800px to see it collapse into an active card list.</p>
+            
+            <div class="component-demo" style="overflow-x: auto;">
+                <div class="grid-container">
+                    <table class="data-grid">
+                        <thead>
+                            <tr>
+                                <th class="col-img">Image</th>
+                                <th class="col-name active-sort">Item Name <span class="sort-arrow">▼</span></th>
+                                <th class="col-qty">Qty</th>
+                                <th class="col-cat">Category</th>
+                                <th class="col-loc">Location</th>
+                                <th class="col-money">Value</th>
+                                <th class="col-tags">Tags</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-img cell-img">
+                                    <div style="width: 24px; height: 24px; background: #ff5e57; border-radius: 3px; display: inline-block; vertical-align: middle;"></div>
+                                </td>
+                                <td class="col-name cell-name">Vintage SLR Camera</td>
+                                <td class="col-qty cell-qty">1</td>
+                                <td class="col-cat cell-details"><span class="hide-mobile">Electronics</span></td>
+                                <td class="col-loc cell-details"><span class="hide-mobile">Office Shelf A</span></td>
+                                <td class="col-money cell-details"><span class="hide-mobile">$450.00</span><span class="val-mobile show-mobile" style="display:none;">$450.00</span></td>
+                                <td class="col-tags cell-tags">
+                                    <span class="tag-pill">Camera</span><span class="tag-pill">Vintage</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-img cell-img">
+                                    <div style="width: 24px; height: 24px; background: #00d2d3; border-radius: 3px; display: inline-block; vertical-align: middle;"></div>
+                                </td>
+                                <td class="col-name cell-name">Cordless Drill Set</td>
+                                <td class="col-qty cell-qty">2</td>
+                                <td class="col-cat cell-details"><span class="hide-mobile">Tools</span></td>
+                                <td class="col-loc cell-details"><span class="hide-mobile">Garage Rack 3</span></td>
+                                <td class="col-money cell-details"><span class="hide-mobile">$180.00</span><span class="val-mobile show-mobile" style="display:none;">$180.00</span></td>
+                                <td class="col-tags cell-tags">
+                                    <span class="tag-pill">PowerTools</span><span class="restock-badge">LOW</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">3D Hover Image Zoom</div>
+            <p>Hover on the image below to trigger the visual 3D pop-out effect, lifting the thumbnail out of structural boundaries.</p>
+            <div class="component-demo" style="display: flex; gap: 20px;">
+                <div>
+                    <div style="position: relative; width: 120px; height: 120px;">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233b82f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='14'>SLR Lens</text></svg>" class="gallery-img" alt="Demo Zoom">
+                    </div>
+                </div>
+                <div style="color: var(--muted-text); font-size: 0.9rem; align-self: center;">
+                    Uses custom CSS transforms and z-indexing: <code>.gallery-img:hover</code>. Perfect for inventory item details.
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Airtable Grid HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;div class="grid-container"&gt;
+  &lt;table class="data-grid"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th class="col-img"&gt;Image&lt;/th&gt;
+        &lt;th class="col-name"&gt;Item Name&lt;/th&gt;
+        &lt;th class="col-qty"&gt;Qty&lt;/th&gt;
+        &lt;th class="col-cat"&gt;Category&lt;/th&gt;
+        &lt;th class="col-loc"&gt;Location&lt;/th&gt;
+        &lt;th class="col-money"&gt;Value&lt;/th&gt;
+        &lt;th class="col-tags"&gt;Tags&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td class="col-img cell-img"&gt;
+          &lt;img src="thumb.jpg" class="thumb-tiny"&gt;
+        &lt;/td&gt;
+        &lt;td class="col-name cell-name"&gt;SLR Camera&lt;/td&gt;
+        &lt;td class="col-qty cell-qty"&gt;1&lt;/td&gt;
+        &lt;td class="col-cat cell-details"&gt;&lt;span class="hide-mobile"&gt;Electronics&lt;/span&gt;&lt;/td&gt;
+        &lt;td class="col-loc cell-details"&gt;&lt;span class="hide-mobile"&gt;Cabinet A&lt;/span&gt;&lt;/td&gt;
+        &lt;td class="col-money cell-details"&gt;
+          &lt;span class="hide-mobile"&gt;$450.00&lt;/span&gt;
+          &lt;span class="val-mobile show-mobile" style="display:none;"&gt;$450.00&lt;/span&gt;
+        &lt;/td&gt;
+        &lt;td class="col-tags cell-tags"&gt;
+          &lt;span class="tag-pill"&gt;Gear&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: FORM CONTROLS ==================== -->
+        <section id="forms" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Form Controls & Button Kits
+            </div>
+
+            <p>Forms feature sleek, dark, glassmorphism-friendly inputs with animated blue focus borders. Action buttons support color variables, custom scaling, and high contrast contrast borders.</p>
+            
+            <div class="doc-subsection-title">Interactive Form Sandbox</div>
+            <div class="component-demo">
+                <form class="add-form" onsubmit="event.preventDefault();">
+                    <div class="form-row row-2">
+                        <div class="input-group">
+                            <label for="f-name">Item Title</label>
+                            <input type="text" id="f-name" placeholder="e.g. Leather Bound Notebook">
+                        </div>
+                        <div class="input-group">
+                            <label for="f-qty">Quantity</label>
+                            <input type="number" id="f-qty" value="1">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row row-3">
+                        <div class="input-group">
+                            <label for="f-cat">Category</label>
+                            <select id="f-cat">
+                                <option>Office Supplies</option>
+                                <option>Electronics</option>
+                                <option>Physical Tools</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="f-val">Estimated Value</label>
+                            <input type="text" id="f-val" placeholder="$0.00">
+                        </div>
+                        <div class="input-group">
+                            <label class="file-upload-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                Upload Photo
+                                <input type="file" style="display: none;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-15">
+                        <div class="input-group">
+                            <label for="f-desc">Description Notes</label>
+                            <textarea id="f-desc" placeholder="Write additional serial numbers or warranties here..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div class="checkbox-group" style="padding-top: 0;">
+                            <input type="checkbox" id="f-insure">
+                            <label for="f-insure">Requires insurance valuation</label>
+                        </div>
+                        <div class="submit-area" style="margin-top: 0;">
+                            <button class="stash-btn" type="submit">Stash Item</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="doc-subsection-title">Validation Error State</div>
+            <p>Apply the class <code>.input-error</code> to trigger stark red alerts on forms:</p>
+            <div class="component-demo" style="max-width: 300px;">
+                <div class="input-group">
+                    <label for="f-err">Serial Number *</label>
+                    <input type="text" id="f-err" class="input-error" value="INVALID_HEX_KEY">
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Button Catalog</div>
+            <div class="component-demo" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="stash-btn">.stash-btn (Primary)</button>
+                <button class="stash-btn stash-btn-outline">.stash-btn-outline</button>
+                <button class="delete-btn">.delete-btn (Danger)</button>
+                <a href="#" class="btn-util">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    .btn-util Link
+                </a>
+            </div>
+
+            <div class="doc-subsection-title">Form HTML Layout Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;form class="add-form"&gt;
+  &lt;div class="form-row row-2"&gt;
+    &lt;div class="input-group"&gt;
+      &lt;label&gt;Title&lt;/label&gt;
+      &lt;input type="text" placeholder="Title"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="form-row row-3"&gt;
+    &lt;div class="input-group"&gt;
+      &lt;label&gt;Categories&lt;/label&gt;
+      &lt;select&gt;
+        &lt;option&gt;Office&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class="input-group"&gt;
+      &lt;label class="file-upload-btn"&gt;
+        Upload File
+        &lt;input type="file" style="display: none;"&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="submit-area"&gt;
+    &lt;button class="stash-btn" type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: TREES & ACCORDIONS ==================== -->
+        <section id="trees" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Hierarchical Location Trees & Collapsible Accordions
+            </div>
+
+            <p>Manage nested structures (like file trees or physical locations) using collapsible elements connected with clean vector branch markers.</p>
+            
+            <div class="doc-subsection-title">Collapsible Location Accordions</div>
+            <p>Uses vanilla HTML5 <code>&lt;details&gt;</code> tags styled with custom chevron CSS masks.</p>
+            
+            <div class="component-demo">
+                <details class="location-box">
+                    <summary class="location-header">Main Warehouse Loft (Rack B)</summary>
+                    <div class="location-contents">
+                        <table class="location-table-compact">
+                            <thead>
+                                <tr><th>Bin ID</th><th>Contents</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>B-01</td><td>Network hardware & switches</td><td><span class="badge feature">Active</span></td></tr>
+                                <tr><td>B-02</td><td>Power supply adapter cabling</td><td><span class="badge free">Idle</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                
+                <details class="location-box" open>
+                    <summary class="location-header">Basement Storage Vault</summary>
+                    <div class="location-contents">
+                        <p style="color: var(--muted-text); font-size: 0.9rem; margin: 0;">This locker contains secure archival records and hard drives. Access requires biometric keys.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="doc-subsection-title">Hierarchical Nested Tree View</div>
+            <p>Click on directory items to collapse branch levels. Notice the horizontal and vertical connector lines.</p>
+            
+            <div class="component-demo">
+                <div class="locations-container">
+                    <div class="tree-branch">
+                        <!-- Level 1 Node -->
+                        <details class="tree-node" open>
+                            <summary class="node-header">
+                                <div class="node-title-area">
+                                    <span class="node-toggle-icon">▼</span>
+                                    <strong>Building A (HQ)</strong>
+                                </div>
+                                <span class="tag-badge">3 Areas</span>
+                            </summary>
+                            
+                            <!-- Level 2 Branch -->
+                            <div class="tree-branch">
+                                <details class="tree-node" open>
+                                    <summary class="node-header">
+                                        <div class="node-title-area">
+                                            <span class="node-toggle-icon">▼</span>
+                                            Server Room 102
+                                        </div>
+                                        <span class="tag-badge">Rack 1</span>
+                                    </summary>
+                                    
+                                    <!-- Level 3 Branch -->
+                                    <div class="tree-branch">
+                                        <div class="tree-node">
+                                            <div class="node-header">
+                                                <div class="node-title-area" style="display: flex; align-items: center; gap: 6px;">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Cabinet Alpha (Archival Backup)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </details>
+                                
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <div class="node-title-area" style="display: flex; align-items: center; gap: 6px;">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><polygon points="12 22.08 12 12 3 6.92 3 17.08 12 22.08"></polygon><polygon points="12 12 21 6.92 21 17.08 12 22.08"></polygon><polygon points="12 2 3 6.92 12 12 21 6.92 12 2"></polygon><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>Loading Dock B
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Tree Node HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;div class="locations-container"&gt;
+  &lt;div class="tree-branch"&gt;
+    &lt;details class="tree-node" open&gt;
+      &lt;summary class="node-header"&gt;
+        &lt;div class="node-title-area"&gt;
+          &lt;span class="node-toggle-icon"&gt;▼&lt;/span&gt;
+          &lt;strong&gt;Office&lt;/strong&gt;
+        &lt;/div&gt;
+      &lt;/summary&gt;
+      
+      &lt;div class="tree-branch"&gt;
+        &lt;div class="tree-node"&gt;
+          &lt;div class="node-header"&gt;Cabinet shelf 1&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/details&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 5: DIALOGS & TOASTS ==================== -->
+        <section id="dialogs" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                Dialog Modals & Toast Alerts
+            </div>
+
+            <p>Includes overlay system helpers for notices, delete confirmations, and multiple styled toast banners (e.g. success checkmarks, red warnings, and retro Clippy helpers).</p>
+            
+            <div class="doc-subsection-title">Overlay Modal Launchers</div>
+            <div class="component-demo" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="stash-btn" onclick="triggerAlert()">Trigger Alert Modal</button>
+                <button class="stash-btn stash-btn-outline" onclick="triggerConfirm()">Trigger Confirm Modal</button>
+            </div>
+
+            <div class="doc-subsection-title">Toast Alert Triggers</div>
+            <div class="component-demo" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="stash-btn" style="background-color: var(--accent);" onclick="triggerToast('success')">Success Toast</button>
+                <button class="stash-btn" style="background-color: var(--danger);" onclick="triggerToast('error')">Error Toast</button>
+                <button class="stash-btn" style="background-color: var(--gold); color: #000;" onclick="triggerToast('warning')">Warning Toast</button>
+                <button class="stash-btn stash-btn-outline" onclick="triggerClippy()">Clippy Magpie Toast</button>
+            </div>
+
+            <div class="doc-subsection-title">Helper JS Call Examples</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>// 1. Fire a Toast Notification
+MagpieCSS.toast.show("Saved changes!", "success", 3000);
+
+// 2. Fire an Assistant toast box
+MagpieCSS.toast.showClippy("New Update!", "We added backups.", 5000, () => {
+  console.log("Action button clicked!");
+});
+
+// 3. Fire custom confirm Modal promise
+MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed => {
+  if (confirmed) {
+    console.log("Database wiped!");
+  }
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 6: SPATIAL CANVAS ==================== -->
+        <section id="spatial" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+                Spatial Canvas Designer Layout
+            </div>
+
+            <p>The layout styles used to build interactive floor plans, map visualizers, and node editing drawing pads. This includes absolute tool palettes, fullscreen canvas overrides, and flat selection widgets.</p>
+            
+            <div class="doc-subsection-title">Interactive Canvas Designer View</div>
+            <p>Click the gear icon in the canvas tool palette to expand options, or click the fullscreen button in the bottom right corner.</p>
+            
+            <div class="component-demo" style="padding: 0;">
+                <div class="mapping-container" id="demoMapContainer" style="height: 50vh;">
+                    
+                    <!-- Floating Title and Layer Selection -->
+                    <div class="floating-header">
+                        <div class="map-title-box">
+                            <span class="label-3d">Map Editor</span>
+                            <select class="flat-select" id="property-selector">
+                                <option>Main Floor Layout</option>
+                                <option>Second Floor Loft</option>
+                                <option>Outdoor Yard Grid</option>
+                            </select>
+                        </div>
+                        <div class="view-controls">
+                            <button class="stash-btn" style="padding: 4px 10px; font-size: 0.75rem;">Zoom In</button>
+                            <button class="stash-btn" style="padding: 4px 10px; font-size: 0.75rem; background: transparent; border: 1px solid var(--border)">Zoom Out</button>
+                        </div>
+                    </div>
+
+                    <!-- Toolbox Palette -->
+                    <div class="tool-palette" id="demoPalette">
+                        <button class="tool-btn active" onclick="selectCanvasTool(this, 'Pointer Selector')">
+                            <span class="icon-wrap">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 3 10.07 19.97 12.58 12.58 19.97 10.07 3 3"></polygon><line x1="13" y1="13" x2="19" y2="19"></line></svg>
+                            </span>
+                            <span class="tool-label">Select Node</span>
+                            <span class="shortcut-key">V</span>
+                        </button>
+                        <button class="tool-btn" onclick="selectCanvasTool(this, 'Rectangle Drawer')">
+                            <span class="icon-wrap">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                            </span>
+                            <span class="tool-label">Draw Zone</span>
+                            <span class="shortcut-key">R</span>
+                        </button>
+                        <button class="tool-btn" onclick="selectCanvasTool(this, 'Pin Dropper')">
+                            <span class="icon-wrap">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </span>
+                            <span class="tool-label">Drop Pin</span>
+                            <span class="shortcut-key">P</span>
+                        </button>
+                        <div class="tool-divider"></div>
+                        <button class="tool-btn" onclick="toggleCanvasPalette()">
+                            <span class="icon-wrap">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            </span>
+                            <span class="tool-label">Toggle Menu</span>
+                        </button>
+                    </div>
+
+                    <!-- Grid Canvas Area -->
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #1a202c 1px, transparent 1px); background-size: 20px 20px;">
+                        <div style="text-align: center;">
+                            <span class="label-3d" style="border-left-color: var(--secondary);">Interactive Canvas Workspace</span>
+                            <p style="font-size: 0.8rem; color: #4a5568; margin-top: 10px; font-family: monospace;">[ 2D grid coordinates relative to viewport ]</p>
+                        </div>
+                    </div>
+
+                    <!-- Fullscreen button -->
+                    <button class="fullscreen-btn" onclick="toggleCanvasFullscreen()" title="Fullscreen mode" style="display: flex; align-items: center; justify-content: center;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Designer Canvas HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;div class="mapping-container"&gt;
+  &lt;!-- Floating Header --&gt;
+  &lt;div class="floating-header"&gt;
+    &lt;div class="map-title-box"&gt;
+      &lt;span class="label-3d"&gt;Spatial&lt;/span&gt;
+      &lt;select class="flat-select"&gt;
+        &lt;option&gt;Floor 1&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Side Palette --&gt;
+  &lt;div class="tool-palette expanded"&gt;
+    &lt;button class="tool-btn active"&gt;
+      &lt;span class="icon-wrap"&gt;
+        &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"&gt;&lt;/path&gt;&lt;circle cx="12" cy="10" r="3"&gt;&lt;/circle&gt;&lt;/svg&gt;
+      &lt;/span&gt;
+      &lt;span class="tool-label"&gt;Pins&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Fullscreen Button --&gt;
+  &lt;button class="fullscreen-btn"&gt;
+    &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"&gt;&lt;/path&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 7: PRINT LAYOUTS ==================== -->
+        <section id="print" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                PDF & Print Report Styles
+            </div>
+
+            <p>Clean, high-contrast, light-themed layouts optimized for exporting catalog indices, invoices, inventories, and audits into physical print or PDF formats.</p>
+            
+            <div class="doc-subsection-title">Print Layout Preview</div>
+            <p>Below is a preview of the print-formatted structure (uses high-contrast borders and tabular-numeric fonts).</p>
+            
+            <div class="component-demo" style="background: #ffffff; color: #334155; padding: 30px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                <!-- Simulated print wrapper -->
+                <div style="font-family: 'Inter', sans-serif;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #0f172a; padding-bottom: 15px; margin-bottom: 25px;">
+                        <div>
+                            <h2 style="margin: 0; font-size: 24px; color: #0f172a; font-family: Outfit;">VALUATION REPORT INDEX</h2>
+                            <span style="color: #64748b; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase;">Stash Vault Inventory Audit</span>
+                        </div>
+                        <div style="font-size: 0.85rem; text-align: right; color: #64748b;">
+                            Date: May 23, 2026<br>
+                            Operator: Derek
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                        <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; text-align: center;">
+                            <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: bold; margin-bottom: 5px;">Total Stashed Items</span>
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">142</span>
+                        </div>
+                        <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; text-align: center;">
+                            <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: bold; margin-bottom: 5px;">Calculated Value</span>
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">$12,450.00</span>
+                        </div>
+                    </div>
+                    
+                    <table style="width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="background: #f8fafc;">
+                                <th style="padding: 10px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; border-left: 1px solid #e2e8f0; border-top-left-radius: 6px; color: #0f172a; text-align: left; font-weight: bold;">ITEM</th>
+                                <th style="padding: 10px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; color: #0f172a; text-align: left; font-weight: bold;">LOCATION</th>
+                                <th style="padding: 10px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-top-right-radius: 6px; color: #0f172a; text-align: right; font-weight: bold;">VALUE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; border-left: 1px solid #e2e8f0; font-weight: bold; color: #0f172a;">Vintage SLR Camera</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; color: #64748b;">Office Shelf A</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; text-align: right; font-variant-numeric: tabular-nums; font-weight: bold; color: #0f172a;">$450.00</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; border-left: 1px solid #e2e8f0; font-weight: bold; color: #0f172a; border-bottom-left-radius: 6px;">Archival Storage Locker</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; color: #64748b;">Server Room 102</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; text-align: right; font-variant-numeric: tabular-nums; font-weight: bold; color: #0f172a; border-bottom-right-radius: 6px;">$1,200.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; justify-content: flex-end;">
+                <button class="stash-btn" onclick="window.print()">Print Document</button>
+            </div>
+
+            <div class="doc-subsection-title">Report Layout HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Apply print-mode class on body during print trigger --&gt;
+&lt;body class="print-mode"&gt;
+  &lt;div class="header-container"&gt;
+    &lt;div class="header-left"&gt;
+      &lt;h1&gt;VALUATION REPORT&lt;/h1&gt;
+      &lt;span class="meta"&gt;Audit Index&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="summary-boxes"&gt;
+    &lt;div class="summary-box"&gt;
+      &lt;span class="summary-label"&gt;Total Items&lt;/span&gt;
+      &lt;span class="summary-value"&gt;142&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Table uses separate border collapse to allow rounded header corners --&gt;
+  &lt;table style="border-collapse: separate; border-spacing: 0;"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;ITEM&lt;/th&gt;
+        &lt;th&gt;VALUE&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+  &lt;/table&gt;
+&lt;/body&gt;</code></pre>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 6. FOOTER -->
+    <div class="app-footer">
+        <div style="margin-top: 60px; padding: 25px 0; border-top: 1px solid var(--border-light); text-align: center; font-size: 0.85rem; color: var(--muted-text); letter-spacing: 0.05rem;">
+            MagpieCSS is a modern, themeable, open-source responsive design system.<br>
+            <div style="margin-top: 10px;">
+                <a href="https://github.com" target="_blank" style="color: var(--muted-text); text-decoration: underline; margin-right: 15px;">GitHub Code</a>
+                <a href="#overview" class="nav-link" style="color: var(--muted-text); text-decoration: underline; display: inline; border: none; background: transparent; padding: 0;">Back to top</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Framework JS Helper file -->
+<script src="dist/magpie.js"></script>
+<!-- Showcase site controller -->
+<script src="showcase.js"></script>
+
+</body>
+</html>
