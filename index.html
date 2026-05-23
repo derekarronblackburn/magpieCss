@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagpieCSS | Beautiful, Themeable Design System</title>
     
+    <!-- SVG Feather Icon Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z'/><line x1='16' y1='8' x2='2' y2='22'/></svg>">
+    
     <!-- Link to the compiled bundle stylesheet -->
     <link rel="stylesheet" href="dist/magpie.css">
     <!-- Link to showcase-specific style documentation -->
@@ -53,21 +56,22 @@
     </div>
 
     <!-- 3. TOP ACTION BAR (THEME DROPDOWN SWITCHER) -->
-    <div class="app-actions">
+    <div class="app-actions header-actions">
         <div class="dropdown">
-            <button class="hamburger-btn" onclick="MagpieCSS.ui.toggleDropdown('showcaseThemeDropdown')" style="border: 1px solid var(--border); padding: 8px 16px; background: var(--card); border-radius: 20px; display: flex; align-items: center; gap: 8px;">
+            <button class="hamburger-btn hide-print" onclick="MagpieCSS.ui.toggleDropdown('showcaseThemeDropdown')" style="border: 1px solid var(--border); padding: 8px 16px; background: var(--card); border-radius: 20px; display: flex; align-items: center; gap: 8px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                 <span style="font-size: 0.85rem; font-weight: bold; color: var(--text);">Change Theme</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             
             <div id="showcaseThemeDropdown" class="dropdown-content" style="right: 0; min-width: 200px;">
-                <div style="padding: 10px 16px; font-size: 0.7rem; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.05rem; border-bottom: 1px solid var(--border-light);">Choose Visual Theme</div>
-                <button id="btn-theme-magpie" class="dropdown-item" onclick="setAppTheme('magpie')">Magpie Slate (Default)</button>
-                <button id="btn-theme-dark" class="dropdown-item" onclick="setAppTheme('dark')">Dark Mode</button>
-                <button id="btn-theme-light" class="dropdown-item" onclick="setAppTheme('light')">Light Mode</button>
-                <button id="btn-theme-hc" class="dropdown-item" onclick="setAppTheme('hc')">High Contrast Stark</button>
-                <button id="btn-theme-terminal" class="dropdown-item" onclick="setAppTheme('terminal')">Monospace Terminal</button>
+                <div style="padding: 10px 16px; font-size: 0.7rem; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.05rem;">Choose Visual Theme</div>
+                <div class="dropdown-divider"></div>
+                <button id="btn-theme-magpie" class="dropdown-item theme-btn" onclick="setAppTheme('magpie')">Magpie Slate (Default)</button>
+                <button id="btn-theme-dark" class="dropdown-item theme-btn" onclick="setAppTheme('dark')">Dark Mode</button>
+                <button id="btn-theme-light" class="dropdown-item theme-btn" onclick="setAppTheme('light')">Light Mode</button>
+                <button id="btn-theme-hc" class="dropdown-item theme-btn" onclick="setAppTheme('hc')">High Contrast Stark</button>
+                <button id="btn-theme-terminal" class="dropdown-item theme-btn" onclick="setAppTheme('terminal')">Monospace Terminal</button>
             </div>
         </div>
     </div>
@@ -76,7 +80,7 @@
     <div class="app-nav">
         <div class="nav-wrapper">
             <nav class="nav-menu" id="mainNavMenu">
-                <div style="padding: 0 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Tokens & Reset</div>
+                <div style="padding: 0 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Getting Started</div>
                 <a href="#overview" class="nav-link active">Overview & Tokens</a>
                 
                 <div style="padding: 15px 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Layouts & Grids</div>
@@ -85,6 +89,8 @@
                 <div style="padding: 15px 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">UI Components</div>
                 <a href="#forms" class="nav-link">Form Controls & Buttons</a>
                 <a href="#trees" class="nav-link">Trees & Accordions</a>
+                <a href="#flashcards" class="nav-link">3D Flipping Cards</a>
+                <a href="#wiki" class="nav-link">Wiki Page Renderer</a>
                 <a href="#dialogs" class="nav-link">Dialogs & Toasts</a>
                 <a href="#spatial" class="nav-link">Spatial Canvas Designer</a>
                 <a href="#print" class="nav-link">Report & Print Styles</a>
@@ -95,18 +101,64 @@
     <!-- 5. MAIN CONTENT FRAME -->
     <div class="app-content">
 
-        <!-- ==================== SECTION 1: OVERVIEW & TOKENS ==================== -->
+        <!-- ==================== SECTION 1: OVERVIEW & LANDING ==================== -->
         <section id="overview" class="doc-section active">
             <div class="doc-section-title">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                Overview & Design Tokens
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                MagpieCSS Design System
             </div>
             
-            <p>Welcome to <strong>MagpieCSS</strong>, a themeable, responsive design system extracted from the MagpieStash asset manager. It is written in pure vanilla CSS and relies on modern CSS Custom Properties for theme switching.</p>
-            <p>To use this design system, link the distribution stylesheet and target themes using the <code>data-theme</code> attribute on the root html node.</p>
+            <div style="background: rgba(45, 212, 191, 0.05); border-left: 4px solid var(--secondary); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="margin-top: 0; color: var(--text); font-family: Outfit; font-size: 1.3rem;">Welcome to MagpieCSS</h3>
+                <p style="margin: 0; line-height: 1.6; color: var(--text);">
+                    MagpieCSS is a modern, lightweight, themeable vanilla CSS framework. Originally extracted from administrative tools (MagpieStash) and wiki platforms (MagpieNest), it is built specifically for data-dense user interfaces, spatial grid workspaces, and document libraries.
+                </p>
+            </div>
 
+            <!-- ==================== METHODOLOGY & ARCHITECTURE ==================== -->
+            <div class="doc-subsection-title">Methodology & Design Philosophy</div>
+            <p>MagpieCSS is guided by four core engineering principles designed to make building administrative and wiki systems fast, clean, and highly readable:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <h4 style="margin-top: 0; color: var(--accent); font-family: Outfit; font-weight: bold;">1. Pure Vanilla CSS</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--muted-text); line-height: 1.5;">
+                        No preprocessors, compilers, or complex node setups needed. MagpieCSS leverages modern CSS Custom Properties directly inside standard stylesheets for instant browser loads.
+                    </p>
+                </div>
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <h4 style="margin-top: 0; color: var(--secondary); font-family: Outfit; font-weight: bold;">2. High Density Layouts</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--muted-text); line-height: 1.5;">
+                        Optimized for data-dense dashboards, tables, and nested trees where scanning complex lists quickly is critical, avoiding bloated gaps of empty white space.
+                    </p>
+                </div>
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <h4 style="margin-top: 0; color: var(--gold); font-family: Outfit; font-weight: bold;">3. Zero-Emoji Integrity</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--muted-text); line-height: 1.5;">
+                        To maintain professional rendering consistency across operating systems, all visual icons are styled using inline SVG vectors or native typewriter font glyphs.
+                    </p>
+                </div>
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <h4 style="margin-top: 0; color: var(--text); font-family: Outfit; font-weight: bold;">4. Declarative Variable Theming</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--muted-text); line-height: 1.5;">
+                        All colors, border curves, and spacing are tied to variables. Swap the root <code>data-theme</code> attribute to shift color variables instantly (supporting Slate, Dark, Light, High Contrast, and Terminal).
+                    </p>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">The Three Architectural Layers</div>
+            <p>Our source code is split into three clean layers to separate global resets, layout structures, and standalone components:</p>
+            <div class="wiki-content-body" style="padding-left: 15px; margin-bottom: 30px;">
+                <ul>
+                    <li><strong>Tokens & Reset (<code>variables.css</code>, <code>reset.css</code>)</strong>: Defines the global spacing scales, transition durations, standard scrollbars, typewriter terminal overrides, and core theme properties.</li>
+                    <li><strong>Responsive Grids (<code>layout.css</code>)</strong>: Binds the side-navigation desktop grid, full-viewport overrides (<code>.layout-full-width</code>), printer layouts, and dense Airtable list structures.</li>
+                    <li><strong>standalone Components (<code>components.css</code>)</strong>: Hosts custom inputs, button styles, collapsible tree trees, administrative panels, modals, 3D flipping cards, color swatches, and toast alerts.</li>
+                </ul>
+            </div>
+
+            <!-- ==================== DYNAMIC COLOR TOKENS ==================== -->
             <div class="doc-subsection-title">Active Theme Color Tokens</div>
-            <p>Below are the current values of the design variables. Try changing the theme in the top-right header switcher to see variables adapt dynamically.</p>
+            <p>Below are the current values of the design variables. Try changing the theme in the top-right header dropdown switcher to see variables adapt dynamically.</p>
             
             <div class="swatches-grid">
                 <div class="swatch-card">
@@ -175,9 +227,11 @@
                 </div>
             </div>
 
+            <!-- ==================== MONOSPACE TERMINAL OVERRIDES ==================== -->
             <div class="doc-subsection-title">Custom Monospace overrides (Terminal Theme)</div>
             <p>When using <code>data-theme="terminal"</code>, the font stack changes to a strict typewriter monospace style, and border-radius indicators flatline to <code>0px</code>, giving a blocky retro vibe automatically.</p>
             
+            <!-- ==================== TYPOGRAPHY ==================== -->
             <div class="doc-subsection-title">Typography Scale Preview</div>
             <div class="component-demo">
                 <div class="font-display">
@@ -200,6 +254,7 @@
                 </div>
             </div>
 
+            <!-- ==================== QUICK START ==================== -->
             <div class="doc-subsection-title">Integration Code</div>
             <div class="code-container">
                 <button class="copy-btn">Copy</button>
@@ -324,6 +379,122 @@
   &lt;/table&gt;
 &lt;/div&gt;</code></pre>
             </div>
+
+            <!-- ==================== SUBSECTION: APP LAYOUT HEADER & USER BADGE ==================== -->
+            <div class="doc-subsection-title">App Layout Header & User Badge</div>
+            <p>Responsive profile badges and vault text designed to condense beautifully on smaller viewports. Shrink the browser width below <code>768px</code> to see the user name hide and the vault name truncate automatically.</p>
+            
+            <div class="component-demo">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: var(--card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 10px; height: 10px; background: var(--secondary); border-radius: 50%;"></div>
+                        <span class="vault-name-text" style="font-weight: bold; color: var(--accent);">Primary Storage Vault</span>
+                    </div>
+                    <div class="user-profile-badge" style="display: flex; align-items: center; gap: 8px; margin-right: 10px;">
+                        <div style="width: 24px; height: 24px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--bg); font-weight: bold;">D</div>
+                        <span class="user-name" style="font-size: 0.9rem; color: var(--text);">Derek Blackburn</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: DASHBOARD TOOLBARS & METRIC CARDS ==================== -->
+            <div class="doc-subsection-title">Dashboard Toolbars & Metric Cards</div>
+            <p>Statistics panels and dashboard toolbar components styled to display key variables, totals, and controls cleanly in dense layouts.</p>
+            
+            <div class="component-demo">
+                <!-- Dashboard Toolbar -->
+                <div class="dashboard-toolbar">
+                    <div class="vault-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Value</span>
+                            <span class="stat-val">$45,210.00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Items Stashed</span>
+                            <span class="stat-val gold">124</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Active Node</span>
+                            <span class="stat-val">Vault B</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <button class="btn-util">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Export
+                        </button>
+                        <button class="stash-btn" style="padding: 6px 12px; font-size: 0.8rem;">Sync Vault</button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Summary Widget -->
+                <div id="portfolio-summary" style="margin-top: 15px;">
+                    <span class="summary-title">TOTAL VAULT VALUE</span>
+                    <span id="total-value-display">$45,210.00</span>
+                </div>
+
+                <!-- Stats Metric Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div class="metric-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center;">
+                        <div class="stat-label">Space Used</div>
+                        <div class="metric-value">74%</div>
+                        <div class="stat-val" style="font-size: 0.75rem; color: var(--muted-text);">22.4 GB of 30 GB</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center;">
+                        <div class="stat-label">Last Audited</div>
+                        <div class="metric-value" style="font-size: 2rem; color: var(--secondary);">2 Hours Ago</div>
+                        <div class="stat-val" style="font-size: 0.75rem; color: var(--muted-text);">All items verified</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: UTILITIES ==================== -->
+            <div class="doc-subsection-title">Layout Utility & Print Modifiers</div>
+            <p>Utility classes to adjust layout configurations and printer visibility.</p>
+            <div class="wiki-content-body" style="padding-left: 15px;">
+                <ul>
+                    <li><code>.layout-full-width</code>: Bypasses the default responsive side-navigation menu on desktop, expanding the content frame to fill 100% of the viewport width. Ideal for map grids or full-width editor workspaces.</li>
+                    <li><code>.hide-print</code>: Forcefully hides elements (like action buttons, navigation sidebars, theme selectors) during print previews and PDF exports.</li>
+                </ul>
+            </div>
+
+            <div class="doc-subsection-title">Dashboard Widgets HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Responsive Header Widgets --&gt;
+&lt;div style="display: flex; justify-content: space-between;"&gt;
+  &lt;span class="vault-name-text"&gt;Primary Storage Vault&lt;/span&gt;
+  &lt;div class="user-profile-badge"&gt;
+    &lt;span class="user-name"&gt;Derek Blackburn&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Dashboard Stats Toolbar --&gt;
+&lt;div class="dashboard-toolbar"&gt;
+  &lt;div class="vault-stats"&gt;
+    &lt;div class="stat-item"&gt;
+      &lt;span class="stat-label"&gt;Total Value&lt;/span&gt;
+      &lt;span class="stat-val"&gt;$45,210.00&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-item"&gt;
+      &lt;span class="stat-label"&gt;Items Stashed&lt;/span&gt;
+      &lt;span class="stat-val gold"&gt;124&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Metric Cards --&gt;
+&lt;div class="metric-card"&gt;
+  &lt;div class="stat-label"&gt;Space Used&lt;/div&gt;
+  &lt;div class="metric-value"&gt;74%&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Full-Width Grid Layout Bypass --&gt;
+&lt;div class="container app-layout layout-full-width"&gt;
+  &lt;!-- Side navigation will be hidden automatically --&gt;
+  &lt;div class="app-content"&gt;Full screen canvas or page here&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
         </section>
 
         <!-- ==================== SECTION 3: FORM CONTROLS ==================== -->
@@ -337,6 +508,11 @@
             
             <div class="doc-subsection-title">Interactive Form Sandbox</div>
             <div class="component-demo">
+                <!-- Search & Filter Strip -->
+                <div class="filter-strip" style="margin-bottom: 20px;">
+                    <input type="text" class="search-box" placeholder="Filter items in sandbox..." style="flex-grow: 1; padding: 8px 12px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.9rem;">
+                    <button class="stash-btn" style="padding: 8px 15px;">Search</button>
+                </div>
                 <form class="add-form" onsubmit="event.preventDefault();">
                     <div class="form-row row-2">
                         <div class="input-group">
@@ -375,6 +551,30 @@
                         <div class="input-group">
                             <label for="f-desc">Description Notes</label>
                             <textarea id="f-desc" placeholder="Write additional serial numbers or warranties here..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 4-Column Layout using row-1 -->
+                    <div class="form-row row-1 mt-15">
+                        <div class="input-group">
+                            <label>Tracking Code</label>
+                            <input type="text" value="TRK-9820-A" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Bin Location</label>
+                            <input type="number" value="14">
+                        </div>
+                        <div class="input-group">
+                            <label>Shelf Level</label>
+                            <input type="text" value="B2">
+                        </div>
+                        <div class="input-group" style="align-self: center; margin-top: 20px;">
+                            <div class="switch-toggle" onclick="this.classList.toggle('active')" style="padding: 4px 10px; border-radius: 12px;">
+                                <div class="toggle-switch">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <span style="font-size: 0.75rem;">Fragile</span>
+                            </div>
                         </div>
                     </div>
 
@@ -440,6 +640,80 @@
     &lt;button class="stash-btn" type="submit"&gt;Submit&lt;/button&gt;
   &lt;/div&gt;
 &lt;/form&gt;</code></pre>
+            </div>
+
+            <!-- ==================== SUBSECTION: SWITCH TOGGLES ==================== -->
+            <div class="doc-subsection-title">Interactive Switch Toggles</div>
+            <p>A touch-friendly toggle switch component. Adding the class <code>.active</code> shifts the thumb and highlights the accent track color. Click below to toggle the switch state.</p>
+            
+            <div class="component-demo">
+                <div class="switch-toggle" id="demoToggle" onclick="this.classList.toggle('active')">
+                    <div class="toggle-switch">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                    <span style="font-size: 0.9rem; color: var(--text);">Enable Spatial Grid Snap</span>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: BADGES, SUGGESTED TAGS & PRICES ==================== -->
+            <div class="doc-subsection-title">Badges, Suggested Tags & Price Stacks</div>
+            <p>UI elements for counts, tagging helper lists, and dense details stacking.</p>
+            
+            <div class="component-demo" style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Cart Count Pill</span>
+                    <span class="cart-count-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        Stash: 14 Items
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Suggested Tag badges</span>
+                    <div class="suggested-tags">
+                        <span class="tag-badge">Database</span>
+                        <span class="tag-badge">Stash Vault</span>
+                        <span class="tag-badge">Hardware</span>
+                        <span class="tag-badge">Office Rack</span>
+                    </div>
+                </div>
+
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Price Stack Layout</span>
+                    <div class="price-stack" style="display: inline-flex; flex-direction: column; gap: 4px;">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--text);">$12,450.00</span>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">Calculated Stash Valuation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Switch Toggle & Badge HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Toggle Switch Component --&gt;
+&lt;div class="switch-toggle active"&gt;
+  &lt;div class="toggle-switch"&gt;
+    &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span&gt;Toggle Text Label&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Cart Count Badge --&gt;
+&lt;span class="cart-count-pill"&gt;
+  Stash: 14 Items
+&lt;/span&gt;
+
+&lt;!-- Tag Recommendations Group --&gt;
+&lt;div class="suggested-tags"&gt;
+  &lt;span class="tag-badge"&gt;Tag 1&lt;/span&gt;
+  &lt;span class="tag-badge"&gt;Tag 2&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Price Stack Container --&gt;
+&lt;div class="price-stack"&gt;
+  &lt;span class="price-amount"&gt;$12,450.00&lt;/span&gt;
+  &lt;span class="price-label"&gt;Replacement Cost&lt;/span&gt;
+&lt;/div&gt;</code></pre>
             </div>
         </section>
 
@@ -555,6 +829,188 @@
             </div>
         </section>
 
+        <!-- ==================== SECTION: 3D FLIPPING CARDS ==================== -->
+        <section id="flashcards" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                3D Flipping Cards
+            </div>
+
+            <p>A CSS 3D flipping card component designed for learning, flashcards, or presenting double-sided item properties. Click a card below to see it flip in 3D space.</p>
+            
+            <div class="doc-subsection-title">Interactive Flashcards</div>
+            <div class="component-demo">
+                <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+                    <!-- Card 1 -->
+                    <div class="card-container" onclick="this.querySelector('.card-3d').classList.toggle('flipped')" style="height: 180px; perspective: 1000px; cursor: pointer;">
+                        <div class="card-3d" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d;">
+                            <!-- Front -->
+                            <div class="card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+                                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-badge" style="background: rgba(59, 130, 246, 0.1); color: var(--accent); font-size: 0.75rem; padding: 2px 8px; border-radius: 10px;">JavaScript</span>
+                                    <div class="card-avatar-placeholder" style="width: 24px; height: 24px; background: var(--hover-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--text); font-weight: bold;">JS</div>
+                                </div>
+                                <h3 class="card-title" style="margin: 5px 0; font-size: 1.25rem; color: var(--text);">What is a Closure?</h3>
+                                <span class="card-subtitle">JavaScript Core Concept</span>
+                                <div class="card-footer" style="text-align: right;">
+                                    <span class="card-flip-prompt" style="font-size: 0.8rem; color: var(--muted-text);">Flip ↻</span>
+                                </div>
+                            </div>
+                            <!-- Back -->
+                            <div class="card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); background: var(--hover-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+                                <div class="card-back-attributes" style="font-size: 0.8rem; color: var(--muted-text);">
+                                    <div class="card-back-attr-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 4px; margin-bottom: 6px;">
+                                        <span class="card-back-attr-label">Scope Binding</span>
+                                        <span class="card-back-attr-val" style="font-weight: bold; color: var(--secondary);">Lexical</span>
+                                    </div>
+                                    <div class="card-back-attr-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 4px; margin-bottom: 6px;">
+                                        <span class="card-back-attr-label">Memory</span>
+                                        <span class="card-back-attr-val" style="font-weight: bold; color: var(--secondary);">Persistent</span>
+                                    </div>
+                                </div>
+                                <p class="card-back-description" style="margin: 5px 0 0 0; font-size: 0.85rem; line-height: 1.4; color: var(--text);">A closure is the combination of a function bundled together with references to its surrounding state (the lexical environment).</p>
+                                <div class="card-footer" style="text-align: right; margin-top: 5px;">
+                                    <span style="color: var(--accent); font-size: 0.75rem; font-weight: bold;">Click to flip back</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Flipping Card HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Grid container --&gt;
+&lt;div class="card-grid"&gt;
+  &lt;!-- Card Perspective Wrapper (Interactive via JS toggle) --&gt;
+  &lt;div class="card-container" onclick="this.querySelector('.card-3d').classList.toggle('flipped')"&gt;
+    &lt;div class="card-3d"&gt;
+      &lt;!-- Front Face --&gt;
+      &lt;div class="card-front"&gt;
+        &lt;div class="card-header"&gt;
+          &lt;span class="card-badge"&gt;Topic&lt;/span&gt;
+          &lt;div class="card-avatar-placeholder"&gt;A&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 class="card-title"&gt;Question?&lt;/h3&gt;
+        &lt;div class="card-footer"&gt;
+          &lt;span class="card-flip-prompt"&gt;Flip ↻&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Back Face --&gt;
+      &lt;div class="card-back"&gt;
+        &lt;div class="card-back-attributes"&gt;
+          &lt;div class="card-back-attr-row"&gt;
+            &lt;span class="card-back-attr-label"&gt;Property&lt;/span&gt;
+            &lt;span class="card-back-attr-val"&gt;Value&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p class="card-back-description"&gt;Answer definition details...&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: WIKI ARTICLE RENDERER ==================== -->
+        <section id="wiki" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                Wiki Article Renderer & Search Previews
+            </div>
+
+            <p>Components for rendering Markdown content pages, metadata editors, custom pills, and search autocomplete dropdown overlays. Perfect for wikis and document libraries.</p>
+            
+            <div class="doc-subsection-title">Pill Inheritance Variations</div>
+            <p>Pill tags used to indicate status, categories, or inheritance flags.</p>
+            <div class="component-demo" style="display: flex; gap: 10px;">
+                <span class="pill-default">.pill-default</span>
+                <span class="pill-inherited">.pill-inherited</span>
+                <span class="pill-override">.pill-override</span>
+            </div>
+
+            <div class="doc-subsection-title">Wiki Render Content Preview</div>
+            <p>Markdown elements styled automatically inside the <code>.wiki-content-body</code> wrapper class.</p>
+            <div class="component-demo">
+                <div class="wiki-content-body">
+                    <h2>Magpie Nest Development Roadmap</h2>
+                    <p>The development of the wiki platform (Magpie Nest) aims to integrate full spatial assets indexing alongside rich markdown documentation articles. Here is a preview of the typography and layouts:</p>
+                    
+                    <blockquote>
+                        "Organizing the physical world digitally requires bridging database structures with human-readable wikis."
+                    </blockquote>
+
+                    <h3>Core Document Syntax</h3>
+                    <ul>
+                        <li><strong>Inline code styling</strong>: Use <code>const db = new MagpieDB()</code> to query local records.</li>
+                        <li><strong>Nested lists</strong>: Fully supported with customized spacings.</li>
+                    </ul>
+
+                    <pre><code>// Example Markdown Code Block
+function initializeVault() {
+    console.log("Nest vault initialized.");
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Wiki Metadata Editor Block</div>
+            <div class="component-demo">
+                <div class="metadata-editor-section">
+                    <div class="metadata-editor-title">Document Metadata</div>
+                    <div class="form-row row-2">
+                        <div class="input-group">
+                            <label>Assigned Tag Owner</label>
+                            <input type="text" value="Derek" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Revision State</label>
+                            <span class="pill-override" style="align-self: flex-start; margin-top: 5px;">Override Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Live Autocomplete Search Preview Dropdown</div>
+            <p>Visual overlay list displayed below search boxes during user queries.</p>
+            <div class="component-demo" style="position: relative; height: 160px;">
+                <div class="search-preview-dropdown" style="position: absolute; top: 0; left: 0; width: 100%; max-width: 400px; box-sizing: border-box;">
+                    <a href="#" class="search-preview-item">
+                        <span class="search-preview-title">Cabinet Alpha Backups</span>
+                        <span class="search-preview-type">Location</span>
+                    </a>
+                    <a href="#" class="search-preview-item">
+                        <span class="search-preview-title">Vintage SLR Camera Guide</span>
+                        <span class="search-preview-type">Wiki Page</span>
+                    </a>
+                    <a href="#" class="search-preview-empty">No other results found.</a>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Wiki Article HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Markdown Content Container --&gt;
+&lt;div class="wiki-content-body"&gt;
+  &lt;h1&gt;Article Title&lt;/h1&gt;
+  &lt;blockquote&gt;Blockquote block&lt;/blockquote&gt;
+  &lt;pre&gt;&lt;code&gt;// Code snippet&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;!-- Autocomplete Search Dropdown --&gt;
+&lt;div style="position: relative;"&gt;
+  &lt;input type="text" placeholder="Search..."&gt;
+  &lt;div class="search-preview-dropdown"&gt;
+    &lt;a href="#" class="search-preview-item"&gt;
+      &lt;span class="search-preview-title"&gt;Result&lt;/span&gt;
+      &lt;span class="search-preview-type"&gt;Type&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
         <!-- ==================== SECTION 5: DIALOGS & TOASTS ==================== -->
         <section id="dialogs" class="doc-section">
             <div class="doc-section-title">
@@ -584,10 +1040,14 @@
                 <pre><code>// 1. Fire a Toast Notification
 MagpieCSS.toast.show("Saved changes!", "success", 3000);
 
-// 2. Fire an Assistant toast box
-MagpieCSS.toast.showClippy("New Update!", "We added backups.", 5000, () => {
-  console.log("Action button clicked!");
-});
+// 2. Fire an Assistant toast box (optional customIconHtml parameter)
+MagpieCSS.toast.showClippy(
+  "New Update!", 
+  "We added backups.", 
+  5000, 
+  () => { console.log("Action clicked!"); },
+  `&lt;svg width="48" height="48"&gt;...&lt;/svg&gt;` // Optional custom icon SVG or &lt;img&gt; tag
+);
 
 // 3. Fire custom confirm Modal promise
 MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed => {
@@ -595,6 +1055,49 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
     console.log("Database wiped!");
   }
 });</code></pre>
+            </div>
+
+            <!-- ==================== SUBSECTION: ADMIN WARNINGS ==================== -->
+            <div class="doc-subsection-title">Admin Warning Banners</div>
+            <p>Sleek alert panels for warning notifications and system indicators.</p>
+            <div class="component-demo">
+                <div class="admin-warning">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span>Warning: Cabinet Alpha is reaching maximum capacity. Plan database migration soon.</span>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: ADMIN TABS ==================== -->
+            <div class="doc-subsection-title">Navigation Tabs Component</div>
+            <p>Admin tabs for switching settings views. Styled with modern, layout-fitting borders.</p>
+            <div class="component-demo tabs-parent">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="tab-overview">Overview</button>
+                    <button class="tab-btn" data-tab="tab-settings">Settings</button>
+                </div>
+                <div id="tab-overview" class="tab-content active">
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--muted-text);">Overview Panel Content: Node coordinates are aligned and storage indexer is fully operational.</p>
+                </div>
+                <div id="tab-settings" class="tab-content">
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--muted-text);">Settings Panel Content: Custom rules can be modified. Snapping behavior enabled.</p>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: MODAL OVERLAY MARKUP ==================== -->
+            <div class="doc-subsection-title">Custom Modal & Overlay Markup</div>
+            <p>Standard overlay structures used to build popups and edit frames.</p>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Modal Overlay structure --&gt;
+&lt;div class="modal-overlay" style="display: none;"&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;h3&gt;Edit Location&lt;/h3&gt;
+    &lt;p&gt;Enter details below.&lt;/p&gt;
+    &lt;div style="display: flex; gap: 10px; justify-content: flex-end;"&gt;
+      &lt;button class="stash-btn"&gt;Save&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
             </div>
         </section>
 
@@ -623,11 +1126,23 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
                                 <option>Outdoor Yard Grid</option>
                             </select>
                         </div>
-                        <div class="view-controls">
+                        <div class="view-controls" style="display: flex; align-items: center; gap: 10px;">
+                            <!-- Site plan toggle -->
+                            <div class="site-plan-toggle active" id="canvasGridToggle" onclick="this.classList.toggle('active')">
+                                <div class="toggle-switch">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <span style="font-size: 0.7rem; font-weight: bold; color: var(--muted-text);">Grid</span>
+                            </div>
                             <button class="stash-btn" style="padding: 4px 10px; font-size: 0.75rem;">Zoom In</button>
                             <button class="stash-btn" style="padding: 4px 10px; font-size: 0.75rem; background: transparent; border: 1px solid var(--border)">Zoom Out</button>
                         </div>
                     </div>
+                    
+                    <!-- Mobile controls toggle button (displays only on mobile screens) -->
+                    <button class="mobile-controls-toggle" onclick="toggleCanvasPalette()" title="Toggle Tools" style="display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--text); cursor: pointer;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                    </button>
 
                     <!-- Toolbox Palette -->
                     <div class="tool-palette" id="demoPalette">
@@ -705,6 +1220,50 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
     &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"&gt;&lt;/path&gt;&lt;/svg&gt;
   &lt;/button&gt;
 &lt;/div&gt;</code></pre>
+            </div>
+
+            <!-- ==================== SUBSECTION: CANVAS COLORS ==================== -->
+            <div class="doc-subsection-title">Canvas Tool Color Pickers</div>
+            <p>Drawing palette widgets that contain input selectors and quick-select color swatches.</p>
+            <div class="component-demo">
+                <div class="color-picker-wrapper">
+                    <span style="font-size: 0.85rem; color: var(--muted-text); font-weight: bold; text-transform: uppercase;">Draw Color:</span>
+                    <input type="color" value="#3b82f6" style="width: 28px; height: 28px; padding: 0; border: none; border-radius: 4px; cursor: pointer; background: transparent;">
+                    <div class="recent-colors-palette" style="display: flex; gap: 6px;">
+                        <div class="color-swatch" style="background-color: #3b82f6; width: 18px; height: 18px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);"></div>
+                        <div class="color-swatch" style="background-color: #2dd4bf; width: 18px; height: 18px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);"></div>
+                        <div class="color-swatch" style="background-color: #ffd700; width: 18px; height: 18px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);"></div>
+                        <div class="color-swatch" style="background-color: #f43f5e; width: 18px; height: 18px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSECTION: MOBILE CONTROLS & FAB ==================== -->
+            <div class="doc-subsection-title">Mobile Floating Action Button (FAB)</div>
+            <p>Responsive layout classes to handle mobile action controls. These trigger floating action buttons and tool visibility controls on devices under <code>768px</code> wide.</p>
+            <div class="wiki-content-body" style="padding-left: 15px;">
+                <ul>
+                    <li><code>.mobile-fab</code>: A fixed floating action button that appears in the bottom right corner on mobile screens. It defaults to the theme accent color with a subtle drop shadow.</li>
+                    <li><code>.mobile-controls-toggle</code>: A layout container helper to toggle the display of complex tools list on mobile viewports.</li>
+                </ul>
+            </div>
+
+            <div class="doc-subsection-title">Canvas Colors & FAB HTML Code</div>
+            <div class="code-container">
+                <button class="copy-btn">Copy</button>
+                <pre><code>&lt;!-- Color Picker Wrapper --&gt;
+&lt;div class="color-picker-wrapper"&gt;
+  &lt;input type="color" value="#3b82f6"&gt;
+  &lt;div class="recent-colors-palette"&gt;
+    &lt;div class="color-swatch" style="background-color: #3b82f6;"&gt;&lt;/div&gt;
+    &lt;div class="color-swatch" style="background-color: #2dd4bf;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Mobile Floating Action Button --&gt;
+&lt;button class="mobile-fab"&gt;
+  &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;line x1="12" y1="5" x2="12" y2="19"&gt;&lt;/line&gt;&lt;line x1="5" y1="12" x2="19" y2="12"&gt;&lt;/line&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
             </div>
         </section>
 
@@ -811,6 +1370,7 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
     <div class="app-footer">
         <div style="margin-top: 60px; padding: 25px 0; border-top: 1px solid var(--border-light); text-align: center; font-size: 0.85rem; color: var(--muted-text); letter-spacing: 0.05rem;">
             MagpieCSS is a modern, themeable, open-source responsive design system.<br>
+            A <a href="https://www.blackburnautomationworks.com/" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: bold; transition: color 0.2s;">Blackburn Design Works</a> Project<br>
             <div style="margin-top: 10px;">
                 <a href="https://github.com" target="_blank" style="color: var(--muted-text); text-decoration: underline; margin-right: 15px;">GitHub Code</a>
                 <a href="#overview" class="nav-link" style="color: var(--muted-text); text-decoration: underline; display: inline; border: none; background: transparent; padding: 0;">Back to top</a>

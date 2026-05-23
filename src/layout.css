@@ -368,6 +368,27 @@
 
 /* --- PRINT SYSTEM OVERRIDES --- */
 @media print {
+    :root, 
+    [data-theme="magpie"], 
+    [data-theme="dark"], 
+    [data-theme="light"], 
+    [data-theme="hc"], 
+    [data-theme="terminal"] {
+        --bg: #ffffff !important;
+        --card: #ffffff !important;
+        --input-bg: #ffffff !important;
+        --text: #0f172a !important;
+        --muted-text: #475569 !important;
+        --border: #cbd5e1 !important;
+        --border-light: #e2e8f0 !important;
+        --accent: #3b82f6 !important;
+        --secondary: #0f172a !important;
+        --gold: #b48600 !important;
+        --hover-bg: #f1f5f9 !important;
+        --table-hover: #f8fafc !important;
+        --table-header-bg: #f1f5f9 !important;
+    }
+
     body {
         background: #ffffff !important;
         color: #0f172a !important;

@@ -83,7 +83,15 @@ const MagpieCSS = {
             }, duration);
         },
 
-        showClippy: function(title, message, duration = 6000, actionCallback = null) {
+        /**
+         * Triggers an animated assistant notification toast.
+         * @param {string} title - The title of the notification header.
+         * @param {string} message - Description message inside toast.
+         * @param {number} [duration=6000] - Lifespan of toast in milliseconds.
+         * @param {function|null} [actionCallback=null] - Action callback trigger (if set, displays primary action button).
+         * @param {string|null} [customIconHtml=null] - Optional custom HTML string for the icon (e.g. an SVG or <img> tag). Defaults to the Magpie bird SVG.
+         */
+        showClippy: function(title, message, duration = 6000, actionCallback = null, customIconHtml = null) {
             let clippy = document.getElementById('clippyToast');
             
             // Create clippy toast dynamically if it doesn't exist
@@ -96,21 +104,25 @@ const MagpieCSS = {
             clippy.style.display = 'flex';
             clippy.style.animation = 'clippySlide 0.5s ease-out forwards';
             
+            const iconHtml = customIconHtml || `
+                <!-- Cute Magpie Assistant SVG (Default) -->
+                <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 25 80 C 10 95 0 90 10 80 C 20 65 35 55 45 60 Z" fill="#1f2937" />
+                    <path d="M 50 75 L 45 95 M 65 75 L 60 95" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" />
+                    <ellipse cx="55" cy="60" rx="28" ry="22" fill="#1f2937" />
+                    <path d="M 40 75 C 65 85 80 65 82 55 C 82 55 60 50 40 75 Z" fill="#ffffff" />
+                    <path d="M 35 55 C 50 45 65 65 50 75 C 40 70 30 65 35 55 Z" fill="#f8fafc" />
+                    <path d="M 40 58 C 50 50 60 65 50 70 Z" fill="var(--accent)" />
+                    <circle cx="68" cy="38" r="18" fill="#1f2937" />
+                    <path d="M 80 35 L 100 40 L 80 46 Z" fill="var(--gold)" stroke-linejoin="round" />
+                    <circle cx="75" cy="33" r="6" fill="#ffffff" />
+                    <circle cx="77" cy="33" r="2.5" fill="#000000" />
+                </svg>
+            `;
+            
             clippy.innerHTML = `
                 <div style="flex-shrink: 0; margin-top: 5px;">
-                    <!-- Cute Magpie Assistant SVG -->
-                    <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 25 80 C 10 95 0 90 10 80 C 20 65 35 55 45 60 Z" fill="#1f2937" />
-                        <path d="M 50 75 L 45 95 M 65 75 L 60 95" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" />
-                        <ellipse cx="55" cy="60" rx="28" ry="22" fill="#1f2937" />
-                        <path d="M 40 75 C 65 85 80 65 82 55 C 82 55 60 50 40 75 Z" fill="#ffffff" />
-                        <path d="M 35 55 C 50 45 65 65 50 75 C 40 70 30 65 35 55 Z" fill="#f8fafc" />
-                        <path d="M 40 58 C 50 50 60 65 50 70 Z" fill="var(--accent)" />
-                        <circle cx="68" cy="38" r="18" fill="#1f2937" />
-                        <path d="M 80 35 L 100 40 L 80 46 Z" fill="var(--gold)" stroke-linejoin="round" />
-                        <circle cx="75" cy="33" r="6" fill="#ffffff" />
-                        <circle cx="77" cy="33" r="2.5" fill="#000000" />
-                    </svg>
+                    ${iconHtml}
                 </div>
                 <div style="flex-grow: 1;">
                     <h4 style="margin: 0 0 5px 0; color: var(--accent); font-size: 1.05rem;">${title}</h4>

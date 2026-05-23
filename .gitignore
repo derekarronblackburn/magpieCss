@@ -1,0 +1,14 @@
+# Developer & AI Context
+.developer-context.md
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Builds and Logs
+*.log
+npm-debug.log*

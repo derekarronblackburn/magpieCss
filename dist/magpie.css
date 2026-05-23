@@ -616,6 +616,27 @@ button {
 
 /* --- PRINT SYSTEM OVERRIDES --- */
 @media print {
+    :root, 
+    [data-theme="magpie"], 
+    [data-theme="dark"], 
+    [data-theme="light"], 
+    [data-theme="hc"], 
+    [data-theme="terminal"] {
+        --bg: #ffffff !important;
+        --card: #ffffff !important;
+        --input-bg: #ffffff !important;
+        --text: #0f172a !important;
+        --muted-text: #475569 !important;
+        --border: #cbd5e1 !important;
+        --border-light: #e2e8f0 !important;
+        --accent: #3b82f6 !important;
+        --secondary: #0f172a !important;
+        --gold: #b48600 !important;
+        --hover-bg: #f1f5f9 !important;
+        --table-hover: #f8fafc !important;
+        --table-header-bg: #f1f5f9 !important;
+    }
+
     body {
         background: #ffffff !important;
         color: #0f172a !important;
@@ -1888,14 +1909,14 @@ select.flat-select {
 
 /* Card FRONT Styling - Premium Card style */
 .card-front {
-    background: linear-gradient(135deg, var(--card) 0%, rgba(30, 41, 59, 0.8) 100%);
+    background: linear-gradient(135deg, var(--card) 0%, var(--hover-bg) 100%);
     z-index: 2;
     transform: rotateY(0deg);
 }
 
 /* Card BACK Styling - Flipped and highlighted */
 .card-back {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--card) 0%, var(--hover-bg) 100%);
     border-color: var(--accent);
     transform: rotateY(180deg);
 }
@@ -1995,6 +2016,287 @@ select.flat-select {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* --- 12. PILL INHERITANCE VARIATIONS --- */
+.pill-inherited {
+    background: rgba(45, 212, 191, 0.1);
+    color: var(--secondary);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+.pill-override {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+.pill-default {
+    background: var(--hover-bg);
+    color: var(--muted-text);
+    border: 1px solid var(--border);
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* --- 13. WIKI MARKDOWN RENDER CONTENT --- */
+.wiki-content-body {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+.wiki-content-body h1, 
+.wiki-content-body h2, 
+.wiki-content-body h3, 
+.wiki-content-body h4 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+}
+.wiki-content-body h1 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+.wiki-content-body h2 { font-size: 1.6rem; border-bottom: 1px solid var(--border-light); padding-bottom: 6px; }
+.wiki-content-body h3 { font-size: 1.3rem; }
+.wiki-content-body p { margin-bottom: 1.25em; }
+.wiki-content-body ul, .wiki-content-body ol {
+    margin-bottom: 1.25em;
+    padding-left: 24px;
+}
+.wiki-content-body li {
+    margin-bottom: 0.5em;
+}
+.wiki-content-body code {
+    background: var(--hover-bg);
+    color: var(--secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--border-light);
+}
+.wiki-content-body pre {
+    background: #0b0f19;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+}
+.wiki-content-body pre code {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 0;
+    font-size: 0.9em;
+}
+.wiki-content-body blockquote {
+    border-left: 4px solid var(--accent);
+    margin: 0 0 1.5em 0;
+    padding: 10px 20px;
+    background: var(--hover-bg);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-style: italic;
+    color: var(--muted-text);
+}
+.wiki-content-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+.wiki-content-body th, .wiki-content-body td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+.wiki-content-body th {
+    background: var(--hover-bg);
+    font-weight: bold;
+}
+.wiki-content-body tr:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+}
+
+/* --- 14. WIKI METADATA EDITORS --- */
+.metadata-editor-section {
+    background: rgba(255,255,255,0.01);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.metadata-editor-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--secondary);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- 15. LIVE SEARCH AUTOCOMPLETE PREVIEW --- */
+.search-preview-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1010;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+.search-preview-item {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--border-light);
+}
+.search-preview-item:last-child {
+    border-bottom: none;
+}
+.search-preview-item:hover {
+    background: var(--hover-bg);
+}
+.search-preview-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+}
+.search-preview-type {
+    font-size: 0.7rem;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted-text);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+.search-preview-empty {
+    padding: 15px;
+    color: var(--muted-text);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Switch Toggle Component */
+.switch-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.switch-toggle:hover {
+    border-color: var(--accent);
+    background: var(--hover-bg);
+}
+.switch-toggle.active {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+}
+.switch-toggle .toggle-switch {
+    width: 34px;
+    height: 18px;
+    background: #334155;
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+.switch-toggle .toggle-thumb {
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.switch-toggle.active .toggle-switch {
+    background: var(--accent);
+}
+.switch-toggle.active .toggle-thumb {
+    left: 18px;
+    background: var(--bg);
+}
+
+.cart-count-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-util {
+    padding: 6px 12px;
+    background: var(--hover-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: none;
+}
+.btn-util:hover {
+    background: var(--border-light);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.btn-util.danger {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+.btn-util.danger:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
 
 
 /* --- END OF components.css --- */
