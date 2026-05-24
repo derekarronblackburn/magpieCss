@@ -2,7 +2,7 @@ import os
 import re
 
 # Read all selectors from index.html
-with open(r"c:\magpieCss\index.html", "r", encoding="utf-8") as f:
+with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
 # Normalize HTML for easy searching of class names
@@ -16,10 +16,10 @@ for cls in html_classes:
 
 # Read all selectors from CSS source files
 css_files = [
-    r"c:\magpieCss\src\variables.css",
-    r"c:\magpieCss\src\reset.css",
-    r"c:\magpieCss\src\layout.css",
-    r"c:\magpieCss\src\components.css"
+    "src/variables.css",
+    "src/reset.css",
+    "src/layout.css",
+    "src/components.css"
 ]
 
 css_classes = set()
