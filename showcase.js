@@ -286,18 +286,26 @@ function setupDemoListeners() {
 
     // SVG Icon Search Filter
     const svgSearch = document.getElementById('svgIconSearchInput');
-    const svgGrid = document.getElementById('svgGalleryGrid');
-    if (svgSearch && svgGrid) {
+    if (svgSearch) {
         svgSearch.addEventListener('input', () => {
             const query = svgSearch.value.toLowerCase().trim();
-            const cards = svgGrid.querySelectorAll('.icon-card');
-            cards.forEach(card => {
-                const names = card.getAttribute('data-name').toLowerCase();
-                if (names.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+            const groups = document.querySelectorAll('#svg-gallery .gallery-category-group');
+            
+            groups.forEach(group => {
+                const cards = group.querySelectorAll('.icon-card');
+                let groupHasVisible = false;
+                
+                cards.forEach(card => {
+                    const names = card.getAttribute('data-name').toLowerCase();
+                    if (names.includes(query)) {
+                        card.style.display = 'flex';
+                        groupHasVisible = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                group.style.display = groupHasVisible ? 'block' : 'none';
             });
         });
     }
