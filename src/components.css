@@ -1412,6 +1412,7 @@ select.flat-select {
     flex-grow: 1;
     margin-top: 15px;
     margin-bottom: 15px;
+    padding-right: 16px;
     overflow-y: auto;
 }
 .card-back-attr-row {
