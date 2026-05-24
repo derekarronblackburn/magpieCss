@@ -1696,8 +1696,48 @@ MagpieCSS.ui.initCodeBlocks();</code></pre>
                 </div>
             </div>
 
-            <!-- 4. HTML MARKUP DOCUMENTATION -->
-            <div class="doc-subsection-title">4. Integration & Layout Markup Code</div>
+            <!-- 4. CORNER TRIANGLES -->
+            <div class="doc-subsection-title">4. Themed Corner Triangles</div>
+            <p>Fixed or absolute corner badges to highlight repository status, version numbers, or primary calls to action. Supports all four corners with automatic text orientation and responsive theme transitions.</p>
+
+            <div class="component-demo">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+                    <!-- Top-Left -->
+                    <div style="position: relative; height: 120px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: flex-end; padding: 15px;">
+                        <div class="corner-triangle top-left" style="position: absolute; width: 80px; height: 80px;">
+                            <a href="#overview"><span class="corner-triangle-text" style="font-size: 0.45rem; transform: rotate(-45deg) translateY(-12px);">TOP_LEFT</span></a>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">Top-Left Class</span>
+                    </div>
+
+                    <!-- Top-Right -->
+                    <div style="position: relative; height: 120px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: flex-end; padding: 15px;">
+                        <div class="corner-triangle top-right" style="position: absolute; width: 80px; height: 80px;">
+                            <a href="#overview"><span class="corner-triangle-text" style="font-size: 0.45rem; transform: rotate(45deg) translateY(-12px);">TOP_RIGHT</span></a>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">Top-Right Class</span>
+                    </div>
+
+                    <!-- Bottom-Left -->
+                    <div style="position: relative; height: 120px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: flex-start; padding: 15px;">
+                        <div class="corner-triangle bottom-left" style="position: absolute; width: 80px; height: 80px;">
+                            <a href="#overview"><span class="corner-triangle-text" style="font-size: 0.45rem; transform: rotate(45deg) translateY(12px);">BTM_LEFT</span></a>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">Bottom-Left Class</span>
+                    </div>
+
+                    <!-- Bottom-Right -->
+                    <div style="position: relative; height: 120px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: flex-start; padding: 15px;">
+                        <div class="corner-triangle bottom-right" style="position: absolute; width: 80px; height: 80px;">
+                            <a href="#overview"><span class="corner-triangle-text" style="font-size: 0.45rem; transform: rotate(-45deg) translateY(12px);">BTM_RIGHT</span></a>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">Bottom-Right Class</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. HTML MARKUP DOCUMENTATION -->
+            <div class="doc-subsection-title">5. Integration & Layout Markup Code</div>
             <p>Code patterns for dashboards, item detail grids, and landing pricing blocks. Copy these configurations to construct data workspaces quickly.</p>
 
             <div class="code-block">

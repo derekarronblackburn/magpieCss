@@ -334,11 +334,14 @@ window.openChangelogModal = async function(e) {
         }
         const changelog = await res.json();
         
-        contentDiv.innerHTML = '';
+        // Use a dedicated inner container with right padding so text never touches the scrollbar
+        contentDiv.innerHTML = '<div id="changelogContentInner" style="display: flex; flex-direction: column; gap: 25px; padding-right: 16px;"></div>';
+        const innerDiv = document.getElementById('changelogContentInner');
+        
         changelog.forEach(release => {
             const changesList = release.changes.map(c => `<li style="margin-bottom: 6px;">${c}</li>`).join('');
             const html = `
-                <div style="border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px;">
+                <div style="border-left: 3px solid var(--accent); padding-left: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
                         <h3 style="margin: 0; color: var(--text); font-size: 1.15rem;">v${release.version}</h3>
                         <span style="font-size: 0.75rem; color: var(--muted-text);">${release.date}</span>
@@ -349,7 +352,7 @@ window.openChangelogModal = async function(e) {
                     </ul>
                 </div>
             `;
-            contentDiv.insertAdjacentHTML('beforeend', html);
+            innerDiv.insertAdjacentHTML('beforeend', html);
         });
         
         if (changelog.length > 0) {
