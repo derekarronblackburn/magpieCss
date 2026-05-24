@@ -363,3 +363,31 @@ window.openChangelogModal = async function(e) {
         contentDiv.innerHTML = '<div style="color: var(--danger); text-align: center; padding: 20px;">Error fetching release notes.</div>';
     }
 };
+
+window.triggerLoadingModal = function() {
+    let modal = document.getElementById('demoLoadingModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'demoLoadingModal';
+        modal.className = 'modal-overlay';
+        modal.style.zIndex = '30000';
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width: 300px; text-align: center; padding: 30px;">
+                <div class="spinner large" style="margin-bottom: 15px; border-top-color: var(--accent);"></div>
+                <div style="font-weight: 600; color: var(--text); font-family: 'Outfit', sans-serif;">Synchronizing Database...</div>
+                <div style="font-size: 0.8rem; color: var(--muted-text); margin-top: 5px; font-family: monospace;">STATUS: ENCRYPTING_VAULT</div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    modal.style.display = 'flex';
+    
+    setTimeout(() => {
+        modal.style.display = 'none';
+        if (window.MagpieCSS) {
+            MagpieCSS.toast.show("Vault synchronization complete!", "success");
+        }
+    }, 3000);
+};
+

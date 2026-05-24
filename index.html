@@ -1095,6 +1095,85 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
                     <p style="font-size: 0.9rem; margin: 0; color: var(--muted-text);">Settings Panel Content: Custom rules can be modified. Snapping behavior enabled.</p>
                 </div>
             </div>
+            <!-- ==================== SUBSECTION: LOADERS & SPINNERS ==================== -->
+            <div class="doc-subsection-title">Loading Indicators & Skeleton Shimmers</div>
+            <p>CSS-based spinner icons, status-blocking loading overlays, and skeleton placeholder shimmers for mock list loading states.</p>
+            
+            <div class="component-demo" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Row 1: Spinners -->
+                <div style="display: flex; align-items: center; gap: 25px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="spinner small"></span>
+                        <span style="font-size: 0.8rem; color: var(--muted-text);">Small Spinner (`.spinner.small`)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="spinner"></span>
+                        <span style="font-size: 0.8rem; color: var(--muted-text);">Default Spinner (`.spinner`)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="spinner large"></span>
+                        <span style="font-size: 0.8rem; color: var(--muted-text);">Large Spinner (`.spinner.large`)</span>
+                    </div>
+                    <button class="stash-btn stash-btn-outline" onclick="triggerLoadingModal()">Launch Loading Overlay Demo</button>
+                </div>
+                
+                <!-- Row 2: Skeletons -->
+                <div style="border-top: 1px solid var(--border-light); padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- Skeleton Row List Card -->
+                    <div style="background: var(--bg); border: 1px solid var(--border); padding: 15px; border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                            <div class="skeleton-avatar skeleton-shimmer"></div>
+                            <div style="flex-grow: 1;">
+                                <div class="skeleton-title skeleton-shimmer" style="width: 50%;"></div>
+                                <div class="skeleton-text skeleton-shimmer" style="width: 80%; height: 10px; margin-bottom: 0;"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-text skeleton-shimmer" style="margin-bottom: 8px;"></div>
+                        <div class="skeleton-text skeleton-shimmer short" style="margin-bottom: 0;"></div>
+                    </div>
+                    
+                    <!-- Skeleton Large Grid Block -->
+                    <div style="background: var(--bg); border: 1px solid var(--border); padding: 15px; border-radius: 8px;">
+                        <div class="skeleton-block skeleton-shimmer" style="margin-bottom: 12px;"></div>
+                        <div class="skeleton-title skeleton-shimmer" style="width: 30%;"></div>
+                        <div class="skeleton-text skeleton-shimmer" style="margin-bottom: 0;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">Spinners & Skeleton Loaders Markup</div>
+            <p>Code snippets to build spinner animations, skeleton shimmers, and blocking status load modals.</p>
+            
+            <div class="code-block" style="margin-bottom: 30px;">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML (Spinners & Loaders)</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>&lt;!-- Spinners --&gt;
+&lt;span class="spinner small"&gt;&lt;/span&gt;
+&lt;span class="spinner"&gt;&lt;/span&gt;
+&lt;span class="spinner large"&gt;&lt;/span&gt;
+
+&lt;!-- Skeleton Shimmer text & blocks --&gt;
+&lt;div class="skeleton-avatar skeleton-shimmer"&gt;&lt;/div&gt;
+&lt;div class="skeleton-title skeleton-shimmer"&gt;&lt;/div&gt;
+&lt;div class="skeleton-text skeleton-shimmer"&gt;&lt;/div&gt;
+&lt;div class="skeleton-block skeleton-shimmer"&gt;&lt;/div&gt;
+
+&lt;!-- Fullscreen Loading Modal overlay --&gt;
+&lt;div class="modal-overlay" style="display: flex;"&gt;
+  &lt;div class="modal-content" style="max-width: 300px; text-align: center; padding: 30px;"&gt;
+    &lt;div class="spinner large" style="margin-bottom: 15px;"&gt;&lt;/div&gt;
+    &lt;div style="font-weight: 600;"&gt;Loading Database...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
 
             <!-- ==================== SUBSECTION: MODAL OVERLAY MARKUP ==================== -->
             <div class="doc-subsection-title">Custom Modal & Overlay Markup</div>

@@ -1570,6 +1570,84 @@ details > summary::-webkit-details-marker {
         background: var(--gold);
     }
 }
+/* --- 9a. SPINNERS & SKELETON LOADERS --- */
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+.spinner.small {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+.spinner.large {
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.skeleton-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+[data-theme="light"] .skeleton-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.04) 25%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 75%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-text {
+    height: 12px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.skeleton-text.short {
+    width: 60%;
+}
+.skeleton-title {
+    height: 20px;
+    width: 40%;
+    margin-bottom: 12px;
+}
+.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.skeleton-block {
+    height: 120px;
+    width: 100%;
+}
 
 
 /* --- 10. SPATIAL & CANVAS DESIGNER WORKSPACE --- */
