@@ -266,6 +266,7 @@ const MagpieCSS = {
                     });
                 });
             });
+        },
         initCodeBlocks: function() {
             document.querySelectorAll('.code-block-copy').forEach(btn => {
                 btn.addEventListener('click', () => {

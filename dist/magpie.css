@@ -1469,6 +1469,28 @@ details > summary::-webkit-details-marker {
     border-width: 2px; 
 }
 
+/* Dropdown specific theme switcher button styling */
+.dropdown-content .theme-btn {
+    padding: 10px 16px;
+    margin-bottom: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.dropdown-content .theme-btn:hover {
+    background: var(--hover-bg);
+}
+.dropdown-content .theme-btn.active {
+    background: var(--hover-bg);
+    color: var(--accent);
+    border: none;
+    border-left: 3px solid var(--accent);
+    border-width: 0 0 0 3px;
+}
+
+
 
 /* --- 9. DYNAMIC ANIMS & TOASTS --- */
 @keyframes clippySlide {
