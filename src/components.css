@@ -2049,7 +2049,106 @@ select.flat-select {
 }
 
 
+/* --- 20. THEMED CORNER TRIANGLE CTA --- */
+.corner-triangle {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    z-index: 99999;
+    pointer-events: none;
+}
 
+.corner-triangle a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, #000) 100%);
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+
+.corner-triangle a:hover {
+    background: linear-gradient(135deg, var(--secondary) 0%, color-mix(in srgb, var(--secondary) 70%, #000) 100%);
+}
+
+.corner-triangle-text {
+    color: var(--bg);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Placement Modifiers */
+
+/* Top-Right Corner */
+.corner-triangle.top-right {
+    top: 0;
+    right: 0;
+}
+.corner-triangle.top-right a {
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+.corner-triangle.top-right .corner-triangle-text {
+    transform: rotate(45deg) translateY(-18px);
+}
+.corner-triangle.top-right a:hover .corner-triangle-text {
+    transform: rotate(45deg) translateY(-14px) scale(1.05);
+}
+
+/* Top-Left Corner */
+.corner-triangle.top-left {
+    top: 0;
+    left: 0;
+}
+.corner-triangle.top-left a {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.corner-triangle.top-left .corner-triangle-text {
+    transform: rotate(-45deg) translateY(-18px);
+}
+.corner-triangle.top-left a:hover .corner-triangle-text {
+    transform: rotate(-45deg) translateY(-14px) scale(1.05);
+}
+
+/* Bottom-Right Corner */
+.corner-triangle.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+.corner-triangle.bottom-right a {
+    clip-path: polygon(100% 100%, 100% 0, 0 100%);
+}
+.corner-triangle.bottom-right .corner-triangle-text {
+    transform: rotate(-45deg) translateY(18px);
+}
+.corner-triangle.bottom-right a:hover .corner-triangle-text {
+    transform: rotate(-45deg) translateY(14px) scale(1.05);
+}
+
+/* Bottom-Left Corner */
+.corner-triangle.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+.corner-triangle.bottom-left a {
+    clip-path: polygon(0 100%, 0 0, 100% 100%);
+}
+.corner-triangle.bottom-left .corner-triangle-text {
+    transform: rotate(45deg) translateY(18px);
+}
+.corner-triangle.bottom-left a:hover .corner-triangle-text {
+    transform: rotate(45deg) translateY(14px) scale(1.05);
+}
 
 
 /* --- Mobile Fixes (Forms & Layout) --- */
