@@ -8,8 +8,85 @@ const cssFiles = [
     'variables.css',
     'reset.css',
     'layout.css',
-    'components.css'
+    'components.css',
+    'icons.css'
 ];
+
+// 0. Auto-extract SVGs from index.html and generate src/icons.css
+try {
+    console.log("Extracting SVG vectors from index.html to generate src/icons.css...");
+    const indexHtmlPath = path.join(__dirname, 'index.html');
+    const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
+
+    const cardRegex = /<div\s+class="icon-card"[^>]*>([\s\S]*?)<\/div>/g;
+    const svgRegex = /<svg[^>]*>([\s\S]*?)<\/svg>/;
+    const nameRegex = /<span\s+class="icon-card-name">([^<]+)<\/span>/;
+
+    let iconsCssContent = `/* 
+ * MagpieCSS Generated Icons
+ * Automatically generated from the SVG Icon Gallery in index.html.
+ * Do not modify this file directly.
+ */
+
+.m-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: currentColor;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+`;
+
+    let match;
+    let count = 0;
+    while ((match = cardRegex.exec(indexHtmlContent)) !== null) {
+        const cardBody = match[1];
+        const svgMatch = svgRegex.exec(cardBody);
+        const nameMatch = nameRegex.exec(cardBody);
+        
+        if (svgMatch && nameMatch) {
+            const svgContent = svgMatch[0];
+            const rawName = nameMatch[1].trim().toLowerCase();
+            const cleanName = rawName
+                .replace(/\s*\/\s*/g, '-')
+                .replace(/\s+/g, '-');
+                
+            // Convert to solid stroke and solid fill for masking
+            let cssSvg = svgContent
+                .replace(/stroke="currentColor"/g, 'stroke="black"')
+                .replace(/fill="currentColor"/g, 'fill="black"');
+                
+            // URL encoding for CSS data URI
+            const encodedSvg = cssSvg
+                .replace(/#/g, '%23')
+                .replace(/\r?\n/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+                
+            iconsCssContent += `.m-icon-${cleanName} {
+    -webkit-mask-image: url('data:image/svg+xml;utf8,${encodedSvg}');
+    mask-image: url('data:image/svg+xml;utf8,${encodedSvg}');
+}
+
+`;
+            count++;
+        }
+    }
+
+    const iconsCssPath = path.join(srcDir, 'icons.css');
+    fs.writeFileSync(iconsCssPath, iconsCssContent, 'utf-8');
+    console.log(`Successfully generated ${iconsCssPath} with ${count} icon classes.`);
+} catch (err) {
+    console.error("Error generating icons.css:", err);
+    process.exit(1);
+}
 
 if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir);

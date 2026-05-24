@@ -1,5 +1,58 @@
 [
   {
+    "version": "1.8.0",
+    "date": "2026-05-24",
+    "highlight": "Automated CSS Icon Mask Utilities & Documentation!",
+    "changes": [
+      "Implemented a build-time parser in build.js to automatically extract all 51 icons from the SVG Icon Gallery.",
+      "Generated class utilities (.m-icon and .m-icon-[name]) using CSS masks and data URIs, fully bundled into dist/magpie.css.",
+      "Added an interactive documentation section to the SVG Icon Gallery showing how to size and color icons using standard CSS color inheritance."
+    ]
+  },
+  {
+    "version": "1.7.3",
+    "date": "2026-05-24",
+    "highlight": "UI Component Section Header SVGs Added to Gallery",
+    "changes": [
+      "Added the 8 unique UI component section header SVGs (Layout-Grid, Layout-Columns, Map-Pin, Shield, Layers, Message-Square, Code, Compass) to the SVG gallery in Category 6.",
+      "Fixed alignment between actual documentation section headers and the gallery icons.",
+      "Updated the vector library total count to 51 standard icons."
+    ]
+  },
+  {
+    "version": "1.7.2",
+    "date": "2026-05-24",
+    "highlight": "Added Fullscreen, Envelope, and At-sign Vectors",
+    "changes": [
+      "Added a new toggle-fullscreen SVG icon to the General Interface category.",
+      "Added an envelope/mail SVG icon to the General Interface category.",
+      "Added an @/at-sign SVG icon to the General Interface category.",
+      "Expanded the vector library total to 43 standard icons."
+    ]
+  },
+  {
+    "version": "1.7.1",
+    "date": "2026-05-24",
+    "highlight": "Refined Brands & Added Navigation Vectors",
+    "changes": [
+      "Upgraded JavaScript, Python, PHP, PowerShell, NPM, and Discord brand SVGs to clean, outline-based Tabler equivalents.",
+      "Added a new Navigation & Directions category to the SVG gallery featuring 8 new arrows and chevrons.",
+      "Expanded the vector library total to 40 standard icons."
+    ]
+  },
+  {
+    "version": "1.7.0",
+    "date": "2026-05-24",
+    "highlight": "Expanded Social, Language & Tooling Vector Library",
+    "changes": [
+      "Expanded the interactive SVG Icon Gallery to 32 vector icons, grouped by category.",
+      "Added brand-accurate stroke-based vectors for major social platforms (Twitter/X, Discord, YouTube, LinkedIn, Reddit).",
+      "Added vector representations for major scripting languages (JavaScript, Python, Ruby, PHP, Bash, PowerShell).",
+      "Added essential developer tool vectors (HTML, CSS, Git, NPM, Link).",
+      "Optimized search matching logic to support multi-category group filtering and hide empty sections dynamically."
+    ]
+  },
+  {
     "version": "1.6.0",
     "date": "2026-05-24",
     "highlight": "Zero-Emoji Sanitization & SVG Icon Gallery!",
