@@ -66,6 +66,28 @@ You can switch the visual theme dynamically via JavaScript:
 MagpieCSS.theme.set('terminal');
 ```
 
+### 3. Add a Code Snippet Card
+
+MagpieCSS includes a styled, copyable `.code-block` component:
+
+```html
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-block-lang">HTML</span>
+    <button class="code-block-copy">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      </svg>
+      <span class="copy-label">Copy</span>
+    </button>
+  </div>
+  <pre><code>&lt;link rel="stylesheet" href="magpie.css"&gt;</code></pre>
+</div>
+```
+
+The companion script automatically detects and registers interactive copy-to-clipboard handlers for all `.code-block-copy` buttons.
+
 ---
 
 ## Development & Customization
