@@ -31,6 +31,11 @@
 </head>
 <body>
 
+<!-- GitHub Ribbon CTA -->
+<div class="github-ribbon hide-print">
+    <a href="https://github.com/derekarronblackburn/magpieCss" target="_blank">Use Magpie CSS!</a>
+</div>
+
 <div class="container app-layout">
     
     <!-- 1. APP LOGO AREA -->
@@ -82,6 +87,10 @@
             <nav class="nav-menu" id="mainNavMenu">
                 <div style="padding: 0 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Getting Started</div>
                 <a href="#overview" class="nav-link active">Overview & Tokens</a>
+                <a href="#" class="nav-link" onclick="openChangelogModal(event)" style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    What's Changed
+                </a>
                 
                 <div style="padding: 15px 10px 5px; font-size: 0.75rem; font-weight: 800; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.08rem;">Layouts & Grids</div>
                 <a href="#grids" class="nav-link">Responsive Grids</a>
@@ -1822,6 +1831,28 @@ MagpieCSS.ui.initCodeBlocks();</code></pre>
         </div>
     </div>
 
+</div>
+
+<!-- CHANGELOG MODAL -->
+<div id="changelogModal" class="modal-overlay" onclick="if(event.target===this) document.getElementById('changelogModal').style.display='none'">
+    <div class="modal-content" style="max-width: 600px; width: 90%; max-height: 80vh; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 20px; flex-shrink: 0;">
+            <h2 style="margin: 0; color: var(--text); display: flex; align-items: center; gap: 10px; font-size: 1.3rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                What's Changed
+            </h2>
+            <button onclick="document.getElementById('changelogModal').style.display='none'" style="background: transparent; border: none; color: var(--muted-text); cursor: pointer; font-size: 1.5rem; line-height: 1;">&times;</button>
+        </div>
+        <div id="changelogContent" style="overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 25px; padding-right: 5px;">
+            <div style="text-align: center; padding: 20px; color: var(--muted-text);">Loading changelog...</div>
+        </div>
+    </div>
 </div>
 
 <!-- Framework JS Helper file -->

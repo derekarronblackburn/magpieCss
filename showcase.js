@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Setup dynamic demo listeners
     setupDemoListeners();
+    checkChangelog();
 });
 
 // Setup interactive features on the showcase page
@@ -283,3 +284,79 @@ function setupDemoListeners() {
         }
     };
 }
+
+// 4. Changelog (What's Changed) system
+async function checkChangelog() {
+    try {
+        const res = await fetch('changelog.json?t=' + new Date().getTime());
+        if (!res.ok) return;
+        const changelog = await res.json();
+        if (changelog.length === 0) return;
+        
+        const latest = changelog[0];
+        const lastSeen = localStorage.getItem('magpie_css_last_version');
+        
+        if (lastSeen !== latest.version) {
+            if (window.MagpieCSS) {
+                // Trigger the Clippy notification toast
+                MagpieCSS.toast.showClippy(
+                    `MagpieCSS v${latest.version} Released!`,
+                    `${latest.highlight} Click below to see what changed in the design system library.`,
+                    10000,
+                    () => {
+                        localStorage.setItem('magpie_css_last_version', latest.version);
+                        window.openChangelogModal();
+                    }
+                );
+            }
+        }
+    } catch (e) {
+        console.error("Failed to check changelog", e);
+    }
+}
+
+window.openChangelogModal = async function(e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('changelogModal');
+    if (!modal) return;
+    
+    modal.style.display = 'flex';
+    const contentDiv = document.getElementById('changelogContent');
+    if (!contentDiv) return;
+    
+    contentDiv.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--muted-text);">Loading release notes...</div>';
+    
+    try {
+        const res = await fetch('changelog.json?t=' + new Date().getTime());
+        if (!res.ok) {
+            contentDiv.innerHTML = '<div style="color: var(--danger); text-align: center; padding: 20px;">Could not load changelog.json.</div>';
+            return;
+        }
+        const changelog = await res.json();
+        
+        contentDiv.innerHTML = '';
+        changelog.forEach(release => {
+            const changesList = release.changes.map(c => `<li style="margin-bottom: 6px;">${c}</li>`).join('');
+            const html = `
+                <div style="border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                        <h3 style="margin: 0; color: var(--text); font-size: 1.15rem;">v${release.version}</h3>
+                        <span style="font-size: 0.75rem; color: var(--muted-text);">${release.date}</span>
+                    </div>
+                    <p style="color: var(--secondary); font-size: 0.9rem; margin-top: 0; margin-bottom: 12px; font-weight: 500;"><em>${release.highlight}</em></p>
+                    <ul style="color: var(--text); font-size: 0.85rem; padding-left: 18px; line-height: 1.5; margin: 0 0 10px 0;">
+                        ${changesList}
+                    </ul>
+                </div>
+            `;
+            contentDiv.insertAdjacentHTML('beforeend', html);
+        });
+        
+        if (changelog.length > 0) {
+            localStorage.setItem('magpie_css_last_version', changelog[0].version);
+        }
+    } catch (e) {
+        console.error("Failed to load changelog", e);
+        contentDiv.innerHTML = '<div style="color: var(--danger); text-align: center; padding: 20px;">Error fetching release notes.</div>';
+    }
+};

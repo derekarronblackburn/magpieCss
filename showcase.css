@@ -177,3 +177,45 @@ pre {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- 45-Degree Corner Ribbon CTA --- */
+.github-ribbon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 99999;
+    pointer-events: none;
+}
+
+.github-ribbon a {
+    position: absolute;
+    top: 30px;
+    right: -40px;
+    width: 220px;
+    padding: 8px 0;
+    background: linear-gradient(135deg, var(--gold) 0%, #b29400 100%);
+    color: #05070a;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
+    display: block;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.05rem;
+}
+
+.github-ribbon a:hover {
+    background: linear-gradient(135deg, var(--secondary) 0%, #1fb19f 100%);
+    color: #05070a;
+    box-shadow: 0 6px 15px rgba(45, 212, 191, 0.4);
+    top: 32px;
+}

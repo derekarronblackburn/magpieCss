@@ -1,0 +1,55 @@
+[
+  {
+    "version": "1.4.0",
+    "date": "2026-05-24",
+    "highlight": "Layouts & Dashboard Showcase Expansion!",
+    "changes": [
+      "Integrated Project and Kanban dashboard panels into the core design system components library.",
+      "Added allocation and checkout cart components for high-density transactional interfaces.",
+      "Added marketing landing heroes and tiered subscription pricing grids.",
+      "Created a dedicated layout documentation section in the showcase site featuring full integration templates.",
+      "Integrated interactive copy-to-clipboard code blocks for the empty placeholder and features grid components."
+    ]
+  },
+  {
+    "version": "1.3.0",
+    "date": "2026-05-23",
+    "highlight": "Interactive Code Snippets & Custom Wiki Renderer",
+    "changes": [
+      "Added the Wiki markdown text content renderer (.wiki-content-body) and administrative metadata editor panels.",
+      "Integrated a copy-to-clipboard widget engine with micro-animations, green checkmarks, and automated feedback notifications.",
+      "Optimized print layouts and report layout media overrides for audit summaries and sheet archives.",
+      "Resolved select option styling conflicts inside high-contrast dropdown lists."
+    ]
+  },
+  {
+    "version": "1.2.0",
+    "date": "2026-05-22",
+    "highlight": "Spatial Workspace & 3D Flipping Cards",
+    "changes": [
+      "Added 2D spatial canvas grids, tool containers, coordinate trackers, and interactive control bars.",
+      "Implemented hardware-accelerated 3D flipping cards and responsive double-sided flashcards.",
+      "Styled standard color pickers, site plan indicators, and full-viewport modal overlays."
+    ]
+  },
+  {
+    "version": "1.1.0",
+    "date": "2026-05-18",
+    "highlight": "Dynamic Modals, Toasts & Hierarchy Trees",
+    "changes": [
+      "Built custom dialog modals (.modal-overlay, .modal-content) with dynamic confirm/alert JS resolution.",
+      "Built a non-blocking toast warning and success notification system.",
+      "Integrated collapsible tree nodes, detailed hierarchies, and smooth-open details animations."
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-05-12",
+    "highlight": "Initial Release of MagpieCSS Framework!",
+    "changes": [
+      "Ported core CSS custom variables and theme styling states (Magpie Slate, Dark, Light, High Contrast, Stark, Monospace Terminal).",
+      "Created basic reset rules and responsive flex/grid wrappers.",
+      "Added dense Airtable-style data grids that collapse into mobile-first cards dynamically."
+    ]
+  }
+]
