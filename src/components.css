@@ -2120,11 +2120,15 @@ select.flat-select {
     position: relative;
 }
 .tier-card ul li::before {
-    content: '✓';
+    content: "";
     position: absolute;
-    left: 0;
-    color: var(--secondary);
-    font-weight: bold;
+    left: 4px;
+    top: 5px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--secondary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 
@@ -2227,6 +2231,68 @@ select.flat-select {
 }
 .corner-triangle.bottom-left a:hover .corner-triangle-text {
     transform: rotate(45deg) translateY(14px) scale(1.05);
+}
+
+
+/* --- 21. SVG ICON GALLERY --- */
+.svg-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+.icon-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+}
+.icon-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.icon-card svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--text);
+    transition: stroke var(--transition-fast), transform var(--transition-fast);
+}
+.icon-card:hover svg {
+    stroke: var(--accent);
+    transform: scale(1.1);
+}
+.icon-card-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted-text);
+    margin-top: 12px;
+    text-transform: capitalize;
+    transition: color var(--transition-fast);
+}
+.icon-card:hover .icon-card-name {
+    color: var(--text);
+}
+.icon-card-copy-hint {
+    position: absolute;
+    bottom: 8px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: var(--secondary);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.icon-card:hover .icon-card-copy-hint {
+    opacity: 1;
 }
 
 

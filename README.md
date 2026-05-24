@@ -8,13 +8,13 @@ MagpieCSS features a curated, dark-slate visual style by default, with built-in 
 
 ## Key Features
 
-* 🎨 **Five Built-In Themes**: Easily toggle between **Magpie** (slate blue & teal), **Dark Mode**, **Light Mode**, **High Contrast** (accessibility stark contrast), and a retro monospace **Terminal** theme.
-* 📱 **Responsive App Layouts**: Responsive side-navigation dashboard layouts that seamlessly transform for small/mobile screens.
-* 📊 **Airtable-Style Dense Grid**: A data table style designed for high information density that dynamically transforms into list cards on mobile devices (screens under `800px` wide).
-* 📂 **Hierarchical Trees**: Collapsible location/folder tree structures styled using native `<details>` and summary connector elements.
-* 📦 **UI Component Kit**: Custom-styled form elements, toggle switches, buttons, modals, and slide-in toast notifications (including a retro interactive assistant toast!).
-* 🗺️ **Spatial Mapping Canvas UI**: Standard layout rules for overlay tool palettes, floating controls, color pickers, and viewport view selectors.
-* 🖨️ **Print and PDF Styles**: Dedicated high-contrast printer styles ideal for index listings, audits, or invoice exports.
+* **Five Built-In Themes**: Easily toggle between **Magpie** (slate blue & teal), **Dark Mode**, **Light Mode**, **High Contrast** (accessibility stark contrast), and a retro monospace **Terminal** theme.
+* **Responsive App Layouts**: Responsive side-navigation dashboard layouts that seamlessly transform for small/mobile screens.
+* **Airtable-Style Dense Grid**: A data table style designed for high information density that dynamically transforms into list cards on mobile devices (screens under `800px` wide).
+* **Hierarchical Trees**: Collapsible location/folder tree structures styled using native `<details>` and summary connector elements.
+* **UI Component Kit**: Custom-styled form elements, toggle switches, buttons, modals, and slide-in toast notifications (including a retro interactive assistant toast!).
+* **Spatial Mapping Canvas UI**: Standard layout rules for overlay tool palettes, floating controls, color pickers, and viewport view selectors.
+* **Print and PDF Styles**: Dedicated high-contrast printer styles ideal for index listings, audits, or invoice exports.
 
 ---
 
@@ -99,6 +99,12 @@ To recompile and bundle the changes into `dist/magpie.css`, ensure you have Node
 ```bash
 node build.js
 ```
+
+---
+
+## Core Tenets
+
+* **Zero Emojis**: MagpieCSS is designed for clean, professional, and dense flat-vector layouts. The use of Unicode emojis (colored or default pictographs) is strictly prohibited in buttons, headers, components, or templates. Always use inline SVGs or custom CSS stylings instead of pictograph character mappings.
 
 ---
 

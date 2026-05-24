@@ -283,6 +283,24 @@ function setupDemoListeners() {
             drawer.classList.toggle('show');
         }
     };
+
+    // SVG Icon Search Filter
+    const svgSearch = document.getElementById('svgIconSearchInput');
+    const svgGrid = document.getElementById('svgGalleryGrid');
+    if (svgSearch && svgGrid) {
+        svgSearch.addEventListener('input', () => {
+            const query = svgSearch.value.toLowerCase().trim();
+            const cards = svgGrid.querySelectorAll('.icon-card');
+            cards.forEach(card => {
+                const names = card.getAttribute('data-name').toLowerCase();
+                if (names.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
 }
 
 // 4. Changelog (What's Changed) system
@@ -389,5 +407,40 @@ window.triggerLoadingModal = function() {
             MagpieCSS.toast.show("Vault synchronization complete!", "success");
         }
     }, 3000);
+};
+
+window.copySvgToClipboard = function(card) {
+    const svgEl = card.querySelector('svg').cloneNode(true);
+    // Add standard xmlns attribute
+    svgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    const svgText = svgEl.outerHTML;
+
+    navigator.clipboard.writeText(svgText).then(() => {
+        const nameEl = card.querySelector('.icon-card-name');
+        const hintEl = card.querySelector('.icon-card-copy-hint');
+        const originalName = nameEl.innerText;
+
+        nameEl.innerText = 'Copied!';
+        hintEl.style.opacity = '0';
+        
+        card.style.borderColor = 'var(--secondary)';
+        card.style.background = 'color-mix(in srgb, var(--secondary) 8%, transparent)';
+
+        if (window.MagpieCSS) {
+            MagpieCSS.toast.show(`Copied ${originalName} SVG markup!`, "success", 1500);
+        }
+
+        setTimeout(() => {
+            nameEl.innerText = originalName;
+            hintEl.style.opacity = '';
+            card.style.borderColor = '';
+            card.style.background = '';
+        }, 1500);
+    }).catch(err => {
+        console.error("Failed to copy SVG: ", err);
+        if (window.MagpieCSS) {
+            MagpieCSS.toast.show("Copy failed. Please try again.", "error");
+        }
+    });
 };
 
