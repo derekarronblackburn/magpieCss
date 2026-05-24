@@ -95,6 +95,7 @@
                 <a href="#codeblocks" class="nav-link">Code Snippet Cards</a>
                 <a href="#spatial" class="nav-link">Spatial Canvas Designer</a>
                 <a href="#print" class="nav-link">Report & Print Styles</a>
+                <a href="#advanced-layouts" class="nav-link">Dashboard & Landing Layouts</a>
             </nav>
         </div>
     </div>
@@ -1429,6 +1430,310 @@ MagpieCSS.ui.initCodeBlocks();</code></pre>
     &lt;/thead&gt;
   &lt;/table&gt;
 &lt;/body&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: DASHBOARD & LANDING LAYOUTS ==================== -->
+        <section id="advanced-layouts" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                    <line x1="9" y1="9" x2="21" y2="9"></line>
+                </svg>
+                Dashboard & Landing Layouts
+            </div>
+
+            <p>Advanced workspace frameworks, Kanban panels, checkout carts, and landing heroes designed to arrange dense dashboard blocks, detail cards, and subscription grids cleanly.</p>
+
+            <!-- 1. PROJECT DASHBOARDS & CARTS -->
+            <div class="doc-subsection-title">1. Interactive Project Workspace & Checkout Cart</div>
+            <p>A multi-pane layout featuring project lists, metric cards, and a side-anchored cart checkout. Shrink your viewport width below 900px to see the panes stack vertically.</p>
+
+            <div class="component-demo">
+                <div class="projects-layout">
+                    <!-- Left: Project Feed -->
+                    <div>
+                        <div class="panel-card" style="margin-bottom: 0;">
+                            <div class="panel-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                Active Stash Projects
+                            </div>
+                            
+                            <div class="project-row">
+                                <div class="project-info">
+                                    <h4>Automation Server Rack B2</h4>
+                                    <p>Procuring network switches and cable management modules.</p>
+                                </div>
+                                <div class="project-meta">
+                                    <div class="project-cost">$3,450.00</div>
+                                    <div class="project-date">Updated 10m ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-row">
+                                <div class="project-info">
+                                    <h4>Locker Room Audit Plan</h4>
+                                    <p>Auditing vintage hardware, cameras, and physical keys.</p>
+                                </div>
+                                <div class="project-meta">
+                                    <div class="project-cost">$890.00</div>
+                                    <div class="project-date">Updated 2h ago</div>
+                                </div>
+                            </div>
+
+                            <div class="project-row" style="margin-bottom: 0;">
+                                <div class="project-info">
+                                    <h4>Office Shelf Redesign</h4>
+                                    <p>Shelving units, document files, and storage containers.</p>
+                                </div>
+                                <div class="project-meta">
+                                    <div class="project-cost">$1,200.00</div>
+                                    <div class="project-date">Updated yesterday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Checkout Sidebar -->
+                    <div>
+                        <div class="panel-card" style="margin-bottom: 0;">
+                            <div class="panel-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                Checkout Stash Cart
+                            </div>
+
+                            <table class="cart-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th style="width: 70px; text-align: center;">Qty</th>
+                                        <th style="width: 40px; text-align: center;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Gigabit Network Switch</td>
+                                        <td style="text-align: center;">
+                                            <input type="number" class="cart-qty-input" value="1">
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <button class="remove-btn" onclick="MagpieCSS.toast.show('Removed Switch', 'warning')">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cat6 Ethernet Cable (100ft)</td>
+                                        <td style="text-align: center;">
+                                            <input type="number" class="cart-qty-input" value="4">
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <button class="remove-btn" onclick="MagpieCSS.toast.show('Removed Cable', 'warning')">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <button class="stash-btn" onclick="MagpieCSS.toast.show('Processing Stash Allocation...', 'success')" style="width: 100%; padding: 10px; font-size: 0.85rem;">Allocate Materials</button>
+                                <button class="stash-btn stash-btn-outline" onclick="MagpieCSS.toast.show('Cart cleared.', 'warning')" style="width: 100%; padding: 10px; font-size: 0.85rem;">Clear Stash Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. PROJECT DETAIL CARD -->
+            <div class="doc-subsection-title">2. Layout Detail Card & Action Bar</div>
+            <p>Large viewport detail container displays rich meta info, data tables, and interactive action buttons.</p>
+
+            <div class="component-demo">
+                <div class="detail-card">
+                    <div class="header-meta">
+                        <div class="project-title-area">
+                            <h2>Project: Archival Vault Upgrade</h2>
+                            <p>Allocating high-density storage nodes and setting up multi-factor hardware security key lockers.</p>
+                        </div>
+                        <div class="date-badge">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            Due: June 15, 2026
+                        </div>
+                    </div>
+
+                    <table class="items-table" style="margin-bottom: 0;">
+                        <thead>
+                            <tr>
+                                <th>Item Code</th>
+                                <th>Description</th>
+                                <th style="text-align: right;">Unit Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="cost-font">NODE-S3-12TB</td>
+                                <td>Archival Storage Server Module</td>
+                                <td class="cost-font" style="text-align: right; color: var(--gold); font-weight: bold;">$1,200.00</td>
+                            </tr>
+                            <tr>
+                                <td class="cost-font">LOCK-BIOMETRIC</td>
+                                <td>Biometric Hardware Security Locker</td>
+                                <td class="cost-font" style="text-align: right; color: var(--gold); font-weight: bold;">$450.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="action-bar">
+                        <div style="font-size: 0.9rem; color: var(--muted-text);">
+                            Subtotal Valuation: <span class="cost-font" style="font-weight: bold; color: var(--text);">$1,650.00</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-util danger" onclick="MagpieCSS.toast.show('Project Archived', 'error')">Archive Project</button>
+                            <button class="stash-btn" onclick="MagpieCSS.toast.show('Deploying Project Assets...', 'success')" style="padding: 6px 15px; font-size: 0.8rem;">Deploy Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. LANDING HERO & PRICING GRIDS -->
+            <div class="doc-subsection-title">3. Landing Hero & Pricing Tiers</div>
+            <p>Landing page headlines, features listings, and grid columns showcasing subscription tiers.</p>
+
+            <div class="component-demo" style="background: linear-gradient(180deg, var(--bg) 0%, rgba(255,255,255,0.01) 100%); border-radius: 12px; padding: 40px 20px;">
+                <div class="hero" style="padding: 20px 0 40px;">
+                    <h1 style="font-size: 2.2rem; margin-bottom: 10px;">Stash Assets with Pixel Perfection</h1>
+                    <p class="lead" style="font-size: 1.1rem; margin-bottom: 10px;">Responsive grids, native theme switches, and zero-dependency scripts.</p>
+                    <p class="desc" style="font-size: 0.85rem; max-width: 600px; margin-bottom: 20px;">
+                        MagpieCSS is designed for high-density document rendering and complex administrative workspaces, maintaining visual fidelity and performance without bloat.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="stash-btn" onclick="MagpieCSS.toast.show('Creating account...', 'success')" style="padding: 10px 20px; font-size: 0.85rem;">Get Started Free</button>
+                        <button class="stash-btn stash-btn-outline" onclick="MagpieCSS.toast.show('Documentation loading...', 'success')" style="padding: 10px 20px; font-size: 0.85rem;">Read Documentation</button>
+                    </div>
+                </div>
+
+                <div class="pricing" style="padding: 40px 0 20px;">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--text);">Simple, Transparent Pricing</h2>
+                    
+                    <div class="pricing-grid">
+                        <!-- Tier 1 -->
+                        <div class="tier-card">
+                            <h3 style="font-size: 1.25rem;">Free Sandbox</h3>
+                            <div class="cost-font" style="font-size: 1.8rem; font-weight: bold; color: var(--text); margin: 10px 0;">$0 <span style="font-size: 0.85rem; color: var(--muted-text);">/ month</span></div>
+                            <p style="font-size: 0.8rem; color: var(--muted-text); margin: 0;">Perfect for testing and personal workflows.</p>
+                            <ul>
+                                <li>Up to 50 active inventory items</li>
+                                <li>Standard high-density grids</li>
+                                <li>3 theme presets</li>
+                            </ul>
+                            <button class="stash-btn stash-btn-outline" onclick="MagpieCSS.toast.show('Enrolling in Free Tier...', 'success')" style="width: 100%; padding: 8px;">Start Free Sandbox</button>
+                        </div>
+
+                        <!-- Tier 2 -->
+                        <div class="tier-card featured">
+                            <div style="position: absolute; top: -12px; right: 20px; background: var(--accent); color: #fff; font-size: 0.65rem; font-weight: bold; padding: 4px 10px; border-radius: 12px; text-transform: uppercase;">Most Popular</div>
+                            <h3 style="font-size: 1.25rem;">Stash Pro</h3>
+                            <div class="cost-font" style="font-size: 1.8rem; font-weight: bold; color: var(--accent); margin: 10px 0;">$29 <span style="font-size: 0.85rem; color: var(--muted-text);">/ month</span></div>
+                            <p style="font-size: 0.8rem; color: var(--muted-text); margin: 0;">For engineers, technicians, and organizers.</p>
+                            <ul>
+                                <li>Unlimited inventory items</li>
+                                <li>Spatial floorplan mapping designer</li>
+                                <li>All 5 premium visual themes</li>
+                                <li>PDF/Print audit report exports</li>
+                            </ul>
+                            <button class="stash-btn" onclick="MagpieCSS.toast.show('Subscribing to Pro...', 'success')" style="width: 100%; padding: 8px;">Upgrade to Pro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. HTML MARKUP DOCUMENTATION -->
+            <div class="doc-subsection-title">4. Integration & Layout Markup Code</div>
+            <p>Code patterns for dashboards, item detail grids, and landing pricing blocks. Copy these configurations to construct data workspaces quickly.</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML (Dashboard Workspace)</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>&lt;div class="projects-layout"&gt;
+  &lt;!-- Main Content Feed --&gt;
+  &lt;div&gt;
+    &lt;div class="panel-card"&gt;
+      &lt;div class="panel-title"&gt;Active Projects&lt;/div&gt;
+      &lt;div class="project-row"&gt;
+        &lt;div class="project-info"&gt;
+          &lt;h4&gt;Server Rack Installation&lt;/h4&gt;
+          &lt;p&gt;Adding networking hardware.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="project-meta"&gt;
+          &lt;div class="project-cost"&gt;$3,450.00&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML (Checkout Cart)</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>&lt;div class="panel-card"&gt;
+  &lt;div class="panel-title"&gt;Stash Cart&lt;/div&gt;
+  &lt;table class="cart-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Item&lt;/th&gt;
+        &lt;th&gt;Qty&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Switch&lt;/td&gt;
+        &lt;td&gt;&lt;input type="number" class="cart-qty-input" value="1"&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML (Pricing Grid)</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>&lt;div class="pricing-grid"&gt;
+  &lt;div class="tier-card featured"&gt;
+    &lt;h3&gt;Stash Pro&lt;/h3&gt;
+    &lt;div class="cost-font"&gt;$29 &lt;span&gt;/ month&lt;/span&gt;&lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Unlimited inventory items&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button class="stash-btn"&gt;Upgrade&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
             </div>
         </section>
 
