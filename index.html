@@ -92,6 +92,7 @@
                 <a href="#flashcards" class="nav-link">3D Flipping Cards</a>
                 <a href="#wiki" class="nav-link">Wiki Page Renderer</a>
                 <a href="#dialogs" class="nav-link">Dialogs & Toasts</a>
+                <a href="#codeblocks" class="nav-link">Code Snippet Cards</a>
                 <a href="#spatial" class="nav-link">Spatial Canvas Designer</a>
                 <a href="#print" class="nav-link">Report & Print Styles</a>
             </nav>
@@ -1097,6 +1098,73 @@ MagpieCSS.dialog.confirm("Wipe all database records?", "Caution").then(confirmed
       &lt;button class="stash-btn"&gt;Save&lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: CODE SNIPPET CARDS ==================== -->
+        <section id="codeblocks" class="doc-section">
+            <div class="doc-section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                Code Snippet Cards
+            </div>
+
+            <p>MagpieCSS includes a premium, theme-aware code card layout optimized for sharing code blocks, markdown text, or configuration settings. It automatically includes copy-to-clipboard actions and interactive state transitions.</p>
+
+            <div class="doc-subsection-title">Interactive Component Preview</div>
+            <p>Click the "Copy" button in the card below to test the clipboard copy and micro-animation success states.</p>
+            
+            <div class="component-demo">
+                <div class="code-block" style="margin: 0;">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">Javascript</span>
+                        <button class="code-block-copy">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            <span class="copy-label">Copy</span>
+                        </button>
+                    </div>
+                    <pre><code>// Initialize MagpieCSS Framework Components
+const config = {
+    theme: "magpie",
+    density: "high",
+    emojiSupport: false
+};
+MagpieCSS.ui.initCodeBlocks();</code></pre>
+                </div>
+            </div>
+
+            <div class="doc-subsection-title">HTML Structure & Markup</div>
+            <p>Wrap code within <code>.code-block</code>, providing a <code>.code-block-header</code> containing the language label and copy button. The framework handles binding automatically.</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>&lt;div class="code-block"&gt;
+  &lt;div class="code-block-header"&gt;
+    &lt;span class="code-block-lang"&gt;CSS&lt;/span&gt;
+    &lt;button class="code-block-copy"&gt;
+      &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+        &lt;rect x="8" y="2" width="8" height="4" rx="1" ry="1"&gt;&lt;/rect&gt;
+        &lt;path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      &lt;span class="copy-label"&gt;Copy&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;pre&gt;&lt;code&gt;.my-selector { color: var(--accent); }&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;</code></pre>
             </div>
         </section>

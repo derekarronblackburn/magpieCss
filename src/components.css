@@ -1620,4 +1620,84 @@ select.flat-select {
     color: var(--danger);
 }
 
+/* --- 16. CODE BLOCK & COPY UTILITY --- */
+.code-block {
+    position: relative;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--hover-bg);
+    border-bottom: 1px solid var(--border-light);
+    font-family: 'Outfit', sans-serif;
+}
+
+.code-block-lang {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    font-family: monospace;
+}
+
+.code-block-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--muted-text);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.code-block-copy:hover {
+    background: var(--hover-bg);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.code-block-copy.copied {
+    color: var(--secondary);
+    border-color: var(--secondary);
+    background: var(--hover-bg);
+    transform: scale(1.03);
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.code-block pre code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+
 

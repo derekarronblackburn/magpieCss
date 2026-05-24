@@ -266,6 +266,35 @@ const MagpieCSS = {
                     });
                 });
             });
+        initCodeBlocks: function() {
+            document.querySelectorAll('.code-block-copy').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const block = btn.closest('.code-block');
+                    if (!block) return;
+                    const codeEl = block.querySelector('code');
+                    if (!codeEl) return;
+                    
+                    const text = codeEl.innerText;
+                    navigator.clipboard.writeText(text).then(() => {
+                        btn.classList.add('copied');
+                        const originalHtml = btn.innerHTML;
+                        
+                        btn.innerHTML = `
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="copy-label">Copied!</span>
+                        `;
+                        
+                        setTimeout(() => {
+                            btn.classList.remove('copied');
+                            btn.innerHTML = originalHtml;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy code: ', err);
+                    });
+                });
+            });
         }
     }
 };
@@ -273,4 +302,6 @@ const MagpieCSS = {
 // Initialize theme automatically on script load
 MagpieCSS.theme.init();
 MagpieCSS.ui.initDropdownAutoClose();
+MagpieCSS.ui.initCodeBlocks();
 window.MagpieCSS = MagpieCSS;
+

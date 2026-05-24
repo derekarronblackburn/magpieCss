@@ -57,6 +57,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 2.1 Search Filter Functionality
+    const searchInput = document.querySelector('.nav-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+            const menu = document.getElementById('mainNavMenu');
+            if (!menu) return;
+
+            let currentHeader = null;
+            let hasVisibleLinkInGroup = false;
+
+            Array.from(menu.children).forEach(child => {
+                if (child.tagName === 'DIV') {
+                    if (currentHeader) {
+                        currentHeader.style.display = hasVisibleLinkInGroup || !query ? 'block' : 'none';
+                    }
+                    currentHeader = child;
+                    hasVisibleLinkInGroup = false;
+                } else if (child.tagName === 'A' && child.classList.contains('nav-link')) {
+                    const text = child.textContent.toLowerCase();
+                    const matches = text.includes(query);
+                    child.style.display = matches ? 'block' : 'none';
+                    if (matches) {
+                        hasVisibleLinkInGroup = true;
+                    }
+                }
+            });
+
+            if (currentHeader) {
+                currentHeader.style.display = hasVisibleLinkInGroup || !query ? 'block' : 'none';
+            }
+
+            // Check if any link is visible
+            let anyVisible = false;
+            navLinks.forEach(link => {
+                if (link.style.display !== 'none') anyVisible = true;
+            });
+
+            let noResultsMsg = document.getElementById('navNoResults');
+            if (!anyVisible) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.id = 'navNoResults';
+                    noResultsMsg.style.padding = '15px 10px';
+                    noResultsMsg.style.fontSize = '0.85rem';
+                    noResultsMsg.style.color = 'var(--muted-text)';
+                    noResultsMsg.style.textAlign = 'center';
+                    noResultsMsg.innerText = 'No components match search.';
+                    menu.appendChild(noResultsMsg);
+                }
+            } else {
+                if (noResultsMsg) noResultsMsg.remove();
+            }
+        });
+    }
+
     // 3. Setup dynamic demo listeners
     setupDemoListeners();
 });
