@@ -1,5 +1,16 @@
 [
   {
+    "version": "1.6.0",
+    "date": "2026-05-24",
+    "highlight": "Zero-Emoji Sanitization & SVG Icon Gallery!",
+    "changes": [
+      "Created an interactive SVG Icon Gallery with instant one-click clipboard copying and hover transitions.",
+      "Added dynamic client-side filtering/search to the SVG Icon Gallery.",
+      "Removed emoji markers from documentation and replaced Unicode checkmarks with CSS vector checkmarks.",
+      "Formalized the framework's Zero-Emoji design tenet across codebase resources."
+    ]
+  },
+  {
     "version": "1.5.0",
     "date": "2026-05-24",
     "highlight": "Corner Banners, Loading Indicators & Changelog Alerts",
