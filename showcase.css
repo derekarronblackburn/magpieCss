@@ -178,44 +178,52 @@ pre {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- 45-Degree Corner Ribbon CTA --- */
+/* --- Corner Triangle CTA --- */
 .github-ribbon {
     position: fixed;
     top: 0;
     right: 0;
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
+    width: 120px;
+    height: 120px;
     z-index: 99999;
     pointer-events: none;
 }
 
 .github-ribbon a {
     position: absolute;
-    top: 30px;
-    right: -40px;
-    width: 220px;
-    padding: 8px 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(135deg, var(--gold) 0%, #b29400 100%);
-    color: #05070a;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800;
-    font-size: 0.8rem;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    transform: rotate(45deg);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
     pointer-events: auto;
-    display: block;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    letter-spacing: 0.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
 }
 
 .github-ribbon a:hover {
     background: linear-gradient(135deg, var(--secondary) 0%, #1fb19f 100%);
-    color: #05070a;
-    box-shadow: 0 6px 15px rgba(45, 212, 191, 0.4);
-    top: 32px;
 }
+
+.github-ribbon-text {
+    color: #05070a;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    white-space: nowrap;
+    transform: rotate(45deg) translateY(-18px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.github-ribbon a:hover .github-ribbon-text {
+    transform: rotate(45deg) translateY(-14px) scale(1.05);
+}
+
