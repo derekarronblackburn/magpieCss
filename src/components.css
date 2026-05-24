@@ -1723,3 +1723,19 @@ select.flat-select {
 
 
 
+
+/* --- Mobile Fixes (Forms & Layout) --- */
+@media (max-width: 768px) {
+    .form-row, .row-1, .row-2, .row-3 {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .vault-stats {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
