@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.5.0",
+    "date": "2026-05-24",
+    "highlight": "Corner Banners, Loading Indicators & Changelog Alerts",
+    "changes": [
+      "Added themed .corner-triangle CTA component supporting all four corner modifiers with dynamic hover transformations.",
+      "Added CSS database loading .spinner (small, large) and animated .skeleton-shimmer placeholders.",
+      "Integrated dynamic modal-driven 'What's Changed' release log and localStorage-tracked Clippy update alerts.",
+      "Expanded interactive flashcard container height to 240px to optimize visual space.",
+      "Added right-padding (16px) to the .card-back-attributes class to prevent scrollbar track overlapping."
+    ]
+  },
+  {
     "version": "1.4.0",
     "date": "2026-05-24",
     "highlight": "Layouts & Dashboard Showcase Expansion!",
