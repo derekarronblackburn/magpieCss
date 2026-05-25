@@ -102,13 +102,44 @@ node build.js
 
 ---
 
-## CMS & LLM Content Negotiation
+## CMS (Cascading Markdown Sheets) & LLM Content Negotiation
 
-MagpieCSS/CMS features a client-side DOM-to-Markdown engine that automatically translates complex styled HTML pages into clean, token-efficient Markdown. This allows AI assistants and LLMs to read page contents efficiently.
+**Cascading Markdown Sheets (CMS)** is a client-side compiler design pattern built into MagpieCSS/CMS. Instead of forcing AI crawlers to parse bloated DOM trees or maintaining separate sets of static markdown files, the CMS engine translates visual HTML layouts on the fly into clean, token-efficient Markdown.
 
-### 1. Server-Side Routing
-You can intercept the standard HTTP `Accept: text/markdown` header on your server to serve raw Markdown back to crawlers, keeping your site's content accessible to AI agents.
+### How It Works
 
+1. **Content Negotiation (HTTP Accept Header)**: When an LLM crawler or AI agent requests a page with the header `Accept: text/markdown`, the server intercepts the request, bypasses the HTML/CSS layout rendering entirely, and returns the raw Markdown payload.
+2. **Client-Side DOM Compiler**: If the page is already rendered in the browser, the client-side helper `MagpieCSS.cms.toMarkdown(element)` recursively inspects the target elements (handling complex grids, tables, and details trees) while stripping away visual helpers (copy buttons, theme switches, and layout wrappers) to deliver pure semantic context.
+
+---
+
+### How to Implement It
+
+#### 1. Server-Side Content Negotiation
+
+##### Python / FastAPI
+Detect the incoming `Accept` header to dynamically serve Markdown payloads instead of HTML templates:
+
+```python
+from fastapi import FastAPI, Header, Response
+from fastapi.responses import HTMLResponse
+
+app = FastAPI()
+
+@app.get("/dashboard", response_class=HTMLResponse)
+def read_dashboard(accept: str = Header(None)):
+    if accept and "text/markdown" in accept:
+        markdown_content = """# System Dashboard
+- **Active Nodes**: 12
+- **Status**: Operational
+- **Load**: Normal"""
+        return Response(content=markdown_content, media_type="text/markdown")
+    
+    # Otherwise return normal HTML template
+    return "<html>...</html>"
+```
+
+##### Node.js / Express
 ```javascript
 app.get('/dashboard', (req, res) => {
     if (req.headers.accept && req.headers.accept.includes('text/markdown')) {
@@ -119,15 +150,15 @@ app.get('/dashboard', (req, res) => {
 });
 ```
 
-### 2. Client-Side DOM-to-Markdown (MagpieCSS.cms API)
-You can compile any DOM subtree dynamically into Markdown using our companion script helper:
+#### 2. Client-Side DOM-to-Markdown (MagpieCSS.cms API)
+Instantly compile any rendered sub-tree of the active DOM into Markdown for dynamic clipboard copies, local agent prompts, or client-side indexing:
 
 ```javascript
-// Select your target content container
-const docContainer = document.getElementById('my-content');
+// Select the DOM container to translate
+const contentNode = document.getElementById('my-document-root');
 
-// Compile into clean Markdown (automatically strips header icons, copy buttons, and layout wrappers)
-const markdown = MagpieCSS.cms.toMarkdown(docContainer);
+// Compile DOM to clean Markdown (strips layout, theme styling and copy actions)
+const markdown = MagpieCSS.cms.toMarkdown(contentNode);
 
 console.log(markdown);
 ```
