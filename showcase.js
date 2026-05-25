@@ -515,6 +515,7 @@ window.updateLlmViewContent = function(section) {
 window.toggleGlobalLlmView = function() {
     const btnText = document.getElementById('globalLlmBtnText');
     const llmSection = document.getElementById('global-llm-view');
+    const toggleBtn = document.getElementById('globalLlmToggleBtn');
     if (!llmSection || !btnText) return;
     
     window.llmViewActive = !window.llmViewActive;
@@ -527,7 +528,7 @@ window.toggleGlobalLlmView = function() {
             currentActive.classList.remove('active');
         }
         llmSection.classList.add('active');
-        btnText.innerText = "Exit Agent View";
+        if (toggleBtn) toggleBtn.classList.add('active');
         if (window.MagpieCSS) {
             window.MagpieCSS.toast.show("Agent View Enabled (Accept: text/markdown)", "success", 2000);
         }
@@ -535,7 +536,7 @@ window.toggleGlobalLlmView = function() {
         llmSection.classList.remove('active');
         const prevSection = document.getElementById(window._previousActiveSectionId || 'overview');
         if (prevSection) prevSection.classList.add('active');
-        btnText.innerText = "Agent View (llms.txt)";
+        if (toggleBtn) toggleBtn.classList.remove('active');
         if (window.MagpieCSS) {
             window.MagpieCSS.toast.show("Return to Human View (Accept: text/html)", "success", 2000);
         }
