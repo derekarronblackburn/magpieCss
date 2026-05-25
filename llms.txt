@@ -1,6 +1,6 @@
-# MagpieCSS - LLM Context & Repository Map
+# MagpieCSS/CMS - LLM Context & Repository Map
 
-MagpieCSS is a modern, lightweight, themeable vanilla CSS framework. Originally extracted from administrative tools (MagpieStash) and wiki platforms (MagpieNest), it is built specifically for data-dense user interfaces, spatial grid workspaces, and document libraries.
+MagpieCSS/CMS is a modern, lightweight, themeable vanilla design system and components framework. Originally extracted from administrative tools (MagpieStash) and wiki platforms (MagpieNest), it is built specifically for data-dense user interfaces, document libraries, and native LLM content negotiation (serving styled HTML to humans and token-efficient Markdown to AI agents).
 
 This file provides a structured interface map of the repository's stylesheets, component classes, design tokens, and JavaScript APIs to help AI agents read, write, and maintain the codebase.
 

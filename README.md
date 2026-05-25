@@ -1,8 +1,8 @@
-# MagpieCSS
+# MagpieCSS/CMS
 
 A modern, open-source vanilla CSS design system and components library designed for building beautiful, responsive, and highly themeable web applications, dashboards, and wikis.
 
-MagpieCSS features a curated, dark-slate visual style by default, with built-in variables supporting multiple color themes.
+MagpieCSS/CMS features a curated, dark-slate visual style by default, with built-in variables supporting multiple color themes.
 
 ---
 
@@ -33,7 +33,7 @@ MagpieCSS features a curated, dark-slate visual style by default, with built-in 
 
 ## Getting Started
 
-To use MagpieCSS in your project, copy the distribution files (preferably `magpie.min.css` and `magpie.min.js` for production) into your project directory.
+To use MagpieCSS/CMS in your project, copy the distribution files (preferably `magpie.min.css` and `magpie.min.js` for production) into your project directory.
 
 ### 1. Link Assets in HTML
 
@@ -68,7 +68,7 @@ MagpieCSS.theme.set('terminal');
 
 ### 3. Add a Code Snippet Card
 
-MagpieCSS includes a styled, copyable `.code-block` component:
+MagpieCSS/CMS includes a styled, copyable `.code-block` component:
 
 ```html
 <div class="code-block">
@@ -104,7 +104,8 @@ node build.js
 
 ## Core Tenets
 
-* **Zero Emojis**: MagpieCSS is designed for clean, professional, and dense flat-vector layouts. The use of Unicode emojis (colored or default pictographs) is strictly prohibited in buttons, headers, components, or templates. Always use inline SVGs or custom CSS stylings instead of pictograph character mappings.
+* **Zero Emojis**: MagpieCSS/CMS is designed for clean, professional, and dense flat-vector layouts. The use of Unicode emojis (colored or default pictographs) is strictly prohibited in buttons, headers, components, or templates. Always use inline SVGs or custom CSS stylings instead of pictograph character mappings.
+* **LLM-Friendly Legibility**: DOM hierarchies, design tokens, and class naming conventions are engineered to be readable by LLMs. Includes dynamic DOM-to-Markdown (CMS) parsers for agent content negotiation (serving styled HTML to humans and token-efficient Markdown to AI agents).
 
 ---
 

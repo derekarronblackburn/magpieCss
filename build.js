@@ -23,7 +23,7 @@ try {
     const nameRegex = /<span\s+class="icon-card-name">([^<]+)<\/span>/;
 
     let iconsCssContent = `/* 
- * MagpieCSS Generated Icons
+ * MagpieCSS/CMS Generated Icons
  * Automatically generated from the SVG Icon Gallery in index.html.
  * Do not modify this file directly.
  */
@@ -95,7 +95,7 @@ if (!fs.existsSync(distDir)) {
 // 1. Bundle CSS
 console.log("Starting CSS bundling...");
 let bundledCss = `/* 
- * MagpieCSS - Design System & UI Library
+ * MagpieCSS/CMS - Design System & UI Library
  * Extracted from MagpieStash app.
  * Fully responsive, multi-themed, vanilla CSS layout and components framework.
  */\n\n`;
