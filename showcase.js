@@ -16,10 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show corresponding section
             const targetId = link.getAttribute('href').substring(1);
             sections.forEach(sec => {
-                if (sec.id === targetId) {
-                    sec.classList.add('active');
-                } else {
+                if (window.llmViewActive) {
                     sec.classList.remove('active');
+                    if (sec.id === 'global-llm-view') {
+                        sec.classList.add('active');
+                    }
+                    if (sec.id === targetId) {
+                        window._previousActiveSectionId = targetId;
+                        window.updateLlmViewContent(sec);
+                    }
+                } else {
+                    if (sec.id === targetId) {
+                        sec.classList.add('active');
+                    } else {
+                        sec.classList.remove('active');
+                    }
                 }
             });
 
@@ -477,6 +488,66 @@ window.copyWikiCmsMarkdown = function() {
     navigator.clipboard.writeText(codeEl.innerText).then(() => {
         if (window.MagpieCSS) {
             window.MagpieCSS.toast.show("Markdown copied to clipboard!", "success", 1500);
+        }
+    }).catch(err => {
+        console.error("Failed to copy Markdown: ", err);
+    });
+};
+
+// Global LLM / Agent View Toggle System
+window.llmViewActive = false;
+
+window.updateLlmViewContent = function(section) {
+    if (!section) return;
+    const codeEl = document.getElementById('globalLlmCode');
+    if (!codeEl) return;
+    
+    const markdown = window.MagpieCSS.cms.toMarkdown(section);
+    codeEl.innerText = markdown;
+    
+    const titleEl = document.getElementById('globalLlmTitle');
+    if (titleEl) {
+        const titleText = section.querySelector('.doc-section-title')?.innerText.trim() || 'Active Section';
+        titleEl.innerText = `LLM Accept: text/markdown - ${titleText}`;
+    }
+};
+
+window.toggleGlobalLlmView = function() {
+    const btnText = document.getElementById('globalLlmBtnText');
+    const llmSection = document.getElementById('global-llm-view');
+    if (!llmSection || !btnText) return;
+    
+    window.llmViewActive = !window.llmViewActive;
+    
+    if (window.llmViewActive) {
+        const currentActive = Array.from(document.querySelectorAll('.doc-section')).find(s => s.classList.contains('active') && s.id !== 'global-llm-view');
+        if (currentActive) {
+            window._previousActiveSectionId = currentActive.id;
+            window.updateLlmViewContent(currentActive);
+            currentActive.classList.remove('active');
+        }
+        llmSection.classList.add('active');
+        btnText.innerText = "Exit Agent View";
+        if (window.MagpieCSS) {
+            window.MagpieCSS.toast.show("Agent View Enabled (Accept: text/markdown)", "success", 2000);
+        }
+    } else {
+        llmSection.classList.remove('active');
+        const prevSection = document.getElementById(window._previousActiveSectionId || 'overview');
+        if (prevSection) prevSection.classList.add('active');
+        btnText.innerText = "Agent View (llms.txt)";
+        if (window.MagpieCSS) {
+            window.MagpieCSS.toast.show("Return to Human View (Accept: text/html)", "success", 2000);
+        }
+    }
+};
+
+window.copyGlobalLlmMarkdown = function() {
+    const codeEl = document.getElementById('globalLlmCode');
+    if (!codeEl) return;
+    navigator.clipboard.writeText(codeEl.innerText).then(() => {
+        if (window.MagpieCSS) {
+            window.MagpieCSS.toast.show("Global Markdown copied!", "success", 1500);
         }
     }).catch(err => {
         console.error("Failed to copy Markdown: ", err);

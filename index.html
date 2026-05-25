@@ -63,7 +63,12 @@
     </div>
 
     <!-- 3. TOP ACTION BAR (THEME DROPDOWN SWITCHER) -->
-    <div class="app-actions header-actions">
+    <div class="app-actions header-actions" style="display: flex; gap: 10px; align-items: center;">
+        <button class="hamburger-btn hide-print" onclick="toggleGlobalLlmView()" style="border: 1px solid var(--border); padding: 8px 16px; background: var(--card); border-radius: 20px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="m-icon m-icon-code" style="width: 16px; height: 16px;"></svg>
+            <span id="globalLlmBtnText" style="font-size: 0.85rem; font-weight: bold; color: var(--text);">Agent View (llms.txt)</span>
+        </button>
+
         <div class="dropdown">
             <button class="hamburger-btn hide-print" onclick="MagpieCSS.ui.toggleDropdown('showcaseThemeDropdown')" style="border: 1px solid var(--border); padding: 8px 16px; background: var(--card); border-radius: 20px; display: flex; align-items: center; gap: 8px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
@@ -2373,6 +2378,34 @@ MagpieCSS.ui.initCodeBlocks();</code></pre>
                         <span class="icon-card-copy-hint">Copy Vector</span>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: GLOBAL LLM VIEW ==================== -->
+        <section id="global-llm-view" class="doc-section">
+            <div class="doc-section-title" style="border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 20px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-icon m-icon-code" style="width: 24px; height: 24px; color: var(--accent);"></svg>
+                <span id="globalLlmTitle">LLM Accept: text/markdown View</span>
+            </div>
+            
+            <div style="background: rgba(59, 130, 246, 0.05); border-left: 4px solid var(--accent); padding: 15px; border-radius: 8px; margin-bottom: 25px;">
+                <p style="margin: 0; font-size: 0.85rem; color: var(--text); line-height: 1.5;">
+                    <strong>Agent view active!</strong> Below is the semantic Markdown compiled on-the-fly by the <code>MagpieCSS.cms</code> engine. This matches what an AI agent receives via Content Negotiation when requesting the active page with the header <code>Accept: text/markdown</code>.
+                </p>
+            </div>
+            
+            <div class="code-block" style="margin: 0;">
+                <div class="code-block-header">
+                    <span class="code-block-lang">Markdown Representation</span>
+                    <button class="code-block-copy" onclick="copyGlobalLlmMarkdown()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code id="globalLlmCode" style="white-space: pre-wrap; font-family: monospace; font-size: 0.85rem;"></code></pre>
             </div>
         </section>
 

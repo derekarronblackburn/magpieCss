@@ -1,5 +1,15 @@
 [
   {
+    "version": "1.9.1",
+    "date": "2026-05-24",
+    "highlight": "Global LLM Agent View Toggle!",
+    "changes": [
+      "Added a global 'Agent View (llms.txt)' toggle button to the main page header bar.",
+      "Implemented a real-time page-level CMS compiler view that displays the active documentation section translated to Markdown.",
+      "Integrated page link listeners to dynamically update the Markdown view when browsing different sections."
+    ]
+  },
+  {
     "version": "1.9.0",
     "date": "2026-05-24",
     "highlight": "LLM-Friendly Architecture & CMS (Cascading Markdown Sheet) Engine",
