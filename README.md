@@ -102,6 +102,38 @@ node build.js
 
 ---
 
+## CMS & LLM Content Negotiation
+
+MagpieCSS/CMS features a client-side DOM-to-Markdown engine that automatically translates complex styled HTML pages into clean, token-efficient Markdown. This allows AI assistants and LLMs to read page contents efficiently.
+
+### 1. Server-Side Routing
+You can intercept the standard HTTP `Accept: text/markdown` header on your server to serve raw Markdown back to crawlers, keeping your site's content accessible to AI agents.
+
+```javascript
+app.get('/dashboard', (req, res) => {
+    if (req.headers.accept && req.headers.accept.includes('text/markdown')) {
+        res.type('text/markdown');
+        return res.send('# System Dashboard\n\n- Active nodes: 12\n- Status: OK');
+    }
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+```
+
+### 2. Client-Side DOM-to-Markdown (MagpieCSS.cms API)
+You can compile any DOM subtree dynamically into Markdown using our companion script helper:
+
+```javascript
+// Select your target content container
+const docContainer = document.getElementById('my-content');
+
+// Compile into clean Markdown (automatically strips header icons, copy buttons, and layout wrappers)
+const markdown = MagpieCSS.cms.toMarkdown(docContainer);
+
+console.log(markdown);
+```
+
+---
+
 ## Core Tenets
 
 * **Zero Emojis**: MagpieCSS/CMS is designed for clean, professional, and dense flat-vector layouts. The use of Unicode emojis (colored or default pictographs) is strictly prohibited in buttons, headers, components, or templates. Always use inline SVGs or custom CSS stylings instead of pictograph character mappings.

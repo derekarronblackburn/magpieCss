@@ -181,6 +181,67 @@
                 </ul>
             </div>
 
+            <!-- ==================== CMS (CASCADING MARKDOWN SHEETS) SECTION ==================== -->
+            <div class="doc-subsection-title">CMS (Cascading Markdown Sheets) Engine</div>
+            <p>Cascading Markdown Sheets (CMS) is a client-side compiler design pattern built into MagpieCSS/CMS. Instead of forcing AI crawlers to parse bloated DOM structures or maintaining separate sets of static markdown files, the CMS engine translates visual HTML layouts on the fly into clean, token-efficient Markdown.</p>
+            
+            <h4 style="margin-top: 15px; margin-bottom: 5px; font-family: Outfit; font-weight: bold; color: var(--accent);">How It Works</h4>
+            <div class="wiki-content-body" style="padding-left: 15px; margin-bottom: 20px;">
+                <ul>
+                    <li><strong>Content Negotiation</strong>: When an LLM crawler or AI agent requests a page with the header <code>Accept: text/markdown</code>, the server bypasses the HTML/CSS layout entirely and returns raw Markdown.</li>
+                    <li><strong>DOM Compiler</strong>: If the page is already rendered in the browser, the client-side helper <code>MagpieCSS.cms.toMarkdown(element)</code> recursively inspects the target elements (handling layouts, tables, and trees) while stripping away copy buttons, theme switches, and layout wrappers to deliver semantic context.</li>
+                </ul>
+            </div>
+
+            <h4 style="margin-top: 15px; margin-bottom: 5px; font-family: Outfit; font-weight: bold; color: var(--accent);">How to Implement It</h4>
+            <p>Integrating content-negotiated CMS support into your web applications requires two simple steps:</p>
+
+            <div style="margin-bottom: 10px; font-size: 0.85rem; font-weight: bold; color: var(--text);">1. Server-Side Routing (Content Negotiation)</div>
+            <p>Detect the incoming Accept header to dynamically serve Markdown payloads instead of HTML templates:</p>
+            
+            <div class="code-block" style="margin-bottom: 20px;">
+                <div class="code-block-header">
+                    <span class="code-block-lang">Node.js (Express)</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>app.get('/dashboard', (req, res) => {
+    if (req.headers.accept && req.headers.accept.includes('text/markdown')) {
+        res.type('text/markdown');
+        return res.send('# System Dashboard\\n\\n- Active nodes: 12\\n- Status: OK');
+    }
+    res.sendFile(path.join(__dirname, 'index.html'));
+});</code></pre>
+            </div>
+
+            <div style="margin-bottom: 10px; font-size: 0.85rem; font-weight: bold; color: var(--text);">2. Client-Side DOM-to-Markdown (MagpieCSS.cms API)</div>
+            <p>Instantly compile any rendered sub-tree of the active DOM into Markdown for dynamic clipboard copies, local agent prompts, or client-side indexing:</p>
+
+            <div class="code-block" style="margin-bottom: 30px;">
+                <div class="code-block-header">
+                    <span class="code-block-lang">JavaScript</span>
+                    <button class="code-block-copy">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        </svg>
+                        <span class="copy-label">Copy</span>
+                    </button>
+                </div>
+                <pre><code>// Select the DOM container to translate
+const contentNode = document.getElementById('my-document-root');
+
+// Compile DOM to clean Markdown (strips layouts, theme styling and copy actions)
+const markdown = MagpieCSS.cms.toMarkdown(contentNode);
+
+console.log(markdown);</code></pre>
+            </div>
+
             <!-- ==================== DYNAMIC COLOR TOKENS ==================== -->
             <div class="doc-subsection-title">Active Theme Color Tokens</div>
             <p>Below are the current values of the design variables. Try changing the theme in the top-right header dropdown switcher to see variables adapt dynamically.</p>

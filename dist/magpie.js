@@ -362,157 +362,186 @@ const MagpieCSS = {
          * @returns {string} The parsed Markdown string.
          */
         toMarkdown: function(element, indentLevel = 0) {
-            if (!element) return '';
-            
-            // Exclude helper wrappers, theme selectors, copy actions, and layout gutters
-            if (element.classList && (
-                element.classList.contains('hide-print') || 
-                element.classList.contains('copy-btn') || 
-                element.classList.contains('code-block-copy') || 
-                element.classList.contains('mobile-menu-toggle') ||
-                element.classList.contains('dropdown-content') ||
-                element.classList.contains('theme-btn')
-            )) {
-                return '';
-            }
-            
-            const tagName = element.tagName ? element.tagName.toLowerCase() : '';
-            if (tagName === 'script' || tagName === 'style') return '';
-            
-            const indent = '  '.repeat(indentLevel);
-            
-            // Handle MagpieCSS Custom Classes
-            if (element.classList) {
-                // Code block cards
-                if (element.classList.contains('code-block')) {
-                    const langEl = element.querySelector('.code-block-lang');
-                    const lang = langEl ? langEl.innerText.trim().toLowerCase() : '';
-                    const codeEl = element.querySelector('code');
-                    const codeText = codeEl ? codeEl.innerText.trim() : '';
-                    return `\n\`\`\`${lang}\n${codeText}\n\`\`\`\n\n`;
+            const cmsRef = this;
+            const recurse = (el, level) => {
+                if (!el) return '';
+                
+                // Exclude helper wrappers, theme selectors, copy actions, and layout gutters
+                if (el.classList && (
+                    el.classList.contains('hide-print') || 
+                    el.classList.contains('copy-btn') || 
+                    el.classList.contains('code-block-copy') || 
+                    el.classList.contains('mobile-menu-toggle') ||
+                    el.classList.contains('dropdown-content') ||
+                    el.classList.contains('theme-btn')
+                )) {
+                    return '';
                 }
                 
-                // 3D Flipping flashcards
-                if (element.classList.contains('card-container')) {
-                    const frontTitleEl = element.querySelector('.card-title');
-                    const frontTitle = frontTitleEl ? frontTitleEl.innerText.trim() : '';
-                    const subtitleEl = element.querySelector('.card-subtitle');
-                    const subtitle = subtitleEl ? ` (${subtitleEl.innerText.trim()})` : '';
-                    const backTextEl = element.querySelector('.card-back-contents') || element.querySelector('.card-back');
-                    
-                    let backText = '';
-                    if (backTextEl) {
-                        const clonedBack = backTextEl.cloneNode(true);
-                        clonedBack.querySelectorAll('.card-flip-prompt, .card-back-attributes').forEach(el => el.remove());
-                        backText = clonedBack.innerText.trim();
+                const tagName = el.tagName ? el.tagName.toLowerCase() : '';
+                if (tagName === 'script' || tagName === 'style') return '';
+                
+                const indent = '  '.repeat(level);
+                
+                // Handle MagpieCSS Custom Classes
+                if (el.classList) {
+                    // Code block cards
+                    if (el.classList.contains('code-block')) {
+                        const langEl = el.querySelector('.code-block-lang');
+                        const lang = langEl ? langEl.innerText.trim().toLowerCase() : '';
+                        const codeEl = el.querySelector('code');
+                        const codeText = codeEl ? codeEl.innerText.trim() : '';
+                        return `\n\`\`\`${lang}\n${codeText}\n\`\`\`\n\n`;
                     }
                     
-                    return `> **Card**: ${frontTitle}${subtitle}\n> **Details**: ${backText}\n\n`;
-                }
-                
-                // Section Title (H1 equivalent)
-                if (element.classList.contains('doc-section-title')) {
-                    // Extract text (ignoring SVG icon nodes)
-                    const clonedTitle = element.cloneNode(true);
-                    clonedTitle.querySelectorAll('svg').forEach(s => s.remove());
-                    return `\n# ${clonedTitle.innerText.trim()}\n\n`;
-                }
-                
-                // Subsection Title (H2 equivalent)
-                if (element.classList.contains('doc-subsection-title')) {
-                    return `\n## ${element.innerText.trim()}\n\n`;
-                }
-                
-                // Badge elements
-                if (element.classList.contains('tag-badge') || element.classList.contains('card-badge') || element.classList.contains('swatch-var')) {
-                    return ` \`${element.innerText.trim()}\` `;
-                }
-            }
-            
-            // Standard semantic elements
-            if (tagName === 'h1') return `\n# ${element.innerText.trim()}\n\n`;
-            if (tagName === 'h2') return `\n## ${element.innerText.trim()}\n\n`;
-            if (tagName === 'h3') return `\n### ${element.innerText.trim()}\n\n`;
-            if (tagName === 'h4') return `\n#### ${element.innerText.trim()}\n\n`;
-            
-            if (tagName === 'blockquote') {
-                return `> ${element.innerText.trim()}\n\n`;
-            }
-            
-            if (tagName === 'p') {
-                return `${this._parseChildren(element, indentLevel)}\n\n`;
-            }
-            
-            if (tagName === 'strong' || tagName === 'b') {
-                return `**${this._parseChildren(element, indentLevel)}**`;
-            }
-            
-            if (tagName === 'em' || tagName === 'i') {
-                return `*${this._parseChildren(element, indentLevel)}*`;
-            }
-            
-            if (tagName === 'code') {
-                return `\`${element.innerText.trim()}\``;
-            }
-            
-            // Lists
-            if (tagName === 'ul' || tagName === 'ol') {
-                let markdown = '\n';
-                Array.from(element.children).forEach(child => {
-                    if (child.tagName.toLowerCase() === 'li') {
-                        markdown += `${indent}- ${this._parseChildren(child, indentLevel + 1).trim()}\n`;
-                    } else {
-                        markdown += this.toMarkdown(child, indentLevel + 1);
+                    // 3D Flipping flashcards
+                    if (el.classList.contains('card-container')) {
+                        const frontTitleEl = el.querySelector('.card-title');
+                        const frontTitle = frontTitleEl ? frontTitleEl.innerText.trim() : '';
+                        const subtitleEl = el.querySelector('.card-subtitle');
+                        const subtitle = subtitleEl ? ` (${subtitleEl.innerText.trim()})` : '';
+                        const backTextEl = el.querySelector('.card-back-contents') || el.querySelector('.card-back');
+                        
+                        let backText = '';
+                        if (backTextEl) {
+                            const clonedBack = backTextEl.cloneNode(true);
+                            clonedBack.querySelectorAll('.card-flip-prompt, .card-back-attributes').forEach(e => e.remove());
+                            backText = clonedBack.innerText.trim();
+                        }
+                        
+                        return `> **Card**: ${frontTitle}${subtitle}\n> **Details**: ${backText}\n\n`;
                     }
-                });
-                return markdown + '\n';
-            }
-            
-            // Collapsible Tree Nodes
-            if (element.classList && element.classList.contains('tree-node')) {
-                const header = element.querySelector('.node-header') || element.querySelector('summary');
-                let headerText = '';
-                if (header) {
-                    const clonedHeader = header.cloneNode(true);
-                    clonedHeader.querySelectorAll('.node-toggle-icon, .tag-badge').forEach(el => el.remove());
-                    headerText = clonedHeader.innerText.trim();
-                }
-                
-                let markdown = `${indent}- ${headerText}\n`;
-                
-                // Parse nested tree-node structures recursively
-                const branch = element.querySelector('.tree-branch') || element;
-                Array.from(branch.children).forEach(child => {
-                    if (child !== header && child.classList && (child.classList.contains('tree-node') || child.classList.contains('tree-branch'))) {
-                        markdown += this.toMarkdown(child, indentLevel + 1);
+                    
+                    // Section Title (H1 equivalent)
+                    if (el.classList.contains('doc-section-title')) {
+                        // Extract text (ignoring SVG icon nodes)
+                        const clonedTitle = el.cloneNode(true);
+                        clonedTitle.querySelectorAll('svg').forEach(s => s.remove());
+                        return `\n# ${clonedTitle.innerText.trim()}\n\n`;
                     }
-                });
-                return markdown;
-            }
-            
-            // Airtable & data tables
-            if (tagName === 'table') {
-                let markdown = '\n';
-                const rows = Array.from(element.querySelectorAll('tr'));
-                if (rows.length === 0) return '';
-                
-                const ths = Array.from(rows[0].querySelectorAll('th, td'));
-                markdown += '| ' + ths.map(th => th.innerText.trim()).join(' | ') + ' |\n';
-                markdown += '| ' + ths.map(() => '---').join(' | ') + ' |\n';
-                
-                for (let i = 1; i < rows.length; i++) {
-                    const tds = Array.from(rows[i].querySelectorAll('td'));
-                    markdown += '| ' + tds.map(td => td.innerText.trim()).join(' | ') + ' |\n';
+                    
+                    // Subsection Title (H2 equivalent)
+                    if (el.classList.contains('doc-subsection-title')) {
+                        return `\n## ${el.innerText.trim()}\n\n`;
+                    }
+                    
+                    // Badge elements
+                    if (el.classList.contains('tag-badge') || el.classList.contains('card-badge') || el.classList.contains('swatch-var')) {
+                        return ` \`${el.innerText.trim()}\` `;
+                    }
                 }
-                return markdown + '\n';
+                
+                // Standard semantic elements
+                if (tagName === 'h1') return `\n# ${el.innerText.trim()}\n\n`;
+                if (tagName === 'h2') return `\n## ${el.innerText.trim()}\n\n`;
+                if (tagName === 'h3') return `\n### ${el.innerText.trim()}\n\n`;
+                if (tagName === 'h4') return `\n#### ${el.innerText.trim()}\n\n`;
+                
+                if (tagName === 'blockquote') {
+                    return `> ${el.innerText.trim()}\n\n`;
+                }
+                
+                if (tagName === 'p') {
+                    return `${cmsRef._parseChildren(el, level)}\n\n`;
+                }
+                
+                if (tagName === 'strong' || tagName === 'b') {
+                    return `**${cmsRef._parseChildren(el, level)}**`;
+                }
+                
+                if (tagName === 'em' || tagName === 'i') {
+                    return `*${cmsRef._parseChildren(el, level)}*`;
+                }
+                
+                if (tagName === 'code') {
+                    return `\`${el.innerText.trim()}\``;
+                }
+                
+                // Lists
+                if (tagName === 'ul' || tagName === 'ol') {
+                    let markdown = '\n';
+                    Array.from(el.children).forEach(child => {
+                        if (child.tagName.toLowerCase() === 'li') {
+                            markdown += `${indent}- ${cmsRef._parseChildren(child, level + 1).trim()}\n`;
+                        } else {
+                            markdown += recurse(child, level + 1);
+                        }
+                    });
+                    return markdown + '\n';
+                }
+                
+                // Collapsible Tree Nodes
+                if (el.classList && el.classList.contains('tree-node')) {
+                    const header = el.querySelector('.node-header') || el.querySelector('summary');
+                    let headerText = '';
+                    if (header) {
+                        const clonedHeader = header.cloneNode(true);
+                        clonedHeader.querySelectorAll('.node-toggle-icon, .tag-badge').forEach(e => e.remove());
+                        headerText = clonedHeader.innerText.trim();
+                    }
+                    
+                    let markdown = `${indent}- ${headerText}\n`;
+                    
+                    // Parse nested tree-node structures recursively
+                    const branch = el.querySelector('.tree-branch') || el;
+                    Array.from(branch.children).forEach(child => {
+                        if (child !== header && child.classList && (child.classList.contains('tree-node') || child.classList.contains('tree-branch'))) {
+                            markdown += recurse(child, level + 1);
+                        }
+                    });
+                    return markdown;
+                }
+                
+                // Airtable & data tables
+                if (tagName === 'table') {
+                    let markdown = '\n';
+                    const rows = Array.from(el.querySelectorAll('tr'));
+                    if (rows.length === 0) return '';
+                    
+                    const ths = Array.from(rows[0].querySelectorAll('th, td'));
+                    markdown += '| ' + ths.map(th => th.innerText.trim()).join(' | ') + ' |\n';
+                    markdown += '| ' + ths.map(() => '---').join(' | ') + ' |\n';
+                    
+                    for (let i = 1; i < rows.length; i++) {
+                        const tds = Array.from(rows[i].querySelectorAll('td'));
+                        markdown += '| ' + tds.map(td => td.innerText.trim()).join(' | ') + ' |\n';
+                    }
+                    return markdown + '\n';
+                }
+                
+                // Recursive container crawl
+                if (el.children && el.children.length > 0) {
+                    return cmsRef._parseChildren(el, level);
+                }
+                
+                return el.innerText ? el.innerText.trim() : '';
+            };
+            
+            let rawMarkdown = recurse(element, indentLevel);
+            
+            // Only post-process at the top level
+            if (indentLevel === 0) {
+                // Split by ``` to avoid changing code blocks
+                const parts = rawMarkdown.split('```');
+                for (let i = 0; i < parts.length; i += 2) {
+                    parts[i] = parts[i]
+                        // Collapse 3 or more consecutive newlines to exactly 2 newlines
+                        .replace(/\n{3,}/g, '\n\n')
+                        // Remove spaces at the end of lines
+                        .split('\n')
+                        .map(line => {
+                            if (/^\s+$/.test(line)) return '';
+                            if (/^(\s*[-*+]|\s*\d+\.|\s*>)/.test(line)) return line;
+                            return line.trim();
+                        })
+                        .join('\n')
+                        // Again, collapse any resulting runs of 3+ newlines
+                        .replace(/\n{3,}/g, '\n\n');
+                }
+                rawMarkdown = parts.join('```').trim() + '\n';
             }
             
-            // Recursive container crawl
-            if (element.children && element.children.length > 0) {
-                return this._parseChildren(element, indentLevel);
-            }
-            
-            return element.innerText ? element.innerText.trim() : '';
+            return rawMarkdown;
         },
         
         /**
@@ -524,10 +553,17 @@ const MagpieCSS = {
          */
         _parseChildren: function(element, indentLevel) {
             let markdown = '';
+            const parentTag = element.tagName ? element.tagName.toLowerCase() : '';
+            const isStructural = ['div', 'section', 'ul', 'ol', 'table', 'tbody', 'thead', 'tr', 'article', 'header', 'footer', 'aside', 'nav'].includes(parentTag);
+            
             Array.from(element.childNodes).forEach(node => {
                 if (node.nodeType === 1) { // ELEMENT_NODE
                     markdown += this.toMarkdown(node, indentLevel);
                 } else if (node.nodeType === 3) { // TEXT_NODE
+                    if (isStructural && !/\S/.test(node.textContent)) {
+                        // Skip whitespace-only text nodes in structural layout containers
+                        return;
+                    }
                     markdown += node.textContent;
                 }
             });
