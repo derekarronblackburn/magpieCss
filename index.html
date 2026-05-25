@@ -1017,6 +1017,42 @@ console.log(markdown);</code></pre>
                 <span class="pill-override">.pill-override</span>
             </div>
 
+            <div class="doc-subsection-title">Information & Callout Cards</div>
+            <p>Themed info, success, warning, and danger cards for highlighting notes, instructions, warnings, or errors.</p>
+            <div class="component-demo" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="m-info-card">
+                    <span class="m-icon m-icon-info m-info-card-icon"></span>
+                    <div class="m-info-card-body">
+                        <div class="m-info-card-title">Default Information Card</div>
+                        <div class="m-info-card-content">This is a default information card. It uses the primary theme accent color and is ideal for standard callouts, tips, or neutral notices.</div>
+                    </div>
+                </div>
+
+                <div class="m-info-card is-success">
+                    <span class="m-icon m-icon-check m-info-card-icon"></span>
+                    <div class="m-info-card-body">
+                        <div class="m-info-card-title">Success Notice</div>
+                        <div class="m-info-card-content">The operation was completed successfully! All assets have been synced to the database.</div>
+                    </div>
+                </div>
+
+                <div class="m-info-card is-warning">
+                    <span class="m-icon m-icon-alert-triangle m-info-card-icon"></span>
+                    <div class="m-info-card-body">
+                        <div class="m-info-card-title">Warning / Caution</div>
+                        <div class="m-info-card-content">Be careful! Overwriting the system settings can result in temporary disruption to the server.</div>
+                    </div>
+                </div>
+
+                <div class="m-info-card is-danger">
+                    <span class="m-icon m-icon-alert-circle m-info-card-icon"></span>
+                    <div class="m-info-card-body">
+                        <div class="m-info-card-title">Critical Error / Danger</div>
+                        <div class="m-info-card-content">Unable to connect to the cloud storage API. Please check your credentials in the settings panel.</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="doc-subsection-title" style="display: flex; justify-content: space-between; align-items: center;">
                 Wiki Render Content Preview
                 <button class="stash-btn stash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="toggleWikiCmsView()">Toggle CMS View (Accept: text/markdown)</button>
@@ -2503,6 +2539,12 @@ MagpieCSS.ui.initCodeBlocks();</code></pre>
                     <div class="icon-card" data-name="help-circle, help, question, info, support" onclick="copySvgToClipboard(this)">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         <span class="icon-card-name">help-circle</span>
+                        <span class="icon-card-copy-hint">Copy Vector</span>
+                    </div>
+                    <!-- Card 58a: Info -->
+                    <div class="icon-card" data-name="info, about, details, reference" onclick="copySvgToClipboard(this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span class="icon-card-name">info</span>
                         <span class="icon-card-copy-hint">Copy Vector</span>
                     </div>
                     <!-- Card 59: Alert-Circle -->

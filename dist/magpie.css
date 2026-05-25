@@ -3193,6 +3193,79 @@ select.flat-select {
     color: var(--accent);
 }
 
+/* --- 27. INFORMATION & CALLOUT CARDS --- */
+.m-info-card {
+    --card-accent-color: var(--accent);
+    --card-bg-tint: rgba(59, 130, 246, 0.05);
+    
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--card-accent-color);
+    background: linear-gradient(to right, var(--card-bg-tint), var(--card));
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.m-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.m-info-card-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: var(--card-accent-color);
+    margin-top: 2px;
+}
+
+.m-info-card-body {
+    flex: 1;
+}
+
+.m-info-card-title {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.3;
+}
+
+.m-info-card-content {
+    margin: 0;
+    font-size: 0.925rem;
+    color: var(--muted-text);
+    line-height: 1.5;
+}
+
+/* Variations */
+.m-info-card.is-warning {
+    --card-accent-color: var(--gold);
+    --card-bg-tint: rgba(255, 215, 0, 0.05);
+}
+
+.m-info-card.is-danger {
+    --card-accent-color: var(--danger);
+    --card-bg-tint: rgba(244, 63, 94, 0.05);
+}
+
+.m-info-card.is-success {
+    --card-accent-color: var(--secondary);
+    --card-bg-tint: rgba(45, 212, 191, 0.05);
+}
+
+/* High Contrast & Terminal adjustments */
+[data-theme="hc"] .m-info-card,
+[data-theme="terminal"] .m-info-card {
+    background: var(--card);
+}
+
+
 
 /* --- END OF components.css --- */
 
@@ -3520,6 +3593,11 @@ select.flat-select {
 .m-icon-help-circle {
     -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
     mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
+}
+
+.m-icon-info {
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>');
+    mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>');
 }
 
 .m-icon-alert-circle {
