@@ -2311,3 +2311,204 @@ select.flat-select {
         gap: 10px;
     }
 }
+
+
+/* --- 22. GENERAL WIKI LAYOUT & BREADCRUMBS --- */
+.wiki-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.wiki-breadcrumbs a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.wiki-breadcrumbs a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+.wiki-breadcrumbs span.separator {
+    color: var(--border);
+    font-weight: bold;
+}
+
+/* --- 23. METADATA ATTRIBUTE SYSTEM --- */
+.attributes-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+.attributes-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+}
+.attribute-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.attribute-label {
+    font-size: 0.75rem;
+    color: var(--muted-text);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.attribute-val-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.attribute-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* --- 24. WIKI-LINKS CUSTOM SYNTAX --- */
+.wiki-link-missing {
+    color: var(--danger) !important;
+    text-decoration: dashed underline !important;
+    transition: opacity var(--transition-fast);
+}
+.wiki-link-missing:hover {
+    opacity: 0.8;
+}
+
+/* --- 25. SLIDING QUICK-READ DRAWER --- */
+.quick-drawer {
+    position: fixed;
+    top: 0;
+    right: -460px; /* Hidden off-screen */
+    width: 450px;
+    max-width: 100vw;
+    height: 100vh;
+    background: var(--card);
+    border-left: 1px solid var(--border);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.35);
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    transition: right var(--transition-normal);
+    box-sizing: border-box;
+}
+.quick-drawer.open {
+    right: 0;
+}
+.quick-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1090;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+.quick-drawer-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+.quick-drawer-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.quick-drawer-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text);
+}
+.quick-drawer-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.quick-drawer-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-light);
+    background: var(--hover-bg);
+    box-sizing: border-box;
+}
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-left-color: var(--accent);
+    animation: spin 1s linear infinite;
+    margin: 60px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- 26. COMPONENT PAGE BLOCKS --- */
+.block-container {
+    margin: 25px 0;
+}
+.vs-card-block {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.vs-card-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+.gallery-image-wrapper {
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.gallery-image-wrapper img {
+    transition: transform 0.3s ease;
+}
+.gallery-image-wrapper:hover img {
+    transform: scale(1.06);
+}
+.gallery-image-wrapper:hover {
+    border-color: var(--accent) !important;
+}
+.node-header.active-node {
+    background: rgba(59, 130, 246, 0.12); /* Tint of accent */
+    border-color: var(--accent);
+    border-left: 4px solid var(--accent);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.node-header.active-node .node-link {
+    color: var(--accent);
+    font-weight: 700;
+}
+.node-header.active-node .node-toggle-icon {
+    color: var(--accent);
+}
+
