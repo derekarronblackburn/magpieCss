@@ -452,3 +452,35 @@ window.copySvgToClipboard = function(card) {
     });
 };
 
+window.toggleWikiCmsView = function() {
+    const container = document.getElementById('wikiCmsContainer');
+    const content = document.getElementById('wikiHtmlContent');
+    const codeEl = document.getElementById('wikiCmsCode');
+    
+    if (!container || !content || !codeEl) return;
+    
+    if (container.style.display === 'none') {
+        const markdown = window.MagpieCSS.cms.toMarkdown(content);
+        codeEl.innerText = markdown;
+        container.style.display = 'block';
+        if (window.MagpieCSS) {
+            window.MagpieCSS.toast.show("Content negotiated! Accept: text/markdown served.", "success", 2000);
+        }
+    } else {
+        container.style.display = 'none';
+    }
+};
+
+window.copyWikiCmsMarkdown = function() {
+    const codeEl = document.getElementById('wikiCmsCode');
+    if (!codeEl) return;
+    navigator.clipboard.writeText(codeEl.innerText).then(() => {
+        if (window.MagpieCSS) {
+            window.MagpieCSS.toast.show("Markdown copied to clipboard!", "success", 1500);
+        }
+    }).catch(err => {
+        console.error("Failed to copy Markdown: ", err);
+    });
+};
+
+

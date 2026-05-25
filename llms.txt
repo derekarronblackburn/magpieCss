@@ -1,0 +1,97 @@
+# MagpieCSS - LLM Context & Repository Map
+
+MagpieCSS is a modern, lightweight, themeable vanilla CSS framework. Originally extracted from administrative tools (MagpieStash) and wiki platforms (MagpieNest), it is built specifically for data-dense user interfaces, spatial grid workspaces, and document libraries.
+
+This file provides a structured interface map of the repository's stylesheets, component classes, design tokens, and JavaScript APIs to help AI agents read, write, and maintain the codebase.
+
+---
+
+## 1. Directory & File Map
+
+- [index.html](file:///c:/magpieCss/index.html): Interactive showcase website, components sandbox, and design system documentation.
+- [showcase.css](file:///c:/magpieCss/showcase.css): Layout styles and modifications specific to the showcase site page.
+- [showcase.js](file:///c:/magpieCss/showcase.js): Local page controller, theme switching event listeners, and interactive UI demo bindings.
+- [changelog.json](file:///c:/magpieCss/changelog.json): Release entries and framework feature history.
+- [build.js](file:///c:/magpieCss/build.js): Bundles and minifies stylesheets and scripts from `src/` to `dist/`.
+- [dist/](file:///c:/magpieCss/dist/): Compiled production assets:
+  - `dist/magpie.css`: Bundled stylesheet (variables, resets, layout, components, icon classes).
+  - `dist/magpie.min.css`: Minified bundled stylesheet.
+  - `dist/magpie.js`: Main framework JavaScript helpers.
+  - `dist/magpie.min.js`: Minified framework JavaScript helpers.
+- [src/](file:///c:/magpieCss/src/): Source stylesheets before bundling:
+  - `src/variables.css`: Core design tokens and CSS properties for all themes.
+  - `src/reset.css`: Global base styles and browser normalization.
+  - `src/layout.css`: Sidebar desktop grid, printing media queries, and responsive layouts.
+  - `src/components.css`: Buttons, cards, modals, tables, collapsible trees, and alert widgets.
+  - `src/icons.css`: Generated CSS mask-image classes for all SVG icons.
+
+---
+
+## 2. Design Tokens (CSS Variables)
+
+Colors, spacing, and speeds are defined globally in `src/variables.css` under the `:root` element. Themes are toggled by setting the `data-theme` attribute (values: `magpie`, `dark`, `light`, `hc`, `terminal`) on the `<html>` or `<body>` element.
+
+### Core Semantic Variables
+- `--bg`: Global page viewport background color.
+- `--card`: Panel/card container background color.
+- `--text`: Main text color (high contrast against `--bg`).
+- `--muted-text`: Subtitles, hints, and secondary text color.
+- `--border`: Standard border color for separators and input outlines.
+- `--accent`: Primary interaction color (blue theme default).
+- `--secondary`: Auxiliary highlights (teal theme default).
+- `--danger`: Error alert borders and red action buttons.
+- `--gold`: Special highlighted state badges (gold theme default).
+
+---
+
+## 3. UI Component Class Map
+
+Use these semantic classes to structure HTML layouts that remain cleanly readable by both humans and LLMs:
+
+### Layout Structures
+- `.app-layout`: Main structural parent. Uses CSS grid for sidebar and main content frame.
+- `.app-logo`: Container for the logo emblem and branding.
+- `.app-nav`: Sidebar navigation pane enclosing link elements.
+- `.app-content`: Main content frame where document sections are rendered.
+- `.doc-section`: Standard section page wrapper.
+- `.doc-section-title`: Heading for page sections (contains an inline SVG and text).
+- `.doc-subsection-title`: Subheading for component variants.
+- `.component-demo`: Styled box enclosing interactive UI demos.
+
+### Standalone Widgets
+- `.stash-btn`: Primary solid action button.
+- `.stash-btn-outline`: Secondary outlined action button.
+- `.card-container`: Parent container for 3D flipping cards.
+- `.card-3d`: Intersecting child managing 3D perspective rotates.
+- `.card-front` / `.card-back`: Double-sided card faces.
+- `.wiki-content-body`: Wrapper for rendering markdown typography (blockquote, lists, standard headings).
+- `.locations-container`: Root container for tree hierarchies.
+- `.tree-branch`: Structural branch connecting child tree-nodes.
+- `.tree-node`: Parent collapsible details block.
+- `.node-header`: Summary tag wrapping node toggle indicators and name.
+- `.code-block`: Structured code wrapper with lang badges and copy actions.
+- `.modal-overlay`: Full-screen overlay background container.
+- `.modal-content`: Centered dialog container inside overlay.
+- `.m-icon`: Base class for SVG masks.
+- `.m-icon-[name]`: Specific mask image utility for any of the 51 icons (e.g. `m-icon-home`, `m-icon-settings`).
+
+---
+
+## 4. Client-Side JavaScript API (`window.MagpieCSS`)
+
+The client library in `dist/magpie.js` manages stateful interactions and notifies listeners:
+
+### Theme Manager (`MagpieCSS.theme`)
+- `MagpieCSS.theme.set(themeName)`: Swaps the active visual theme (`magpie`, `dark`, `light`, `hc`, `terminal`).
+- `MagpieCSS.theme.init()`: Loads and applies the user's saved theme preference from `localStorage`.
+
+### Toast System (`MagpieCSS.toast`)
+- `MagpieCSS.toast.show(message, type, duration)`: Triggers a dynamic banner notification (`type` values: `success`, `warning`, `error`).
+- `MagpieCSS.toast.showClippy(title, message, duration, actionCallback, customIconHtml)`: Triggers an interactive magpie assistant overlay notification with custom callback triggers.
+
+### Custom Dialog Modals (`MagpieCSS.dialog`)
+- `MagpieCSS.dialog.alert(message, title)`: Opens a clean modal dialog with an OK button. Returns a Promise.
+- `MagpieCSS.dialog.confirm(message, title)`: Opens a confirm/cancel dialog. Returns a Promise resolving to `true` or `false`.
+
+### CMS DOM-to-Markdown Compiler (`MagpieCSS.cms`)
+- `MagpieCSS.cms.toMarkdown(element)`: Recursively parses a MagpieCSS DOM subtree and compiles it into clean, token-efficient Markdown, stripping out utility design clutter for LLM crawlers.

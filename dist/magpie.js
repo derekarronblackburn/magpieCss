@@ -1,21 +1,34 @@
 /**
  * MagpieCSS Helper Library
- * Client-side script to manage themes, dialog modals, toasts, and dropdowns.
+ * Client-side script to manage themes, dialog modals, toasts, dropdowns, and CMS markdown translation.
  */
 
 const MagpieCSS = {
     // --- 1. THEME MANAGER ---
     theme: {
+        /**
+         * Gets the user's saved visual theme from localStorage.
+         * @returns {string} The saved theme name (defaults to 'magpie').
+         */
         getSaved: function() {
             return localStorage.getItem('magpiestash-theme') || 'magpie';
         },
+        
+        /**
+         * Sets the active visual theme on the document and caches it.
+         * @param {string} themeName - Name of the theme ('magpie', 'dark', 'light', 'hc', 'terminal').
+         */
         set: function(themeName) {
             document.documentElement.setAttribute('data-theme', themeName);
             localStorage.setItem('magpiestash-theme', themeName);
             
-            // Dispatch custom event if other scripts want to listen
+            // Dispatch custom event for external observers
             window.dispatchEvent(new CustomEvent('magpie-theme-change', { detail: themeName }));
         },
+        
+        /**
+         * Initializes the theme manager on page load.
+         */
         init: function() {
             const saved = this.getSaved();
             this.set(saved);
@@ -24,6 +37,12 @@ const MagpieCSS = {
 
     // --- 2. DYNAMIC TOAST SYSTEM ---
     toast: {
+        /**
+         * Displays a simple alert toast banner.
+         * @param {string} message - Notification text.
+         * @param {string} [type='success'] - Style of banner ('success', 'warning', 'error').
+         * @param {number} [duration=3000] - Screen duration in milliseconds.
+         */
         show: function(message, type = 'success', duration = 3000) {
             let toast = document.getElementById('magpieToast');
             
@@ -89,7 +108,7 @@ const MagpieCSS = {
          * @param {string} message - Description message inside toast.
          * @param {number} [duration=6000] - Lifespan of toast in milliseconds.
          * @param {function|null} [actionCallback=null] - Action callback trigger (if set, displays primary action button).
-         * @param {string|null} [customIconHtml=null] - Optional custom HTML string for the icon (e.g. an SVG or <img> tag). Defaults to the Magpie bird SVG.
+         * @param {string|null} [customIconHtml=null] - Optional custom HTML string for the icon. Defaults to the Magpie bird SVG.
          */
         showClippy: function(title, message, duration = 6000, actionCallback = null, customIconHtml = null) {
             let clippy = document.getElementById('clippyToast');
@@ -162,6 +181,13 @@ const MagpieCSS = {
     dialog: {
         _resolve: null,
         
+        /**
+         * Main internal function to trigger a custom popup modal.
+         * @param {string} title - Header text.
+         * @param {string} message - Body contents.
+         * @param {boolean} [isConfirm=false] - If true, displays OK and Cancel buttons; otherwise, just OK.
+         * @returns {Promise<boolean>} Resolves to true if OK was clicked, false otherwise.
+         */
         show: function(title, message, isConfirm = false) {
             return new Promise((resolve) => {
                 this._resolve = resolve;
@@ -212,17 +238,33 @@ const MagpieCSS = {
             });
         },
         
+        /**
+         * Triggers a modal alert notice.
+         * @param {string} message - Body contents.
+         * @param {string} [title='Notice'] - Header text.
+         * @returns {Promise<boolean>}
+         */
         alert: function(message, title = 'Notice') {
             return this.show(title, message, false);
         },
         
+        /**
+         * Triggers a modal confirm/cancel choice.
+         * @param {string} message - Body contents.
+         * @param {string} [title='Are you sure?'] - Header text.
+         * @returns {Promise<boolean>} Resolves to true if OK was clicked, false if Cancel.
+         */
         confirm: function(message, title = 'Are you sure?') {
             return this.show(title, message, true);
         }
     },
 
-    // --- 4. DROPDOWNS & NAVIGATION TABS ---
+    // --- 4. DROPDOWNS, TABS & INTERACTIVE HELPERS ---
     ui: {
+        /**
+         * Toggles the visibility class of a custom dropdown card.
+         * @param {string} dropdownId - The ID of the target element.
+         */
         toggleDropdown: function(dropdownId) {
             const el = document.getElementById(dropdownId);
             if (!el) return;
@@ -235,6 +277,9 @@ const MagpieCSS = {
             el.classList.toggle('show');
         },
         
+        /**
+         * Registers window listeners to dismiss dropdowns on outer viewport clicks.
+         */
         initDropdownAutoClose: function() {
             window.addEventListener('click', (event) => {
                 if (!event.target.closest('.hamburger-btn')) {
@@ -243,6 +288,10 @@ const MagpieCSS = {
             });
         },
         
+        /**
+         * Initializes and binds tab-switching triggers.
+         * @param {string} tabContainerSelector - CSS selector targeting parent tabs wrapper.
+         */
         initTabs: function(tabContainerSelector) {
             const containers = document.querySelectorAll(tabContainerSelector);
             containers.forEach(container => {
@@ -267,6 +316,10 @@ const MagpieCSS = {
                 });
             });
         },
+        
+        /**
+         * Binds clipboard copy actions on code-block components.
+         */
         initCodeBlocks: function() {
             document.querySelectorAll('.code-block-copy').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -297,6 +350,189 @@ const MagpieCSS = {
                 });
             });
         }
+    },
+
+    // --- 5. CMS (CASCADING MARKDOWN SHEETS) DOM-TO-MARKDOWN COMPILER ---
+    cms: {
+        /**
+         * Recursively compiles a MagpieCSS DOM element/subtree into clean, token-efficient Markdown.
+         * Strips away style layers, buttons, copy tools, and side-navs to isolate semantic data for LLM crawlers.
+         * @param {Element} element - The root DOM node/element to parse.
+         * @param {number} [indentLevel=0] - Recursion indent level for nested bullet trees.
+         * @returns {string} The parsed Markdown string.
+         */
+        toMarkdown: function(element, indentLevel = 0) {
+            if (!element) return '';
+            
+            // Exclude helper wrappers, theme selectors, copy actions, and layout gutters
+            if (element.classList && (
+                element.classList.contains('hide-print') || 
+                element.classList.contains('copy-btn') || 
+                element.classList.contains('code-block-copy') || 
+                element.classList.contains('mobile-menu-toggle') ||
+                element.classList.contains('dropdown-content') ||
+                element.classList.contains('theme-btn')
+            )) {
+                return '';
+            }
+            
+            const tagName = element.tagName ? element.tagName.toLowerCase() : '';
+            if (tagName === 'script' || tagName === 'style') return '';
+            
+            const indent = '  '.repeat(indentLevel);
+            
+            // Handle MagpieCSS Custom Classes
+            if (element.classList) {
+                // Code block cards
+                if (element.classList.contains('code-block')) {
+                    const langEl = element.querySelector('.code-block-lang');
+                    const lang = langEl ? langEl.innerText.trim().toLowerCase() : '';
+                    const codeEl = element.querySelector('code');
+                    const codeText = codeEl ? codeEl.innerText.trim() : '';
+                    return `\n\`\`\`${lang}\n${codeText}\n\`\`\`\n\n`;
+                }
+                
+                // 3D Flipping flashcards
+                if (element.classList.contains('card-container')) {
+                    const frontTitleEl = element.querySelector('.card-title');
+                    const frontTitle = frontTitleEl ? frontTitleEl.innerText.trim() : '';
+                    const subtitleEl = element.querySelector('.card-subtitle');
+                    const subtitle = subtitleEl ? ` (${subtitleEl.innerText.trim()})` : '';
+                    const backTextEl = element.querySelector('.card-back-contents') || element.querySelector('.card-back');
+                    
+                    let backText = '';
+                    if (backTextEl) {
+                        const clonedBack = backTextEl.cloneNode(true);
+                        clonedBack.querySelectorAll('.card-flip-prompt, .card-back-attributes').forEach(el => el.remove());
+                        backText = clonedBack.innerText.trim();
+                    }
+                    
+                    return `> **Card**: ${frontTitle}${subtitle}\n> **Details**: ${backText}\n\n`;
+                }
+                
+                // Section Title (H1 equivalent)
+                if (element.classList.contains('doc-section-title')) {
+                    // Extract text (ignoring SVG icon nodes)
+                    const clonedTitle = element.cloneNode(true);
+                    clonedTitle.querySelectorAll('svg').forEach(s => s.remove());
+                    return `\n# ${clonedTitle.innerText.trim()}\n\n`;
+                }
+                
+                // Subsection Title (H2 equivalent)
+                if (element.classList.contains('doc-subsection-title')) {
+                    return `\n## ${element.innerText.trim()}\n\n`;
+                }
+                
+                // Badge elements
+                if (element.classList.contains('tag-badge') || element.classList.contains('card-badge') || element.classList.contains('swatch-var')) {
+                    return ` \`${element.innerText.trim()}\` `;
+                }
+            }
+            
+            // Standard semantic elements
+            if (tagName === 'h1') return `\n# ${element.innerText.trim()}\n\n`;
+            if (tagName === 'h2') return `\n## ${element.innerText.trim()}\n\n`;
+            if (tagName === 'h3') return `\n### ${element.innerText.trim()}\n\n`;
+            if (tagName === 'h4') return `\n#### ${element.innerText.trim()}\n\n`;
+            
+            if (tagName === 'blockquote') {
+                return `> ${element.innerText.trim()}\n\n`;
+            }
+            
+            if (tagName === 'p') {
+                return `${this._parseChildren(element, indentLevel)}\n\n`;
+            }
+            
+            if (tagName === 'strong' || tagName === 'b') {
+                return `**${this._parseChildren(element, indentLevel)}**`;
+            }
+            
+            if (tagName === 'em' || tagName === 'i') {
+                return `*${this._parseChildren(element, indentLevel)}*`;
+            }
+            
+            if (tagName === 'code') {
+                return `\`${element.innerText.trim()}\``;
+            }
+            
+            // Lists
+            if (tagName === 'ul' || tagName === 'ol') {
+                let markdown = '\n';
+                Array.from(element.children).forEach(child => {
+                    if (child.tagName.toLowerCase() === 'li') {
+                        markdown += `${indent}- ${this._parseChildren(child, indentLevel + 1).trim()}\n`;
+                    } else {
+                        markdown += this.toMarkdown(child, indentLevel + 1);
+                    }
+                });
+                return markdown + '\n';
+            }
+            
+            // Collapsible Tree Nodes
+            if (element.classList && element.classList.contains('tree-node')) {
+                const header = element.querySelector('.node-header') || element.querySelector('summary');
+                let headerText = '';
+                if (header) {
+                    const clonedHeader = header.cloneNode(true);
+                    clonedHeader.querySelectorAll('.node-toggle-icon, .tag-badge').forEach(el => el.remove());
+                    headerText = clonedHeader.innerText.trim();
+                }
+                
+                let markdown = `${indent}- ${headerText}\n`;
+                
+                // Parse nested tree-node structures recursively
+                const branch = element.querySelector('.tree-branch') || element;
+                Array.from(branch.children).forEach(child => {
+                    if (child !== header && child.classList && (child.classList.contains('tree-node') || child.classList.contains('tree-branch'))) {
+                        markdown += this.toMarkdown(child, indentLevel + 1);
+                    }
+                });
+                return markdown;
+            }
+            
+            // Airtable & data tables
+            if (tagName === 'table') {
+                let markdown = '\n';
+                const rows = Array.from(element.querySelectorAll('tr'));
+                if (rows.length === 0) return '';
+                
+                const ths = Array.from(rows[0].querySelectorAll('th, td'));
+                markdown += '| ' + ths.map(th => th.innerText.trim()).join(' | ') + ' |\n';
+                markdown += '| ' + ths.map(() => '---').join(' | ') + ' |\n';
+                
+                for (let i = 1; i < rows.length; i++) {
+                    const tds = Array.from(rows[i].querySelectorAll('td'));
+                    markdown += '| ' + tds.map(td => td.innerText.trim()).join(' | ') + ' |\n';
+                }
+                return markdown + '\n';
+            }
+            
+            // Recursive container crawl
+            if (element.children && element.children.length > 0) {
+                return this._parseChildren(element, indentLevel);
+            }
+            
+            return element.innerText ? element.innerText.trim() : '';
+        },
+        
+        /**
+         * Helper utility to aggregate children node values.
+         * @private
+         * @param {Element} element - The parent node.
+         * @param {number} indentLevel - The current layout hierarchy level.
+         * @returns {string} The compiled text segments.
+         */
+        _parseChildren: function(element, indentLevel) {
+            let markdown = '';
+            Array.from(element.childNodes).forEach(node => {
+                if (node.nodeType === 1) { // ELEMENT_NODE
+                    markdown += this.toMarkdown(node, indentLevel);
+                } else if (node.nodeType === 3) { // TEXT_NODE
+                    markdown += node.textContent;
+                }
+            });
+            return markdown;
+        }
     }
 };
 
@@ -305,4 +541,3 @@ MagpieCSS.theme.init();
 MagpieCSS.ui.initDropdownAutoClose();
 MagpieCSS.ui.initCodeBlocks();
 window.MagpieCSS = MagpieCSS;
-

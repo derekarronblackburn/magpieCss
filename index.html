@@ -158,6 +158,12 @@
                         All colors, border curves, and spacing are tied to variables. Swap the root <code>data-theme</code> attribute to shift color variables instantly (supporting Slate, Dark, Light, High Contrast, and Terminal).
                     </p>
                 </div>
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <h4 style="margin-top: 0; color: var(--accent); font-family: Outfit; font-weight: bold;">5. LLM-Friendly Legibility</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--muted-text); line-height: 1.5;">
+                        DOM hierarchies, design tokens, and class naming conventions are engineered to be readable by LLMs. Includes dynamic DOM-to-Markdown (CMS) parsers for agent content negotiation.
+                    </p>
+                </div>
             </div>
 
             <div class="doc-subsection-title">The Three Architectural Layers</div>
@@ -945,10 +951,28 @@
                 <span class="pill-override">.pill-override</span>
             </div>
 
-            <div class="doc-subsection-title">Wiki Render Content Preview</div>
-            <p>Markdown elements styled automatically inside the <code>.wiki-content-body</code> wrapper class.</p>
+            <div class="doc-subsection-title" style="display: flex; justify-content: space-between; align-items: center;">
+                Wiki Render Content Preview
+                <button class="stash-btn stash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="toggleWikiCmsView()">Toggle CMS View (Accept: text/markdown)</button>
+            </div>
+            <p>Markdown elements styled automatically inside the <code>.wiki-content-body</code> wrapper class. Click the button to negotiate content and see the raw Markdown output compiled dynamically by our CMS engine for LLM requests.</p>
             <div class="component-demo">
-                <div class="wiki-content-body">
+                <div id="wikiCmsContainer" style="display: none; margin-bottom: 20px;">
+                    <div class="code-block" style="margin: 0;">
+                        <div class="code-block-header">
+                            <span class="code-block-lang">Markdown (LLM Accept: text/markdown View)</span>
+                            <button class="code-block-copy" onclick="copyWikiCmsMarkdown()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                </svg>
+                                <span class="copy-label">Copy</span>
+                            </button>
+                        </div>
+                        <pre><code id="wikiCmsCode"></code></pre>
+                    </div>
+                </div>
+                <div id="wikiHtmlContent" class="wiki-content-body">
                     <h2>Magpie Nest Development Roadmap</h2>
                     <p>The development of the wiki platform (Magpie Nest) aims to integrate full spatial assets indexing alongside rich markdown documentation articles. Here is a preview of the typography and layouts:</p>
                     

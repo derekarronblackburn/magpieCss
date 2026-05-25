@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.9.0",
+    "date": "2026-05-24",
+    "highlight": "LLM-Friendly Architecture & CMS (Cascading Markdown Sheet) Engine",
+    "changes": [
+      "Added the 5th project tenet: 'LLM-Friendly Legibility' to guide AI agent codebase interactions and content negotiation.",
+      "Created a root-level llms.txt index mapping the framework's files, design tokens, UI components, and JavaScript helper methods for LLMs.",
+      "Added JSDoc documentation to all functions inside dist/magpie.js for direct agentic API parsing.",
+      "Implemented MagpieCSS.cms.toMarkdown() to recursively compile HTML DOM elements to clean, token-efficient Markdown.",
+      "Added an interactive live-preview button to toggle the raw CMS Markdown view inside the Wiki documentation section."
+    ]
+  },
+  {
     "version": "1.8.0",
     "date": "2026-05-24",
     "highlight": "Automated CSS Icon Mask Utilities & Documentation!",
