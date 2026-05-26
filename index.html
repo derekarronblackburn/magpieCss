@@ -775,6 +775,37 @@ console.log(markdown);</code></pre>
                 </div>
             </div>
 
+            <div class="doc-subsection-title">Custom Scrollbar Utilities</div>
+            <p>Explicit classes for styling scrollbars on individual containers.</p>
+            <div class="component-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Standard Scrollbar (<code>.m-scrollbar</code>)</span>
+                    <div class="m-scrollbar" style="height: 120px; overflow-y: scroll; border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: var(--input-bg); font-size: 0.85rem; line-height: 1.5; color: var(--muted-text);">
+                        <p style="margin: 0 0 10px 0;">This container uses the <strong>.m-scrollbar</strong> utility. Scroll down to see the custom thumb track design.</p>
+                        <p style="margin: 0 0 10px 0;">The scrollbar matches the active theme borders and highlights with the brand accent color on hover.</p>
+                        <p style="margin: 0;">You have reached the bottom of the container scroll area.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Thin Scrollbar (<code>.m-scrollbar-thin</code>)</span>
+                    <div class="m-scrollbar-thin" style="height: 120px; overflow-y: scroll; border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: var(--input-bg); font-size: 0.85rem; line-height: 1.5; color: var(--muted-text);">
+                        <p style="margin: 0 0 10px 0;">This container uses the <strong>.m-scrollbar-thin</strong> utility. It is designed for tight UI spaces.</p>
+                        <p style="margin: 0 0 10px 0;">It reduces the scrollbar width to 4px and uses a subtle border-light visual tone to remain unobtrusive.</p>
+                        <p style="margin: 0;">You have reached the bottom of the container scroll area.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--muted-text); display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Hidden Scrollbar (<code>.m-scrollbar-hide</code>)</span>
+                    <div class="m-scrollbar-hide" style="height: 120px; overflow-y: scroll; border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: var(--input-bg); font-size: 0.85rem; line-height: 1.5; color: var(--muted-text);">
+                        <p style="margin: 0 0 10px 0;">This container uses the <strong>.m-scrollbar-hide</strong> utility. It is fully scrollable but the scrollbar is completely invisible.</p>
+                        <p style="margin: 0 0 10px 0;">Ideal for mobile carousels, horizontal swipes, navigation menus, or custom drag panels.</p>
+                        <p style="margin: 0;">You have reached the bottom of the container scroll area.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="doc-subsection-title">Switch Toggle & Badge HTML Code</div>
             <div class="code-container">
                 <button class="copy-btn">Copy</button>
