@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.9.2",
+    "date": "2026-05-26",
+    "highlight": "Custom Scrollbars & Information Cards!",
+    "changes": [
+      "Added a new, theme-aware Information Card (Callout/Alert) component supporting default (info), success, warning, and danger semantic variants.",
+      "Implemented custom scrollbar utility classes (.m-scrollbar, .m-scrollbar-thin, .m-scrollbar-hide) for explicit scrollbar styling.",
+      "Added a visual showcase grid for standard, thin, and hidden scrollbars to the documentation page.",
+      "Upgraded the global Agent View (llms.txt) header button to a premium, animated switch toggle slider.",
+      "Synchronized and distributed the compiled assets to the WikiPlatform and JunkDrawer sibling projects."
+    ]
+  },
+  {
     "version": "1.9.1",
     "date": "2026-05-24",
     "highlight": "Global LLM Agent View Toggle!",
