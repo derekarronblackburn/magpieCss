@@ -1159,6 +1159,58 @@ textarea {
 .badge.paid { background: rgba(48, 209, 88, 0.2); color: #30d158; }
 .badge.free { background: var(--hover-bg); color: var(--muted-text); }
 
+/* Custom Scrollbar Utilities */
+.m-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+.m-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.m-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.m-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background var(--transition-fast) ease;
+}
+.m-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Slim Scrollbar Option */
+.m-scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) transparent;
+}
+.m-scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.m-scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+.m-scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 10px;
+}
+.m-scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Hide Scrollbar Utility */
+.m-scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.m-scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}
+
 
 /* --- 6. AIRTABLE DATA GRID & RESPONSIVE CONVERSION --- */
 .grid-container {
