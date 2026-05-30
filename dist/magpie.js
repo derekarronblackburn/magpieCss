@@ -144,8 +144,8 @@ const MagpieCSS = {
                     ${iconHtml}
                 </div>
                 <div style="flex-grow: 1;">
-                    <h4 style="margin: 0 0 5px 0; color: var(--accent); font-size: 1.05rem;">${title}</h4>
-                    <p style="margin: 0; color: var(--text); font-size: 0.85rem; line-height: 1.4;">${message}</p>
+                    <h4 id="clippyTitle" style="margin: 0 0 5px 0; color: var(--accent); font-size: 1.05rem;"></h4>
+                    <p id="clippyMessage" style="margin: 0; color: var(--text); font-size: 0.85rem; line-height: 1.4;"></p>
                     <div style="margin-top: 12px; display: flex; gap: 10px;">
                         <button class="stash-btn" id="clippyActionBtn" style="padding: 4px 12px; font-size: 0.75rem;">Action</button>
                         <button class="stash-btn" id="clippyDismissBtn" style="padding: 4px 10px; font-size: 0.75rem; background: transparent; border: 1px solid var(--border); color: var(--muted-text);">Dismiss</button>
@@ -153,6 +153,9 @@ const MagpieCSS = {
                 </div>
             `;
             
+            clippy.querySelector('#clippyTitle').textContent = title;
+            clippy.querySelector('#clippyMessage').textContent = message;
+
             const dismissBtn = clippy.querySelector('#clippyDismissBtn');
             const actionBtn = clippy.querySelector('#clippyActionBtn');
             
