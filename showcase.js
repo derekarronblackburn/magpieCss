@@ -71,10 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2.1 Search Filter Functionality
     const searchInput = document.querySelector('.nav-search-input');
     if (searchInput) {
+        const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+        const menu = document.getElementById('mainNavMenu');
+
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase().trim();
-            const navLinks = document.querySelectorAll('.nav-menu .nav-link');
-            const menu = document.getElementById('mainNavMenu');
             if (!menu) return;
 
             let currentHeader = null;
