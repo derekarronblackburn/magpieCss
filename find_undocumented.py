@@ -25,10 +25,13 @@ css_files = [
 css_classes = set()
 class_pattern = re.compile(r'\.([a-zA-Z0-9_-]+)(?::[a-z-]+)?(?:\s|\[|\.|,|{)', re.IGNORECASE)
 
+css_file_contents = {}
+
 for css_file in css_files:
     if os.path.exists(css_file):
         with open(css_file, "r", encoding="utf-8") as f:
             css_content = f.read()
+        css_file_contents[css_file] = css_content
         # Clean comments
         clean_css = re.sub(r"/\*.*?\*/", "", css_content, flags=re.DOTALL)
         for match in class_pattern.finditer(clean_css):
@@ -44,10 +47,7 @@ for u in undocumented:
         continue
     # Let's count where it occurs in the CSS files to see if it is a major styling class
     occurrences = []
-    for css_file in css_files:
-        if os.path.exists(css_file):
-            with open(css_file, "r", encoding="utf-8") as f:
-                c = f.read()
-            if f".{u}" in c:
-                occurrences.append(os.path.basename(css_file))
+    for css_file, c in css_file_contents.items():
+        if f".{u}" in c:
+            occurrences.append(os.path.basename(css_file))
     print(f"- .{u} (found in {', '.join(occurrences)})")
