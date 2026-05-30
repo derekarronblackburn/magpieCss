@@ -38,9 +38,10 @@ for css_file in css_files:
 undocumented = sorted(list(css_classes - split_html_classes))
 
 print("Undocumented CSS classes:")
+IGNORE_CLASSES = {"container", "show", "active", "hover", "focus", "flipped", "disabled", "val-mobile"}
 for u in undocumented:
     # Filter out common layout, state, layout utility tags or layout-wide overrides
-    if u in ["container", "show", "active", "hover", "focus", "flipped", "disabled", "val-mobile"]:
+    if u in IGNORE_CLASSES:
         continue
     # Let's count where it occurs in the CSS files to see if it is a major styling class
     occurrences = []
