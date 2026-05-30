@@ -166,13 +166,18 @@ function setupDemoListeners() {
     // Update showcase swatches with real calculated CSS variable colors
     function updateColorSwatchValues() {
         const swatches = document.querySelectorAll('.swatch-card');
+        if (swatches.length === 0) return;
+
+        // Compute styles once outside the loop to avoid layout thrashing
+        const computedStyles = getComputedStyle(document.documentElement);
+
         swatches.forEach(swatch => {
             const varName = swatch.querySelector('.swatch-var').innerText.trim();
             const colorBlock = swatch.querySelector('.swatch-color');
             const labelValue = swatch.querySelector('.swatch-hex');
             
             // Read computed variable style value
-            const computedColor = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+            const computedColor = computedStyles.getPropertyValue(varName).trim();
             colorBlock.style.backgroundColor = `var(${varName})`;
             if (labelValue) labelValue.innerText = computedColor || 'N/A';
         });
